@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Điểu Gia Bảo | Đại học Portfolio 2026</title>
+
+<style>
+/* General styles */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+html,body{height:100%;overflow:hidden;background:#0f0f1a;color:white}
+
+/* Loading Screen */
+#loader{
+position:fixed;width:100%;height:100%;background:#050a14;display:flex;justify-content:center;align-items:center;z-index:9999;font-size:24px;color:#00f7ff;letter-spacing:3px;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* Canvas for particles */
+canvas{position:fixed;top:0;left:0;z-index:-1;}
+
+/* Navigation and buttons */
+.nav-mini{
+position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.6);padding:10px 20px;border-radius:30px;display:flex;gap:15px;backdrop-filter:blur(10px);
+}
+.nav-mini button{background:#00f7ff;border:none;padding:8px 15px;border-radius:20px;cursor:pointer;font-weight:bold}
+
+/* Layout */
+.wrapper{display:flex;width:300%;height:100%;transition:transform 0.8s cubic-bezier(.77,0,.18,1)}
+.page{width:100%;height:100%;padding:90px 8%;overflow-y:auto}
+
+/* Main Card */
+.card{background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);border:1px solid #00f7ff33;box-shadow:0 0 40px #00f7ff33;padding:40px;border-radius:20px;max-width:1200px;margin:auto;}
+
+/* Headings */
+h1{color:#00f7ff;text-shadow:0 0 15px #00f7ff;margin-bottom:20px}
+h2{color:#00c6ff;margin-top:25px}
+ul{margin-left:20px;margin-top:10px}
+li{margin:6px 0}
+
+/* Button Styling */
+.btn{display:inline-block;margin-top:15px;margin-right:10px;padding:12px 28px;border-radius:30px;background:linear-gradient(45deg,#00f7ff,#0066ff);color:black;font-weight:bold;border:none;cursor:pointer;transition:0.3s;text-decoration:none;}
+.btn:hover{transform:scale(1.1);box-shadow:0 0 20px #00f7ff}
+
+/* Countdown */
+.countdown{margin-top:15px;padding:15px;background:#001b2e;border-radius:15px;box-shadow:0 0 20px #00f7ff44 inset;font-size:18px;}
+
+/* Progress bar */
+.progress-container{margin-top:15px;background:#001b2e;border-radius:20px;overflow:hidden}
+.progress-bar{height:20px;width:0%;background:linear-gradient(90deg,#00f7ff,#0066ff);box-shadow:0 0 10px #00f7ff;transition:width 0.5s}
+
+/* Tabs */
+.tabs{display:flex;gap:15px;margin-bottom:20px;flex-wrap:wrap}
+.tab-btn{padding:10px 20px;background:#001b2e;border-radius:20px;cursor:pointer}
+.tab-btn.active{background:#00f7ff;color:black;font-weight:bold}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* Theme Button */
+.theme-btn,.music-btn{position:fixed;top:20px;padding:10px 15px;border-radius:20px;background:#00f7ff;border:none;cursor:pointer;font-weight:bold}
+.theme-btn{right:20px}
+.music-btn{left:20px}
+
+/* Login Form */
+.login-form, .signup-form{
+background:rgba(0,0,0,0.6);
+padding:30px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,0,0,0.8);
+}
+.input-field{padding:12px;width:100%;border-radius:10px;margin-bottom:10px;border:none;background:#1a233a;color:white;font-size:16px}
+.submit-btn{padding:12px 28px;border-radius:10px;background:#00f7ff;color:black;border:none;cursor:pointer}
+</style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loader">LOADING CYBER SYSTEM...</div>
+<canvas id="particles"></canvas>
+
+<button class="theme-btn" onclick="toggleTheme()">Theme</button>
+<button class="music-btn" onclick="toggleMusic()">Music</button>
+
+<audio id="bgmusic" loop>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7a7b.mp3">
+</audio>
+
+<div class="wrapper" id="slider">
+
+<!-- ================= TRANG CHỦ ================= -->
+<div class="page">
+<div class="card" id="card1">
+<h1 id="typing"></h1>
+
+<p><b>Họ và tên:</b> Điểu Gia Bảo</p>
+<p><b>Lớp:</b> 12XH1A</p>
+<p><b>Trường:</b> THCS-THPT Việt Hoa Quang Chánh</p>
+<p><b>Địa chỉ:</b> Long Khánh, Đồng Nai</p>
+
+<div class="countdown">
+⏳ Đếm ngược đến 11/06/2026:
+<div id="countdown"></div>
+</div>
+
+<h2>Mục tiêu</h2>
+<p>Đạt 24–26+ điểm và đậu ngành Công tác xã hội.</p>
+
+<div class="progress-container">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+<input type="range" min="0" max="100" value="50"
+oninput="updateProgress(this.value)">
+<p id="progressText">Tiến trình: 50%</p>
+
+<a class="btn" href="https://www.facebook.com/share/1QaSbowAYK/" target="_blank">
+Facebook của tôi
+</a>
+
+<br>
+<button class="btn" onclick="goTo(1)">Kỳ Thi 2026</button>
+<button class="btn" onclick="goTo(2)">Hành Trang</button>
+</div>
+</div>
+
+<!-- ================= TRANG KỲ THI ================= -->
+<div class="page">
+<div class="card">
+<h1>Kỳ Thi THPT 2026</h1>
+
+<div class="tabs">
+<div class="tab-btn active" onclick="openTab(0)">📅 Lịch thi</div>
+<div class="tab-btn" onclick="openTab(1)">📘 Cấu trúc</div>
+<div class="tab-btn" onclick="openTab(2)">🧑‍🎓 Đối tượng</div>
+<div class="tab-btn" onclick="openTab(3)">📈 Ôn tập</div>
+</div>
+
+<div class="tab-content active">
+<p>Dự kiến diễn ra 11–12/06/2026.</p>
+<a href="https://thuvienphapluat.vn/hoi-dap-phap-luat/lich-thi-thpt-quoc-gia-2026-dien-ra-vao-ngay-1161262026-du-kien-dung-khong-138059892.html" target="_blank">
+Xem chi tiết tại Thư viện Pháp luật
+</a>
+</div>
+
+<div class="tab-content">
+<ul>
+<li>Toán – Trắc nghiệm</li>
+<li>Ngữ văn – Tự luận</li>
+<li>2 môn tự chọn</li>
+</ul>
+</div>
+
+<div class="tab-content">
+<ul>
+<li>Học sinh lớp 12</li>
+<li>Thí sinh tự do</li>
+<li>Người đã tốt nghiệp dự thi lại</li>
+</ul>
+</div>
+
+<div class="tab-content">
+<ul>
+<li>Luyện đề thường xuyên</li>
+<li>Ôn chuyên đề trọng tâm</li>
+<li>Giữ tâm lý ổn định</li>
+</ul>
+</div>
+
+<button class="btn" onclick="goTo(0)">← Trang Chủ</button>
+<button class="btn" onclick="goTo(2)">→ Hành Trang</button>
+
+</div>
+</div>
+
+<!-- ================= TRANG HÀNH TRANG ================= -->
+<div class="page">
+<div class="card">
+<h1>Hành Trang Ngành Công Tác Xã Hội</h1>
+
+<h2>Kiến thức đào tạo</h2>
+<ul>
+<li>Tâm lý học</li>
+<li>Xã hội học</li>
+<li>Tham vấn – tư vấn</li>
+<li>Phát triển cộng đồng</li>
+<li>Luật an sinh</li>
+</ul>
+
+<h2>Cơ hội nghề nghiệp</h2>
+<ul>
+<li>Nhân viên công tác xã hội bệnh viện</li>
+<li>Chuyên viên NGO</li>
+<li>Tư vấn học đường</li>
+<li>Phát triển dự án cộng đồng</li>
+</ul>
+
+<h2>Mức lương</h2>
+<p>8 – 15 triệu/tháng tùy vị trí.</p>
+
+<button class="btn" onclick="goTo(1)">← Kỳ Thi</button>
+<button class="btn" onclick="goTo(0)">Trang Chủ</button>
+</div>
+</div>
+
+</div>
+
+<div class="nav-mini">
+<button onclick="goTo(0)">Home</button>
+<button onclick="goTo(1)">Exam</button>
+<button onclick="goTo(2)">Career</button>
+</div>
+
+<script>
+/* ============================ SCRIPTS ============================ */
+
+/* LOADER */
+window.onload=function(){
+setTimeout(()=>{document.getElementById("loader").style.display="none"},1500);
+let saved=localStorage.getItem("progress");
+if(saved){
+updateProgress(saved);
+document.querySelector("input[type=range]").value=saved;
+}
+};
+
+/* PAGE SLIDE */
+function goTo(i){
+document.getElementById("slider").style.transform="translateX(-"+(i*100)+"%)";
+}
+
+/* TABS */
+function openTab(i){
+let tabs=document.querySelectorAll(".tab-content");
+let btns=document.querySelectorAll(".tab-btn");
+tabs.forEach(t=>t.classList.remove("active"));
+btns.forEach(b=>b.classList.remove("active"));
+tabs[i].classList.add("active");
+btns[i].classList.add("active");
+}
+
+/* COUNTDOWN */
+var countDate=new Date("June 11, 2026 00:00:00").getTime();
+setInterval(function(){
+var now=new Date().getTime();
+var gap=countDate-now;
+var d=Math.floor(gap/(1000*60*60*24));
+var h=Math.floor((gap%(1000*60*60*24))/(1000*60*60));
+var m=Math.floor((gap%(1000*60*60))/(1000*60));
+var s=Math.floor((gap%(1000*60))/1000);
+document.getElementById("countdown").innerHTML=
+d+" ngày "+h+" giờ "+m+" phút "+s+" giây";
+},1000);
+
+/* PROGRESS SAVE */
+function updateProgress(val){
+document.getElementById("progressBar").style.width=val+"%";
+document.getElementById("progressText").innerText="Tiến trình: "+val+"%";
+localStorage.setItem("progress",val);
+}
+
+/* THEME */
+function toggleTheme(){
+document.body.style.background=
+document.body.style.background=="white"?"#050a14":"white";
+document.body.style.color=
+document.body.style.color=="black"?"white":"black";
+}
+
+/* MUSIC */
+function toggleMusic(){
+let music=document.getElementById("bgmusic");
+music.paused?music.play():music.pause();
+}
+
+/* PARTICLES */
+let canvas=document.getElementById("particles");
+let ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+let particles=[];
+for(let i=0;i<80;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+dx:(Math.random()-0.5)*1.5,
+dy:(Math.random()-0.5)*1.5,
+r:2
+});
+}
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle="#00f7ff";
+ctx.fill();
+p.x+=p.dx;
+p.y+=p.dy;
+if(p.x<0||p.x>canvas.width)p.dx*=-1;
+if(p.y<0||p.y>canvas.height)p.dy*=-1;
+});
+for(let i=0;i<particles.length;i++){
+for(let j=i+1;j<particles.length;j++){
+let dx=particles[i].x-particles[j].x;
+let dy=particles[i].y-particles[j].y;
+let dist=Math.sqrt(dx*dx+dy*dy);
+if(dist<120){
+ctx.strokeStyle="rgba(0,247,255,0.2)";
+ctx.beginPath();
+ctx.moveTo(particles[i].x,particles[i].y);
+ctx.lineTo(particles[j].x,particles[j].y);
+ctx.stroke();
+}}}
+requestAnimationFrame(animate);
+}
+animate();
+
+window.onresize=function(){
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+};
+</script>
+
+</body>
+</html>
