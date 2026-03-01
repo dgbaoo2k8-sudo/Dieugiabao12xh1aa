@@ -6,9 +6,9 @@
 
 <style>
 body{
-    font-family: Arial, sans-serif;
     margin:0;
     padding:0;
+    font-family:Arial, sans-serif;
     background:black;
     color:white;
     overflow-x:hidden;
@@ -25,81 +25,58 @@ body{
     z-index:-2;
 }
 
-/* Thanh menu cố định */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    padding: 10px 20px;
-    z-index: 999;
-    color: white;
-    text-align: center;
+/* MENU */
+.navbar{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(0,0,0,0.85);
+    padding:15px;
+    text-align:center;
+    z-index:999;
 }
 
-.navbar a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    margin: 0 10px;
-    font-weight: bold;
-    font-size: 18px;
+.navbar a{
+    color:white;
+    text-decoration:none;
+    margin:0 20px;
+    font-weight:bold;
+    transition:0.3s;
 }
 
-.navbar a:hover {
-    background-color: #555;
-    border-radius: 5px;
+.navbar a:hover{
+    color:#00ffcc;
 }
 
 /* PAGE */
 .page{
     display:none;
-    padding:50px;
+    padding:120px 50px 50px 50px;
     min-height:100vh;
 }
 .active{
     display:block;
-    animation:fadeIn 0.8s ease;
+    animation:fade 0.8s ease;
 }
 
-@keyframes fadeIn{
-    from{opacity:0; transform:translateY(20px);}
-    to{opacity:1; transform:translateY(0);}
+@keyframes fade{
+    from{opacity:0;}
+    to{opacity:1;}
 }
 
-/* TRANG CHỦ */
-.home-box{
-    max-width:800px;
-}
-
-.home-image img{
-    width:220px;
-    border-radius:12px;
-    margin-top:20px;
-}
-
-/* TRANG 2 & 3 */
-.dark-theme{
-    background:linear-gradient(135deg,#000000,#1a1a1a);
-}
-
+/* BOX */
 .box{
     background:rgba(0,0,0,0.75);
     padding:30px;
     border-radius:15px;
-    box-shadow:0 0 25px rgba(255,255,255,0.1);
     max-width:1000px;
 }
 
 /* ẢNH */
-.gallery{
-    margin:20px 0;
-}
-.gallery img{
-    width:350px;
-    border-radius:12px;
-    box-shadow:0 0 20px rgba(255,255,255,0.2);
+img{
+    width:300px;
+    border-radius:10px;
+    margin:15px 0;
 }
 
 /* BUTTON */
@@ -108,47 +85,38 @@ button{
     margin:10px 10px 10px 0;
     border:none;
     border-radius:8px;
-    background:linear-gradient(45deg,#333,#000);
+    background:#222;
     color:white;
     cursor:pointer;
-    transition:0.3s;
-}
-button:hover{
-    background:linear-gradient(45deg,#555,#111);
-    transform:scale(1.05);
 }
 
-/* LINK */
+button:hover{
+    background:#444;
+}
+
 a{
     color:#00c3ff;
-    font-weight:bold;
-}
-
-#countdown{
-    font-size:20px;
-    font-weight:bold;
-    color:#00ff88;
 }
 </style>
 </head>
 
 <body>
 
-<!-- VIDEO BACKGROUND -->
-<video id="bgVideo" autoplay loop playsinline muted>
+<!-- VIDEO -->
+<video id="bgVideo" autoplay muted loop playsinline>
     <source src="snaptik.vn_cwAXi.mp4" type="video/mp4">
 </video>
 
-<!-- ================= THẢNH MENU CỐ ĐỊNH ================= -->
+<!-- MENU -->
 <div class="navbar">
-    <a href="javascript:void(0);" onclick="showPage(1)">Trang chủ</a>
-    <a href="javascript:void(0);" onclick="showPage(2)">Thông Tin Kỳ Thi THPT 2026</a>
-    <a href="javascript:void(0);" onclick="showPage(3)">Hành Trang Tiếp Ứng</a>
+    <a href="#" onclick="showPage(1)">Trang Chủ</a>
+    <a href="#" onclick="showPage(2)">Kỳ Thi THPT 2026</a>
+    <a href="#" onclick="showPage(3)">Hành Trang</a>
 </div>
 
-<!-- ================= TRANG 1 ================= -->
+<!-- TRANG 1 -->
 <div id="page1" class="page active">
-<div class="home-box">
+<div class="box">
 
 <h1>Giới Thiệu Bản Thân</h1>
 
@@ -156,9 +124,7 @@ a{
 <p><b>Lớp:</b> 12XH1A</p>
 <p><b>Trường:</b> THCS-THPT Việt Hoa Quang Chánh</p>
 
-<div class="home-image">
-    <img src="retouch_2026020222520653.jpg">
-</div>
+<img src="retouch_2026020222520653.jpg">
 
 <h3>Sở thích:</h3>
 <p>📚 Đọc sách về xã hội và tâm lý học</p>
@@ -169,114 +135,122 @@ a{
 <p>❌ Trì hoãn công việc</p>
 <p>❌ Môi trường thiếu tích cực</p>
 
-<h3>⏳ Đếm ngược đến kỳ thi THPT 2026:</h3>
+<h3>⏳ Đếm ngược đến kỳ thi:</h3>
 <p id="countdown"></p>
 
 <h3>Liên hệ:</h3>
-<p>🔗 <a href="https://www.facebook.com/share/18CxTMrCyv/" target="_blank">Facebook</a></p>
-<p>📧 Gmail: dgbaoo2k8@gmail.com</p>
-<p>🎵 <a href="https://tiktok.com/@giabaoo1605" target="_blank">TikTok</a></p>
+<p>Facebook: <a href="https://www.facebook.com/share/18CxTMrCyv/" target="_blank">Link</a></p>
+<p>Gmail: dgbaoo2k8@gmail.com</p>
+<p>TikTok: <a href="https://tiktok.com/@giabaoo1605" target="_blank">Link</a></p>
 
-<button onclick="showPage(2)">Xem thông tin Kỳ thi THPT 2026</button>
+<button onclick="showPage(2)">Xem thông tin Kỳ thi</button>
 <button onclick="showPage(3)">Hành trang tiếp ứng</button>
 
 </div>
 </div>
 
-<!-- ================= TRANG 2 ================= -->
-<div id="page2" class="page dark-theme">
+<!-- TRANG 2 -->
+<div id="page2" class="page">
 <div class="box">
+
 <h1>Thông Tin Kỳ Thi Tốt Nghiệp THPT 2026</h1>
 
-<div class="gallery">
-    <img src="2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg">
-</div>
+<img src="2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg">
 
-<p>Kỳ thi tốt nghiệp THPT năm 2026 dự kiến diễn ra vào ngày 11 và 12 tháng 6 năm 2026.</p>
+<p>Kỳ thi tốt nghiệp THPT 2026 dự kiến diễn ra vào ngày 11 và 12 tháng 6 năm 2026.</p>
 
 <h3>Mục đích:</h3>
 <p>- Xét công nhận tốt nghiệp THPT.</p>
-<p>- Làm căn cứ tuyển sinh đại học, cao đẳng.</p>
+<p>- Làm căn cứ tuyển sinh Đại học, Cao đẳng.</p>
 
 <h3>Các môn thi:</h3>
-<p>- Ngữ văn (tự luận)</p>
-<p>- Toán (trắc nghiệm)</p>
-<p>- Ngoại ngữ (trắc nghiệm)</p>
-<p>- Bài thi tổ hợp</p>
+<p>- Ngữ văn (Tự luận)</p>
+<p>- Toán (Trắc nghiệm)</p>
+<p>- Ngoại ngữ (Trắc nghiệm)</p>
+<p>- Bài thi tổ hợp KHTN hoặc KHXH</p>
 
-<p>📌 Xem chi tiết tại:</p>
+<p>Chi tiết xem tại:</p>
 <a href="https://thuvienphapluat.vn/hoi-dap-phap-luat/lich-thi-thpt-quoc-gia-2026-dien-ra-vao-ngay-1161262026-du-kien-dung-khong-138059892.html" target="_blank">
-Thư Viện Pháp Luật - Lịch thi THPT 2026
+Thư Viện Pháp Luật - Lịch thi 2026
 </a>
 
 <br><br>
-<button onclick="showPage(1)">Quay lại Trang chủ</button>
-<button onclick="showPage(3)">Hành trang tiếp ứng</button>
+<button onclick="showPage(1)">Trang Chủ</button>
+<button onclick="showPage(3)">Hành Trang</button>
+
 </div>
 </div>
 
-<!-- ================= TRANG 3 ================= -->
-<div id="page3" class="page dark-theme">
+<!-- TRANG 3 -->
+<div id="page3" class="page">
 <div class="box">
+
 <h1>Hành Trang Tiếp Ứng - Ngành Công Tác Xã Hội</h1>
 
-<div class="gallery">
-    <img src="https://cdn-icons-png.flaticon.com/512/3132/3132737.png">
-</div>
+<img src="NGHE-CONG-TAC-XA-HOI.png">
 
-<p>Ngành Công tác xã hội đào tạo chuyên viên hỗ trợ cá nhân và cộng đồng giải quyết vấn đề xã hội.</p>
+<h3>Ngành Công tác xã hội là gì?</h3>
+<p>Là ngành hỗ trợ cá nhân, gia đình và cộng đồng giải quyết vấn đề xã hội, nâng cao chất lượng cuộc sống.</p>
+
+<h3>Các trường đào tạo:</h3>
+<p>- Đại học Khoa học Xã hội và Nhân văn TP.HCM</p>
+<p>- Đại học Mở TP.HCM</p>
+<p>- Đại học Lao động - Xã hội</p>
+<p>- Đại học Sư phạm TP.HCM</p>
+
+<h3>Tố chất cần có:</h3>
+<p>• Kỹ năng giao tiếp tốt</p>
+<p>• Biết lắng nghe và thấu hiểu</p>
+<p>• Kiên nhẫn và có trách nhiệm</p>
+<p>• Yêu thích hoạt động cộng đồng</p>
 
 <h3>Cơ hội việc làm:</h3>
-<p>• Cơ quan nhà nước</p>
 <p>• Trung tâm bảo trợ xã hội</p>
-<p>• Tổ chức phi chính phủ</p>
+<p>• Bệnh viện</p>
+<p>• Trường học</p>
+<p>• Tổ chức phi chính phủ (NGO)</p>
 
 <h3>Mức lương:</h3>
-<p>Từ 7 – 15 triệu đồng/tháng tùy kinh nghiệm.</p>
+<p>Từ 7 - 15 triệu/tháng, có thể cao hơn nếu làm quản lý hoặc dự án quốc tế.</p>
 
-<button onclick="showPage(1)">Quay lại Trang chủ</button>
-<button onclick="showPage(2)">Xem thông tin Kỳ thi</button>
+<h3>Những gì đã chuẩn bị:</h3>
+<p>✔ Ôn tập kiến thức lớp 12</p>
+<p>✔ Luyện đề thi thử</p>
+<p>✔ Chuẩn bị tâm lý vững vàng</p>
+<p>✔ Xác định rõ mục tiêu nghề nghiệp</p>
+
+<button onclick="showPage(1)">Trang Chủ</button>
+<button onclick="showPage(2)">Thông Tin Kỳ Thi</button>
+
 </div>
 </div>
 
 <script>
 var video = document.getElementById("bgVideo");
 
-/* Bắt buộc video muted trước để trình duyệt cho phép autoplay */
-video.muted = true;
-
-document.addEventListener("DOMContentLoaded", function(){
-    video.play().then(()=>{
-        video.muted = false;  // bật âm thanh sau khi đã chạy
-    }).catch(()=>{});
+/* Đảm bảo video luôn play khi load */
+window.addEventListener("load", function(){
+    video.play().catch(()=>{});
 });
 
-/* Chuyển trang */
-function showPage(page){
+/* Bật tiếng khi người dùng click lần đầu */
+document.body.addEventListener("click", function(){
+    video.muted = false;
+},{ once:true });
+
+function showPage(p){
     document.getElementById("page1").classList.remove("active");
     document.getElementById("page2").classList.remove("active");
     document.getElementById("page3").classList.remove("active");
-    document.getElementById("page"+page).classList.add("active");
-
-    if(page==1){
-        video.style.display="block";
-        video.muted=false;
-        video.play();
-    }else{
-        video.pause();
-        video.currentTime=0;
-        video.muted=true;
-        video.style.display="none";
-    }
+    document.getElementById("page"+p).classList.add("active");
 }
 
 /* Countdown */
 function countdown(){
     var target = new Date("June 11, 2026 07:00:00").getTime();
     var now = new Date().getTime();
-    var distance = target - now;
-    var days = Math.floor(distance / (1000*60*60*24));
-    document.getElementById("countdown").innerHTML = days + " ngày nữa đến kỳ thi!";
+    var d = Math.floor((target-now)/(1000*60*60*24));
+    document.getElementById("countdown").innerHTML = d + " ngày nữa đến kỳ thi THPT 2026";
 }
 setInterval(countdown,1000);
 countdown();
