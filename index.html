@@ -7,15 +7,12 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
 body{
 font-family:'Segoe UI',sans-serif;
 background:black;
 color:white;
 overflow-x:hidden;
 }
-
-/* VIDEO BACKGROUND */
 #bgVideo{
 position:fixed;
 top:0;
@@ -25,8 +22,6 @@ height:100%;
 object-fit:cover;
 z-index:-3;
 }
-
-/* NAVBAR */
 .navbar{
 position:fixed;
 top:0;
@@ -37,7 +32,6 @@ background:rgba(0,0,0,0.5);
 backdrop-filter:blur(8px);
 z-index:999;
 }
-
 .navbar a{
 color:#00f2ff;
 text-decoration:none;
@@ -45,12 +39,7 @@ margin:0 25px;
 font-weight:bold;
 transition:0.3s;
 }
-
-.navbar a:hover{
-text-shadow:0 0 15px #00f2ff;
-}
-
-/* PAGE */
+.navbar a:hover{ text-shadow:0 0 15px #00f2ff; }
 .page{
 display:none;
 min-height:100vh;
@@ -58,18 +47,14 @@ padding:120px 20px 50px 20px;
 justify-content:center;
 align-items:center;
 }
-
 .active{
 display:flex;
 animation:fade 0.6s ease;
 }
-
 @keyframes fade{
 from{opacity:0;transform:translateY(20px);}
 to{opacity:1;transform:translateY(0);}
 }
-
-/* CONTENT BOX */
 .box{
 background:rgba(0,0,0,0.45);
 backdrop-filter:blur(6px);
@@ -78,22 +63,17 @@ border-radius:20px;
 max-width:1100px;
 box-shadow:0 0 25px rgba(0,242,255,0.4);
 }
-
-/* INTRO */
 .intro{
 display:flex;
 gap:40px;
 align-items:flex-start;
 flex-wrap:wrap;
 }
-
 .intro img{
 width:260px;
 border-radius:15px;
 box-shadow:0 0 20px #00f2ff;
 }
-
-/* IMAGE PAGE 2 & 3 */
 .exam-img{
 width:100%;
 max-width:500px;
@@ -101,8 +81,6 @@ border-radius:15px;
 margin:20px 0;
 box-shadow:0 0 20px #00f2ff;
 }
-
-/* BUTTON */
 button{
 padding:10px 20px;
 margin:15px 10px 0 0;
@@ -113,14 +91,11 @@ color:#00f2ff;
 cursor:pointer;
 transition:0.3s;
 }
-
 button:hover{
 background:#00f2ff;
 color:black;
 box-shadow:0 0 15px #00f2ff;
 }
-
-/* SOUND BUTTON */
 #soundBtn{
 position:fixed;
 bottom:20px;
@@ -133,7 +108,6 @@ border-radius:50px;
 cursor:pointer;
 z-index:1000;
 }
-
 @media(max-width:768px){
 .intro{flex-direction:column;}
 .intro img{width:200px;}
@@ -143,12 +117,12 @@ z-index:1000;
 <body>
 
 <!-- VIDEO -->
-<video id="bgVideo" autoplay loop playsinline>
+<video id="bgVideo" autoplay muted loop playsinline>
 <source src="snaptik.vn_cwAXi.mp4" type="video/mp4">
 </video>
 
 <!-- SOUND BUTTON -->
-<button id="soundBtn">🔇 Tắt nhạc</button>
+<button id="soundBtn">🔊 Bật nhạc</button>
 
 <!-- NAVBAR -->
 <div class="navbar">
@@ -161,24 +135,16 @@ z-index:1000;
 <div id="page1" class="page active">
 <div class="box">
 <h1>Giới Thiệu Bản Thân</h1>
-
 <div class="intro">
 <img src="retouch_2026020222520653.jpg">
 <div>
 <p><b>Họ và tên:</b> Điểu Gia Bảo</p>
 <p><b>Lớp:</b> 12XH1A</p>
 <p><b>Trường:</b> THCS-THPT Việt Hoa Quang Chánh</p>
-
-<h3>Sở thích:</h3>
-<p>📚 Đọc sách xã hội và tâm lý học</p>
-<p>🎵 Nghe nhạc thư giãn</p>
-<p>💻 Tìm hiểu công nghệ và thiết kế web</p>
-
 <h3>⏳ Đếm ngược đến kỳ thi:</h3>
 <p id="countdown"></p>
 </div>
 </div>
-
 <button onclick="showPage(2)">Kỳ Thi</button>
 <button onclick="showPage(3)">Ngành CTXH</button>
 </div>
@@ -188,16 +154,8 @@ z-index:1000;
 <div id="page2" class="page">
 <div class="box">
 <h1>Kỳ Thi Tốt Nghiệp THPT 2026</h1>
-
 <img src="2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="exam-img">
-
 <p><b>Thời gian:</b> 11-12/6/2026</p>
-
-<h3>Môn thi:</h3>
-<p>- Ngữ văn</p>
-<p>- Toán</p>
-<p>- 2 môn tự chọn</p>
-
 <button onclick="showPage(1)">Trang Chủ</button>
 <button onclick="showPage(3)">Ngành CTXH</button>
 </div>
@@ -207,17 +165,11 @@ z-index:1000;
 <div id="page3" class="page">
 <div class="box">
 <h1>Ngành Công Tác Xã Hội</h1>
-
-<p>Ngành học trợ giúp cá nhân, nhóm và cộng đồng nâng cao chức năng xã hội.</p>
-
 <img src="2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="exam-img">
-
 <h3>Hành trang tiếp ứng:</h3>
 <p>✔ Ôn tập lớp 12</p>
 <p>✔ Luyện đề</p>
 <p>✔ Chuẩn bị tâm lý</p>
-<p>✔ Xác định mục tiêu nghề nghiệp</p>
-
 <button onclick="showPage(1)">Trang Chủ</button>
 <button onclick="showPage(2)">Kỳ Thi</button>
 </div>
@@ -244,32 +196,26 @@ d+" ngày "+h+" giờ "+m+" phút "+s+" giây";
 setInterval(countdown,1000);
 countdown();
 
-/* AUTO PLAY SOUND */
+/* VIDEO + SOUND */
 const video=document.getElementById("bgVideo");
 const soundBtn=document.getElementById("soundBtn");
 
-function fadeInAudio(){
-let vol=0;
-video.muted=false;
-let fade=setInterval(()=>{
-if(vol<1){
-vol+=0.05;
-video.volume=vol;
-}else{
-clearInterval(fade);
-}
-},200);
-}
+video.play().catch(()=>{});
 
+/* bật tiếng sau 1 giây */
 window.addEventListener("load",function(){
-video.volume=0;
-fadeInAudio();
+setTimeout(function(){
+video.muted=false;
+video.volume=1;
+soundBtn.innerHTML="🔇 Tắt nhạc";
+},1000);
 });
 
-/* TOGGLE SOUND */
+/* nút bật tắt */
 soundBtn.onclick=function(){
 if(video.muted){
-fadeInAudio();
+video.muted=false;
+video.volume=1;
 soundBtn.innerHTML="🔇 Tắt nhạc";
 }else{
 video.muted=true;
