@@ -38,9 +38,9 @@ canvas{
     width:100%;
     padding:15px;
     text-align:center;
-    backdrop-filter:blur(12px);
-    background:rgba(0,0,0,0.4);
-    box-shadow:0 0 20px #00f2ff;
+    backdrop-filter:blur(10px);
+    background:rgba(0,0,0,0.6);
+    box-shadow:0 0 15px #00f2ff;
     z-index:999;
 }
 .navbar a{
@@ -51,7 +51,7 @@ canvas{
     transition:0.3s;
 }
 .navbar a:hover{
-    text-shadow:0 0 15px #00f2ff;
+    text-shadow:0 0 10px #00f2ff;
 }
 
 /* PAGE */
@@ -64,44 +64,34 @@ canvas{
 }
 .active{
     display:flex;
-    animation:pageAnim 0.6s ease;
+    animation:fadeIn 0.6s ease;
 }
-@keyframes pageAnim{
-    from{opacity:0; transform:scale(0.95);}
-    to{opacity:1; transform:scale(1);}
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
-/* NEON BOX */
+/* BOX */
 .box{
-    position:relative;
     padding:35px;
     border-radius:20px;
-    max-width:900px;
-    background:rgba(0,0,0,0.65);
-    backdrop-filter:blur(10px);
-    overflow:hidden;
-}
-.box::before{
-    content:"";
-    position:absolute;
-    inset:-2px;
-    border-radius:20px;
-    background:linear-gradient(45deg,#00f2ff,#ff00c8,#00ff88,#00f2ff);
-    background-size:400%;
-    animation:neon 6s linear infinite;
-    z-index:-1;
-}
-@keyframes neon{
-    0%{background-position:0%}
-    100%{background-position:400%}
+    max-width:1000px;
+    background:rgba(0,0,0,0.75);
+    backdrop-filter:blur(8px);
+    box-shadow:0 0 20px rgba(0,242,255,0.4);
 }
 
-/* IMAGE */
-img{
-    width:230px;
+/* INTRO FLEX */
+.intro{
+    display:flex;
+    gap:40px;
+    align-items:flex-start;
+    flex-wrap:wrap;
+}
+.intro img{
+    width:250px;
     border-radius:15px;
-    margin:15px 0;
-    box-shadow:0 0 20px #00f2ff;
+    box-shadow:0 0 15px #00f2ff;
 }
 
 /* BUTTON */
@@ -118,17 +108,16 @@ button{
 button:hover{
     background:#00f2ff;
     color:black;
-    box-shadow:0 0 20px #00f2ff;
+    box-shadow:0 0 15px #00f2ff;
 }
 
 h1{
-    text-align:center;
-    text-shadow:0 0 20px #00f2ff;
+    text-shadow:0 0 15px #00f2ff;
 }
 
-@media(max-width:600px){
-    img{width:170px;}
-    .box{padding:20px;}
+@media(max-width:768px){
+    .intro{flex-direction:column;}
+    .intro img{width:200px;}
 }
 </style>
 </head>
@@ -150,18 +139,28 @@ h1{
 <!-- PAGE 1 -->
 <div id="page1" class="page active">
 <div class="box">
-<h1>Điểu Gia Bảo</h1>
+<h1>Giới Thiệu Bản Thân</h1>
+
+<div class="intro">
+<img src="retouch_2026020222520653.jpg">
+<div>
+<p><b>Họ và tên:</b> Điểu Gia Bảo</p>
 <p><b>Lớp:</b> 12XH1A</p>
 <p><b>Trường:</b> THCS-THPT Việt Hoa Quang Chánh</p>
-<img src="retouch_2026020222520653.jpg">
 
 <h3>Sở thích:</h3>
-<p>📚 Đọc sách xã hội & tâm lý</p>
+<p>📚 Đọc sách xã hội và tâm lý học</p>
 <p>🎵 Nghe nhạc thư giãn</p>
-<p>💻 Thiết kế web</p>
+<p>💻 Tìm hiểu công nghệ và thiết kế web</p>
 
-<h3>⏳ Countdown kỳ thi:</h3>
+<h3>Không thích:</h3>
+<p>❌ Trì hoãn công việc</p>
+<p>❌ Môi trường thiếu tích cực</p>
+
+<h3>⏳ Đếm ngược đến kỳ thi:</h3>
 <p id="countdown"></p>
+</div>
+</div>
 
 <button onclick="showPage(2)">Kỳ Thi 2026</button>
 <button onclick="showPage(3)">Ngành CTXH</button>
@@ -173,21 +172,23 @@ h1{
 <div class="box">
 <h1>Kỳ Thi Tốt Nghiệp THPT 2026</h1>
 
-<p><b>Thời gian:</b> Dự kiến 11-12/6/2026 (sớm hơn khoảng 2 tuần).</p>
+<p><b>Thời gian:</b> 11-12/6/2026 (sớm hơn các năm trước).</p>
 
-<h3>Môn thi (Tổng 4 môn):</h3>
-<p><b>2 môn bắt buộc:</b></p>
-<p>- Ngữ văn (120 phút, tự luận)</p>
-<p>- Toán (90 phút, trắc nghiệm)</p>
+<h3>Môn thi (4 môn):</h3>
+<p>Ngữ văn (120 phút - tự luận)</p>
+<p>Toán (90 phút - trắc nghiệm)</p>
+<p>2 môn tự chọn: Vật lí, Hóa học, Sinh học, Lịch sử, Địa lí, Giáo dục kinh tế và pháp luật, Tin học, Công nghệ, Ngoại ngữ.</p>
 
-<p><b>2 môn tự chọn (chọn 2):</b></p>
-<p>Vật lí, Hóa học, Sinh học, Lịch sử, Địa lí, Giáo dục kinh tế và pháp luật, Tin học, Công nghệ (CN/NN), Ngoại ngữ</p>
+<h3>Dự kiến điểm mới:</h3>
+<p>Tại Hội nghị tổng kết công tác tổ chức Kỳ thi tốt nghiệp THPT năm 2025 và chuẩn bị cho năm 2026, Cục trưởng Cục Quản lý chất lượng Huỳnh Văn Chương cho biết:</p>
 
-<h3>Điểm mới:</h3>
-<p>✔ Thi sớm thuận lợi tuyển sinh ĐH, CĐ</p>
-<p>✔ Giảm thời gian phúc khảo</p>
-<p>✔ Đánh giá năng lực theo chương trình GDPT 2018</p>
-<p>✔ Ứng dụng công nghệ thông tin mạnh mẽ</p>
+<p>✔ Kỳ thi giữ ổn định như năm 2025.</p>
+<p>✔ Có điều chỉnh phù hợp mô hình chính quyền địa phương 2 cấp.</p>
+<p>✔ Tiếp tục áp dụng công nghệ thông tin trong tổ chức thi.</p>
+<p>✔ Sửa đổi quy định thanh tra khi chuyển về Thanh tra Chính phủ và Thanh tra tỉnh.</p>
+<p>✔ Điều chỉnh quy trình tổ chức thi phù hợp sắp xếp đơn vị hành chính.</p>
+<p>✔ Giảm thời gian nhận đơn phúc khảo.</p>
+<p>✔ Điều chỉnh quy trình chấm phúc khảo nâng cao hiệu quả.</p>
 
 <h3>Xét tốt nghiệp:</h3>
 <p>Kết hợp điểm thi và điểm học bạ theo quy chế ổn định từ 2025.</p>
@@ -200,29 +201,24 @@ h1{
 <!-- PAGE 3 -->
 <div id="page3" class="page">
 <div class="box">
-<h1>Ngành Công Tác Xã Hội (CTXH)</h1>
+<h1>Ngành Công Tác Xã Hội (Social Work)</h1>
 
-<p>Ngành CTXH là lĩnh vực khoa học và nghề nghiệp chuyên nghiệp hỗ trợ cá nhân, gia đình, cộng đồng yếu thế vượt qua khó khăn và thúc đẩy công bằng xã hội.</p>
+<p>Ngành Công tác xã hội là ngành học học thuật và hoạt động chuyên môn nhằm trợ giúp cá nhân, nhóm và cộng đồng phục hồi hoặc tăng cường chức năng xã hội, góp phần đảm bảo nền an sinh xã hội.</p>
 
-<h3>Mục tiêu:</h3>
-<p>✔ Giúp người yếu thế phát huy năng lực</p>
-<p>✔ Hòa nhập cộng đồng</p>
-<p>✔ Xây dựng chính sách xã hội nhân ái</p>
+<h3>Mục tiêu đào tạo:</h3>
+<p>Đào tạo sinh viên có đạo đức và năng lực làm việc trong các vấn đề xã hội; thúc đẩy thay đổi xã hội; giải quyết các vấn đề trong mối quan hệ con người; xây dựng kỹ năng nghiên cứu, giảng dạy và kỹ năng can thiệp, tư vấn chính sách xã hội.</p>
 
-<h3>Công việc cụ thể:</h3>
-<p>Tham vấn tâm lý, quản lý ca, phát triển cộng đồng, vận động chính sách, hỗ trợ tại trường học & bệnh viện.</p>
+<h3>Kiến thức được học:</h3>
+<p>Xã hội học đại cương, Tâm lý học phát triển, Pháp luật về các vấn đề xã hội…</p>
 
 <h3>Cơ hội việc làm:</h3>
-<p>Cơ quan Nhà nước, tổ chức NGO, bệnh viện, trường học, doanh nghiệp (CSR).</p>
+<p>Làm việc tại trường đại học, cao đẳng đào tạo CTXH; cơ quan chính phủ và phi chính phủ; bệnh viện; tư vấn và hỗ trợ điều trị…</p>
 
-<h3>Kỹ năng cần có:</h3>
-<p>Thấu cảm, lắng nghe, giao tiếp, giải quyết vấn đề, kiên nhẫn, làm việc nhóm.</p>
-
-<h3>Triển vọng:</h3>
-<p>Nhu cầu nhân lực cao do các vấn đề xã hội ngày càng phức tạp.</p>
-
-<h3>Trường đào tạo tiêu biểu:</h3>
-<p>ĐH KHXH&NV (HN & TP.HCM), ĐH Sư phạm TP.HCM, ĐH Tôn Đức Thắng, ĐH Huế, ĐH Quy Nhơn.</p>
+<h3>Những gì tôi đã chuẩn bị:</h3>
+<p>✔ Ôn tập kiến thức lớp 12</p>
+<p>✔ Luyện đề thi thử</p>
+<p>✔ Chuẩn bị tâm lý vững vàng</p>
+<p>✔ Xác định rõ mục tiêu nghề nghiệp</p>
 
 <button onclick="showPage(1)">Trang Chủ</button>
 <button onclick="showPage(2)">Kỳ Thi</button>
@@ -258,7 +254,7 @@ canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 let particles=[];
-for(let i=0;i<80;i++){
+for(let i=0;i<60;i++){
 particles.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
