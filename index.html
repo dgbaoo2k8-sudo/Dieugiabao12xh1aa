@@ -9,26 +9,31 @@ body{
     font-family: Arial, sans-serif;
     margin:0;
     padding:0;
+    background:black;
+    color:white;
     overflow-x:hidden;
 }
 
 /* VIDEO BACKGROUND */
 #bgVideo{
     position:fixed;
-    right:0;
-    bottom:0;
-    min-width:100%;
-    min-height:100%;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
     object-fit:cover;
     z-index:-2;
 }
 
-/* OVERLAY CHO TRANG 2 & 3 */
-.dark-theme{
-    background: linear-gradient(135deg,#1e1e2f,#2c3e50);
-    color:white;
+/* PAGE */
+.page{
+    display:none;
+    padding:50px;
     min-height:100vh;
-    animation: fadeIn 0.8s ease;
+}
+.active{
+    display:block;
+    animation:fadeIn 0.8s ease;
 }
 
 @keyframes fadeIn{
@@ -36,80 +41,53 @@ body{
     to{opacity:1; transform:translateY(0);}
 }
 
-/* PAGE */
-.page{
-    display:none;
-    padding:40px;
-    min-height:100vh;
-}
-.active{
-    display:block;
-}
-
-/* TRANG CHỦ TRONG SUỐT */
+/* TRANG CHỦ */
 .home-box{
-    padding:30px;
-    max-width:1100px;
-    margin:auto;
-    color:white;
-    backdrop-filter: blur(4px);
-}
-
-/* BỐ CỤC TRANG CHỦ */
-.home-container{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:40px;
-}
-
-.home-text{
-    flex:2;
-}
-
-.home-image{
-    flex:1;
-    text-align:right;
+    max-width:800px;
 }
 
 .home-image img{
     width:220px;
     border-radius:12px;
+    margin-top:20px;
 }
 
-/* BOX TRANG 2 & 3 */
+/* TRANG 2 & 3 */
+.dark-theme{
+    background:linear-gradient(135deg,#000000,#1a1a1a);
+}
+
 .box{
-    background:rgba(0,0,0,0.6);
+    background:rgba(0,0,0,0.75);
     padding:30px;
     border-radius:15px;
-    box-shadow:0 0 25px rgba(0,0,0,0.6);
-    max-width:1100px;
-    margin:auto;
+    box-shadow:0 0 25px rgba(255,255,255,0.1);
+    max-width:1000px;
 }
 
 /* ẢNH */
 .gallery{
-    text-align:center;
     margin:20px 0;
 }
 .gallery img{
     width:350px;
     border-radius:12px;
-    box-shadow:0 0 20px rgba(0,0,0,0.7);
+    box-shadow:0 0 20px rgba(255,255,255,0.2);
 }
 
-/* NÚT */
+/* BUTTON */
 button{
     padding:10px 20px;
-    margin:10px;
+    margin:10px 10px 10px 0;
     border:none;
     border-radius:8px;
-    background:linear-gradient(45deg,#ff8c00,#ff5500);
+    background:linear-gradient(45deg,#333,#000);
     color:white;
     cursor:pointer;
     transition:0.3s;
 }
 button:hover{
+    background:linear-gradient(45deg,#555,#111);
     transform:scale(1.05);
 }
 
@@ -129,47 +107,45 @@ a{
 
 <body>
 
-<!-- VIDEO -->
+<!-- VIDEO BACKGROUND -->
 <video id="bgVideo" autoplay loop playsinline>
-    <source src="snaptik.vn_qPjHi.mp4" type="video/mp4">
+    <source src="snaptik.vn_cwAXi.mp4" type="video/mp4">
 </video>
 
 <!-- ================= TRANG 1 ================= -->
 <div id="page1" class="page active">
 <div class="home-box">
+
 <h1>Giới Thiệu Bản Thân</h1>
 
-<div class="home-container">
-    <div class="home-text">
-        <p><b>Họ và tên:</b> Điểu Gia Bảo</p>
-        <p><b>Lớp:</b> 12XH1A</p>
-        <p><b>Trường:</b> THCS-THPT Việt Hoa Quang Chánh</p>
+<p><b>Họ và tên:</b> Điểu Gia Bảo</p>
+<p><b>Lớp:</b> 12XH1A</p>
+<p><b>Trường:</b> THCS-THPT Việt Hoa Quang Chánh</p>
 
-        <h3>Sở thích:</h3>
-        <p>📚 Đọc sách về xã hội và tâm lý học</p>
-        <p>🎵 Nghe nhạc thư giãn</p>
-        <p>💻 Tìm hiểu công nghệ và thiết kế web</p>
-
-        <h3>Không thích:</h3>
-        <p>❌ Trì hoãn công việc</p>
-        <p>❌ Môi trường thiếu tích cực</p>
-
-        <h3>⏳ Đếm ngược đến kỳ thi THPT 2026:</h3>
-        <p id="countdown"></p>
-
-        <h3>Liên hệ:</h3>
-        <p>🔗 <a href="https://www.facebook.com/share/18CxTMrCyv/" target="_blank">Facebook</a></p>
-        <p>📧 Gmail: dgbaoo2k8@gmail.com</p>
-        <p>🎵 <a href="https://tiktok.com/@giabaoo1605" target="_blank">TikTok</a></p>
-
-        <button onclick="showPage(2)">Xem thông tin Kỳ thi THPT 2026</button>
-        <button onclick="showPage(3)">Hành trang tiếp ứng</button>
-    </div>
-
-    <div class="home-image">
-        <img src="retouch_2026020222520653.jpg">
-    </div>
+<div class="home-image">
+    <img src="retouch_2026020222520653.jpg">
 </div>
+
+<h3>Sở thích:</h3>
+<p>📚 Đọc sách về xã hội và tâm lý học</p>
+<p>🎵 Nghe nhạc thư giãn</p>
+<p>💻 Tìm hiểu công nghệ và thiết kế web</p>
+
+<h3>Không thích:</h3>
+<p>❌ Trì hoãn công việc</p>
+<p>❌ Môi trường thiếu tích cực</p>
+
+<h3>⏳ Đếm ngược đến kỳ thi THPT 2026:</h3>
+<p id="countdown"></p>
+
+<h3>Liên hệ:</h3>
+<p>🔗 <a href="https://www.facebook.com/share/18CxTMrCyv/" target="_blank">Facebook</a></p>
+<p>📧 Gmail: dgbaoo2k8@gmail.com</p>
+<p>🎵 <a href="https://tiktok.com/@giabaoo1605" target="_blank">TikTok</a></p>
+
+<button onclick="showPage(2)">Xem thông tin Kỳ thi THPT 2026</button>
+<button onclick="showPage(3)">Hành trang tiếp ứng</button>
+
 </div>
 </div>
 
@@ -182,7 +158,7 @@ a{
     <img src="2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg">
 </div>
 
-<p>Kỳ thi tốt nghiệp THPT năm 2026 dự kiến diễn ra vào ngày 11 và 12 tháng 6 năm 2026 theo kế hoạch của Bộ Giáo dục và Đào tạo.</p>
+<p>Kỳ thi tốt nghiệp THPT năm 2026 dự kiến diễn ra vào ngày 11 và 12 tháng 6 năm 2026.</p>
 
 <h3>Mục đích:</h3>
 <p>- Xét công nhận tốt nghiệp THPT.</p>
@@ -232,10 +208,13 @@ Thư Viện Pháp Luật - Lịch thi THPT 2026
 <script>
 var video = document.getElementById("bgVideo");
 
-/* Ép video chạy ngay khi load */
+/* Bắt buộc muted trước để trình duyệt cho autoplay */
+video.muted = true;
+
 document.addEventListener("DOMContentLoaded", function(){
-    video.muted=false;
-    video.play().catch(()=>{});
+    video.play().then(()=>{
+        video.muted = false;  // bật âm thanh sau khi đã chạy
+    }).catch(()=>{});
 });
 
 /* Chuyển trang */
