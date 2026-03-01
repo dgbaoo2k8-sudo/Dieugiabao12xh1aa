@@ -2,258 +2,293 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Giới Thiệu Bản Thân - Điểu Gia Bảo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio - Điểu Gia Bảo</title>
 
 <style>
 body{
     margin:0;
-    padding:0;
-    font-family:Arial, sans-serif;
+    font-family:'Segoe UI',sans-serif;
     background:black;
     color:white;
     overflow-x:hidden;
 }
 
-/* VIDEO BACKGROUND */
+/* VIDEO */
 #bgVideo{
     position:fixed;
-    top:0;
-    left:0;
     width:100%;
     height:100%;
     object-fit:cover;
+    z-index:-3;
+    filter:brightness(40%);
+}
+
+/* PARTICLES */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
     z-index:-2;
 }
 
-/* MENU */
+/* NAVBAR */
 .navbar{
     position:fixed;
-    top:0;
     width:100%;
-    background:rgba(0,0,0,0.85);
     padding:15px;
     text-align:center;
+    backdrop-filter:blur(12px);
+    background:rgba(0,0,0,0.4);
+    box-shadow:0 0 20px #00f2ff;
     z-index:999;
 }
-
 .navbar a{
-    color:white;
+    color:#00f2ff;
     text-decoration:none;
     margin:0 20px;
     font-weight:bold;
     transition:0.3s;
 }
-
 .navbar a:hover{
-    color:#00ffcc;
+    text-shadow:0 0 15px #00f2ff;
 }
 
 /* PAGE */
 .page{
     display:none;
-    padding:120px 50px 50px 50px;
     min-height:100vh;
+    padding:120px 20px;
+    justify-content:center;
+    align-items:center;
 }
 .active{
-    display:block;
-    animation:fade 0.8s ease;
+    display:flex;
+    animation:pageAnim 0.6s ease;
+}
+@keyframes pageAnim{
+    from{opacity:0; transform:scale(0.95);}
+    to{opacity:1; transform:scale(1);}
 }
 
-@keyframes fade{
-    from{opacity:0;}
-    to{opacity:1;}
-}
-
-/* BOX */
+/* NEON BOX */
 .box{
-    background:rgba(0,0,0,0.75);
-    padding:30px;
-    border-radius:15px;
-    max-width:1000px;
+    position:relative;
+    padding:35px;
+    border-radius:20px;
+    max-width:900px;
+    background:rgba(0,0,0,0.65);
+    backdrop-filter:blur(10px);
+    overflow:hidden;
+}
+.box::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:20px;
+    background:linear-gradient(45deg,#00f2ff,#ff00c8,#00ff88,#00f2ff);
+    background-size:400%;
+    animation:neon 6s linear infinite;
+    z-index:-1;
+}
+@keyframes neon{
+    0%{background-position:0%}
+    100%{background-position:400%}
 }
 
-/* ẢNH */
+/* IMAGE */
 img{
-    width:300px;
-    border-radius:10px;
+    width:230px;
+    border-radius:15px;
     margin:15px 0;
+    box-shadow:0 0 20px #00f2ff;
 }
 
 /* BUTTON */
 button{
     padding:10px 20px;
     margin:10px 10px 10px 0;
-    border:none;
     border-radius:8px;
-    background:#222;
-    color:white;
+    border:1px solid #00f2ff;
+    background:transparent;
+    color:#00f2ff;
     cursor:pointer;
+    transition:0.3s;
 }
-
 button:hover{
-    background:#444;
+    background:#00f2ff;
+    color:black;
+    box-shadow:0 0 20px #00f2ff;
 }
 
-a{
-    color:#00c3ff;
+h1{
+    text-align:center;
+    text-shadow:0 0 20px #00f2ff;
+}
+
+@media(max-width:600px){
+    img{width:170px;}
+    .box{padding:20px;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- VIDEO -->
 <video id="bgVideo" autoplay muted loop playsinline>
-    <source src="snaptik.vn_cwAXi.mp4" type="video/mp4">
+<source src="snaptik.vn_cwAXi.mp4" type="video/mp4">
 </video>
 
-<!-- MENU -->
+<canvas id="particles"></canvas>
+
 <div class="navbar">
-    <a href="#" onclick="showPage(1)">Trang Chủ</a>
-    <a href="#" onclick="showPage(2)">Kỳ Thi THPT 2026</a>
-    <a href="#" onclick="showPage(3)">Hành Trang</a>
+<a href="#" onclick="showPage(1)">Trang Chủ</a>
+<a href="#" onclick="showPage(2)">Kỳ Thi 2026</a>
+<a href="#" onclick="showPage(3)">Ngành CTXH</a>
 </div>
 
-<!-- TRANG 1 -->
+<!-- PAGE 1 -->
 <div id="page1" class="page active">
 <div class="box">
-
-<h1>Giới Thiệu Bản Thân</h1>
-
-<p><b>Họ và tên:</b> Điểu Gia Bảo</p>
+<h1>Điểu Gia Bảo</h1>
 <p><b>Lớp:</b> 12XH1A</p>
 <p><b>Trường:</b> THCS-THPT Việt Hoa Quang Chánh</p>
-
 <img src="retouch_2026020222520653.jpg">
 
 <h3>Sở thích:</h3>
-<p>📚 Đọc sách về xã hội và tâm lý học</p>
+<p>📚 Đọc sách xã hội & tâm lý</p>
 <p>🎵 Nghe nhạc thư giãn</p>
-<p>💻 Tìm hiểu công nghệ và thiết kế web</p>
+<p>💻 Thiết kế web</p>
 
-<h3>Không thích:</h3>
-<p>❌ Trì hoãn công việc</p>
-<p>❌ Môi trường thiếu tích cực</p>
-
-<h3>⏳ Đếm ngược đến kỳ thi:</h3>
+<h3>⏳ Countdown kỳ thi:</h3>
 <p id="countdown"></p>
 
-<h3>Liên hệ:</h3>
-<p>Facebook: <a href="https://www.facebook.com/share/18CxTMrCyv/" target="_blank">Link</a></p>
-<p>Gmail: dgbaoo2k8@gmail.com</p>
-<p>TikTok: <a href="https://tiktok.com/@giabaoo1605" target="_blank">Link</a></p>
-
-<button onclick="showPage(2)">Xem thông tin Kỳ thi</button>
-<button onclick="showPage(3)">Hành trang tiếp ứng</button>
-
+<button onclick="showPage(2)">Kỳ Thi 2026</button>
+<button onclick="showPage(3)">Ngành CTXH</button>
 </div>
 </div>
 
-<!-- TRANG 2 -->
+<!-- PAGE 2 -->
 <div id="page2" class="page">
 <div class="box">
+<h1>Kỳ Thi Tốt Nghiệp THPT 2026</h1>
 
-<h1>Thông Tin Kỳ Thi Tốt Nghiệp THPT 2026</h1>
+<p><b>Thời gian:</b> Dự kiến 11-12/6/2026 (sớm hơn khoảng 2 tuần).</p>
 
-<img src="2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg">
+<h3>Môn thi (Tổng 4 môn):</h3>
+<p><b>2 môn bắt buộc:</b></p>
+<p>- Ngữ văn (120 phút, tự luận)</p>
+<p>- Toán (90 phút, trắc nghiệm)</p>
 
-<p>Kỳ thi tốt nghiệp THPT 2026 dự kiến diễn ra vào ngày 11 và 12 tháng 6 năm 2026.</p>
+<p><b>2 môn tự chọn (chọn 2):</b></p>
+<p>Vật lí, Hóa học, Sinh học, Lịch sử, Địa lí, Giáo dục kinh tế và pháp luật, Tin học, Công nghệ (CN/NN), Ngoại ngữ</p>
 
-<h3>Mục đích:</h3>
-<p>- Xét công nhận tốt nghiệp THPT.</p>
-<p>- Làm căn cứ tuyển sinh Đại học, Cao đẳng.</p>
+<h3>Điểm mới:</h3>
+<p>✔ Thi sớm thuận lợi tuyển sinh ĐH, CĐ</p>
+<p>✔ Giảm thời gian phúc khảo</p>
+<p>✔ Đánh giá năng lực theo chương trình GDPT 2018</p>
+<p>✔ Ứng dụng công nghệ thông tin mạnh mẽ</p>
 
-<h3>Các môn thi:</h3>
-<p>- Ngữ văn (Tự luận)</p>
-<p>- Toán (Trắc nghiệm)</p>
-<p>- Ngoại ngữ (Trắc nghiệm)</p>
-<p>- Bài thi tổ hợp KHTN hoặc KHXH</p>
+<h3>Xét tốt nghiệp:</h3>
+<p>Kết hợp điểm thi và điểm học bạ theo quy chế ổn định từ 2025.</p>
 
-<p>Chi tiết xem tại:</p>
-<a href="https://thuvienphapluat.vn/hoi-dap-phap-luat/lich-thi-thpt-quoc-gia-2026-dien-ra-vao-ngay-1161262026-du-kien-dung-khong-138059892.html" target="_blank">
-Thư Viện Pháp Luật - Lịch thi 2026
-</a>
-
-<br><br>
 <button onclick="showPage(1)">Trang Chủ</button>
-<button onclick="showPage(3)">Hành Trang</button>
-
+<button onclick="showPage(3)">Ngành CTXH</button>
 </div>
 </div>
 
-<!-- TRANG 3 -->
+<!-- PAGE 3 -->
 <div id="page3" class="page">
 <div class="box">
+<h1>Ngành Công Tác Xã Hội (CTXH)</h1>
 
-<h1>Hành Trang Tiếp Ứng - Ngành Công Tác Xã Hội</h1>
+<p>Ngành CTXH là lĩnh vực khoa học và nghề nghiệp chuyên nghiệp hỗ trợ cá nhân, gia đình, cộng đồng yếu thế vượt qua khó khăn và thúc đẩy công bằng xã hội.</p>
 
-<img src="NGHE-CONG-TAC-XA-HOI.png">
+<h3>Mục tiêu:</h3>
+<p>✔ Giúp người yếu thế phát huy năng lực</p>
+<p>✔ Hòa nhập cộng đồng</p>
+<p>✔ Xây dựng chính sách xã hội nhân ái</p>
 
-<h3>Ngành Công tác xã hội là gì?</h3>
-<p>Là ngành hỗ trợ cá nhân, gia đình và cộng đồng giải quyết vấn đề xã hội, nâng cao chất lượng cuộc sống.</p>
-
-<h3>Các trường đào tạo:</h3>
-<p>- Đại học Khoa học Xã hội và Nhân văn TP.HCM</p>
-<p>- Đại học Mở TP.HCM</p>
-<p>- Đại học Lao động - Xã hội</p>
-<p>- Đại học Sư phạm TP.HCM</p>
-
-<h3>Tố chất cần có:</h3>
-<p>• Kỹ năng giao tiếp tốt</p>
-<p>• Biết lắng nghe và thấu hiểu</p>
-<p>• Kiên nhẫn và có trách nhiệm</p>
-<p>• Yêu thích hoạt động cộng đồng</p>
+<h3>Công việc cụ thể:</h3>
+<p>Tham vấn tâm lý, quản lý ca, phát triển cộng đồng, vận động chính sách, hỗ trợ tại trường học & bệnh viện.</p>
 
 <h3>Cơ hội việc làm:</h3>
-<p>• Trung tâm bảo trợ xã hội</p>
-<p>• Bệnh viện</p>
-<p>• Trường học</p>
-<p>• Tổ chức phi chính phủ (NGO)</p>
+<p>Cơ quan Nhà nước, tổ chức NGO, bệnh viện, trường học, doanh nghiệp (CSR).</p>
 
-<h3>Mức lương:</h3>
-<p>Từ 7 - 15 triệu/tháng, có thể cao hơn nếu làm quản lý hoặc dự án quốc tế.</p>
+<h3>Kỹ năng cần có:</h3>
+<p>Thấu cảm, lắng nghe, giao tiếp, giải quyết vấn đề, kiên nhẫn, làm việc nhóm.</p>
 
-<h3>Những gì đã chuẩn bị:</h3>
-<p>✔ Ôn tập kiến thức lớp 12</p>
-<p>✔ Luyện đề thi thử</p>
-<p>✔ Chuẩn bị tâm lý vững vàng</p>
-<p>✔ Xác định rõ mục tiêu nghề nghiệp</p>
+<h3>Triển vọng:</h3>
+<p>Nhu cầu nhân lực cao do các vấn đề xã hội ngày càng phức tạp.</p>
+
+<h3>Trường đào tạo tiêu biểu:</h3>
+<p>ĐH KHXH&NV (HN & TP.HCM), ĐH Sư phạm TP.HCM, ĐH Tôn Đức Thắng, ĐH Huế, ĐH Quy Nhơn.</p>
 
 <button onclick="showPage(1)">Trang Chủ</button>
-<button onclick="showPage(2)">Thông Tin Kỳ Thi</button>
-
+<button onclick="showPage(2)">Kỳ Thi</button>
 </div>
 </div>
 
 <script>
-var video = document.getElementById("bgVideo");
-
-/* Đảm bảo video luôn play khi load */
-window.addEventListener("load", function(){
-    video.play().catch(()=>{});
-});
-
-/* Bật tiếng khi người dùng click lần đầu */
-document.body.addEventListener("click", function(){
-    video.muted = false;
-},{ once:true });
-
 function showPage(p){
-    document.getElementById("page1").classList.remove("active");
-    document.getElementById("page2").classList.remove("active");
-    document.getElementById("page3").classList.remove("active");
-    document.getElementById("page"+p).classList.add("active");
+document.querySelectorAll(".page").forEach(e=>e.classList.remove("active"));
+document.getElementById("page"+p).classList.add("active");
 }
 
-/* Countdown */
 function countdown(){
-    var target = new Date("June 11, 2026 07:00:00").getTime();
-    var now = new Date().getTime();
-    var d = Math.floor((target-now)/(1000*60*60*24));
-    document.getElementById("countdown").innerHTML = d + " ngày nữa đến kỳ thi THPT 2026";
+let target=new Date("June 11, 2026 07:00:00").getTime();
+let now=new Date().getTime();
+let diff=target-now;
+
+let d=Math.floor(diff/(1000*60*60*24));
+let h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+let m=Math.floor((diff%(1000*60*60))/(1000*60));
+let s=Math.floor((diff%(1000*60))/1000);
+
+document.getElementById("countdown").innerHTML=
+d+" ngày "+h+" giờ "+m+" phút "+s+" giây";
 }
 setInterval(countdown,1000);
 countdown();
+
+/* PARTICLES */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<80;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+d:Math.random()*1
+});
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="rgba(0,242,255,0.7)";
+particles.forEach(p=>{
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fill();
+});
+update();
+}
+
+function update(){
+particles.forEach(p=>{
+p.y+=p.d;
+if(p.y>canvas.height){
+p.y=0;
+p.x=Math.random()*canvas.width;
+}
+});
+}
+
+setInterval(draw,33);
 </script>
 
 </body>
