@@ -108,6 +108,13 @@ border-radius:50px;
 cursor:pointer;
 z-index:1000;
 }
+.school-info{
+margin-top:20px;
+padding:15px;
+border-left:4px solid #00f2ff;
+background:rgba(0,242,255,0.08);
+border-radius:10px;
+}
 @media(max-width:768px){
 .intro{flex-direction:column;}
 .intro img{width:200px;}
@@ -116,15 +123,12 @@ z-index:1000;
 </head>
 <body>
 
-<!-- VIDEO -->
 <video id="bgVideo" autoplay muted loop playsinline>
 <source src="snaptik.vn_cwAXi.mp4" type="video/mp4">
 </video>
 
-<!-- SOUND BUTTON -->
 <button id="soundBtn">🔊 Bật nhạc</button>
 
-<!-- NAVBAR -->
 <div class="navbar">
 <a href="#" onclick="showPage(1)">Trang Chủ</a>
 <a href="#" onclick="showPage(2)">Kỳ Thi 2026</a>
@@ -135,16 +139,30 @@ z-index:1000;
 <div id="page1" class="page active">
 <div class="box">
 <h1>Giới Thiệu Bản Thân</h1>
+
 <div class="intro">
 <img src="retouch_2026020222520653.jpg">
 <div>
 <p><b>Họ và tên:</b> Điểu Gia Bảo</p>
 <p><b>Lớp:</b> 12XH1A</p>
-<p><b>Trường:</b> THCS-THPT Việt Hoa Quang Chánh</p>
+<p><b>Trường:</b> THCS & THPT Việt Hoa Quang Chánh</p>
+
+<div class="school-info">
+<h3>Giới thiệu về trường:</h3>
+<p>Trường THCS & THPT Việt Hoa Quang Chánh là cơ sở giáo dục đào tạo học sinh từ cấp THCS đến THPT, chú trọng phát triển toàn diện về kiến thức, đạo đức và kỹ năng sống.</p>
+<p><b>Địa chỉ:</b><br>
+Số 138 đường Hồ Thị Hương, khu phố 12,<br>
+phường Xuân An (Phường Xuân Trung cũ),<br>
+thành phố Long Khánh, tỉnh Đồng Nai,<br>
+Long Khanh, Vietnam
+</p>
+</div>
+
 <h3>⏳ Đếm ngược đến kỳ thi:</h3>
 <p id="countdown"></p>
 </div>
 </div>
+
 <button onclick="showPage(2)">Kỳ Thi</button>
 <button onclick="showPage(3)">Ngành CTXH</button>
 </div>
@@ -181,7 +199,6 @@ document.querySelectorAll(".page").forEach(e=>e.classList.remove("active"));
 document.getElementById("page"+p).classList.add("active");
 }
 
-/* COUNTDOWN */
 function countdown(){
 let target=new Date("June 11, 2026 07:00:00").getTime();
 let now=new Date().getTime();
@@ -196,13 +213,11 @@ d+" ngày "+h+" giờ "+m+" phút "+s+" giây";
 setInterval(countdown,1000);
 countdown();
 
-/* VIDEO + SOUND */
 const video=document.getElementById("bgVideo");
 const soundBtn=document.getElementById("soundBtn");
 
 video.play().catch(()=>{});
 
-/* bật tiếng sau 1 giây */
 window.addEventListener("load",function(){
 setTimeout(function(){
 video.muted=false;
@@ -211,7 +226,6 @@ soundBtn.innerHTML="🔇 Tắt nhạc";
 },1000);
 });
 
-/* nút bật tắt */
 soundBtn.onclick=function(){
 if(video.muted){
 video.muted=false;
