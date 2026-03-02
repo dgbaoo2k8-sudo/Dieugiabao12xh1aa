@@ -7,7 +7,6 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
 html{scroll-behavior:smooth;}
 
 body{
@@ -17,12 +16,11 @@ color:white;
 overflow-x:hidden;
 }
 
-/* Thanh cuộn */
+/* Scroll đẹp */
 ::-webkit-scrollbar{width:8px;}
 ::-webkit-scrollbar-thumb{background:#00f2ff;border-radius:10px;}
 ::-webkit-scrollbar-track{background:black;}
 
-/* Video nền */
 #bgVideo{
 position:fixed;
 top:0;
@@ -33,14 +31,14 @@ object-fit:cover;
 z-index:-3;
 }
 
-/* Overlay bật nhạc */
+/* Overlay nhạc */
 #musicOverlay{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.7);
+background:rgba(0,0,0,0.75);
 display:flex;
 justify-content:center;
 align-items:center;
@@ -74,11 +72,8 @@ margin:0 25px;
 font-weight:bold;
 transition:0.3s;
 }
-.navbar a:hover{
-text-shadow:0 0 15px #00f2ff;
-}
+.navbar a:hover{ text-shadow:0 0 15px #00f2ff; }
 
-/* Page */
 .page{
 display:none;
 min-height:100vh;
@@ -95,7 +90,6 @@ from{opacity:0;transform:translateY(20px);}
 to{opacity:1;transform:translateY(0);}
 }
 
-/* Box */
 .box{
 background:rgba(0,0,0,0.5);
 backdrop-filter:blur(6px);
@@ -103,7 +97,7 @@ padding:35px;
 border-radius:20px;
 max-width:1100px;
 box-shadow:0 0 25px rgba(0,242,255,0.4);
-line-height:1.6;
+line-height:1.7;
 }
 
 .intro{
@@ -137,11 +131,7 @@ color:#00f2ff;
 font-weight:bold;
 margin-top:15px;
 }
-
-.prepare-list{
-margin-top:15px;
-padding-left:20px;
-}
+.prepare-list{margin-top:10px;padding-left:20px;}
 .prepare-list li{margin-bottom:8px;}
 </style>
 </head>
@@ -163,7 +153,6 @@ padding-left:20px;
 <div id="page1" class="page active">
 <div class="box">
 <h1>Giới Thiệu Bản Thân</h1>
-
 <div class="intro">
 <img src="./retouch_2026020222520653.jpg">
 <div>
@@ -183,7 +172,6 @@ thành phố Long Khánh, tỉnh Đồng Nai.
 
 <h3 class="highlight">⏳ Đếm ngược đến kỳ thi:</h3>
 <p id="countdown"></p>
-
 </div>
 </div>
 </div>
@@ -198,10 +186,17 @@ thành phố Long Khánh, tỉnh Đồng Nai.
 <p><b>Thời gian:</b> 11-12/6/2026</p>
 
 <h3 class="highlight">Dự kiến những điểm mới</h3>
-<p>Kỳ thi tổ chức sớm hơn so với các năm trước.</p>
-<p>Giữ ổn định như năm 2025 và điều chỉnh phù hợp mô hình chính quyền 2 cấp.</p>
-<p>Sửa đổi quy định thanh tra.</p>
-<p>Giảm thời gian nhận đơn phúc khảo và điều chỉnh quy trình chấm phúc khảo.</p>
+
+<p>Tại Hội nghị tổng kết công tác tổ chức Kỳ thi tốt nghiệp THPT năm 2025 và chuẩn bị Kỳ thi tốt nghiệp THPT năm 2026, Cục trưởng Cục Quản lý chất lượng Huỳnh Văn Chương đã thông tin về dự kiến công tác tổ chức Kỳ thi tốt nghiệp THPT năm 2026.</p>
+
+<p>Theo dự kiến, Kỳ thi tốt nghiệp THPT năm 2026 tổ chức vào ngày 11, 12/6/2026 - sớm hơn so với các năm trước.</p>
+
+<p>Kỳ thi năm 2026 giữ ổn định như năm 2025 và dự kiến có một vài điều chỉnh để bảo đảm phù hợp với mô hình quản lý chính quyền địa phương 2 cấp, đồng thời tiếp tục áp dụng công nghệ thông tin trong các khâu tổ chức thi. Các điều chỉnh dự kiến không ảnh hưởng tới thí sinh.</p>
+
+<p><b>Cụ thể:</b></p>
+<p>- Sửa đổi các quy định liên quan đến thanh tra, kiểm tra trong Kỳ thi để bảo đảm phù hợp với việc chuyển bộ phận thanh tra giáo dục các cấp về Thanh tra Chính phủ và Thanh tra tỉnh.</p>
+<p>- Điều chỉnh lại một số quy định, quy trình tổ chức thi để bảo đảm phù hợp và thuận tiện hơn cho các đơn vị trong bối cảnh sắp xếp lại đơn vị hành chính cấp tỉnh.</p>
+<p>- Giảm thời gian thu nhận đơn phúc khảo để thông báo kết quả phúc khảo sớm hơn đồng thời thuận tiện cho công tác tuyển sinh của các cơ sở giáo dục đại học, giáo dục nghề nghiệp. Điều chỉnh quy trình chấm phúc khảo để tăng cường hiệu quả, chất lượng.</p>
 
 </div>
 </div>
@@ -212,15 +207,34 @@ thành phố Long Khánh, tỉnh Đồng Nai.
 <h1>Hành Trang Tiếp Ứng</h1>
 <img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="exam-img">
 
-<h3 class="highlight">Ngành Công tác xã hội</h3>
-<p>Ngành Công tác xã hội hỗ trợ cá nhân, gia đình và cộng đồng vượt qua khó khăn, nâng cao chất lượng cuộc sống và phát huy năng lực tự giải quyết vấn đề.</p>
+<h3 class="highlight">Ngành Công tác xã hội (CTXH)</h3>
+
+<p>Ngành Công tác xã hội (CTXH) là lĩnh vực chuyên môn hỗ trợ, can thiệp giúp cá nhân, gia đình và cộng đồng vượt qua khó khăn, nâng cao chất lượng cuộc sống và phát huy năng lực tự giải quyết vấn đề. Đây là ngành nhân văn, kết hợp kiến thức khoa học và kỹ năng thực hành để hỗ trợ nhóm người yếu thế, với cơ hội việc làm rộng mở tại các cơ quan, tổ chức phi chính phủ, bệnh viện, trường học và trung tâm bảo trợ.</p>
+
+<p><b>Tổng quan:</b><br>
+Mã ngành: 7760101.<br>
+Thời gian đào tạo: Đại học (4 năm).<br>
+Văn bằng: Cử nhân Công tác xã hội.<br>
+Tính chất: Nhân văn, hướng tới xã hội công bằng và phát triển bền vững.
+</p>
+
+<p><b>Cơ hội việc làm:</b><br>
+- Tổ chức phi chính phủ (NGO), trung tâm bảo trợ xã hội, trại giam, bệnh viện, trường học.<br>
+- Vị trí: Chuyên viên tham vấn tâm lý, cán bộ phát triển cộng đồng, quản lý ca, nhân viên bảo vệ trẻ em/người cao tuổi, nhà nghiên cứu chính sách.<br>
+- Thu nhập: Khởi điểm từ 8-10 triệu đồng/tháng, có thể cao hơn (15-40 triệu đồng) nếu làm tại các tổ chức quốc tế.
+</p>
+
+<p><b>Yêu cầu kỹ năng:</b><br>
+- Giao tiếp, lắng nghe, thấu cảm (EQ cao), tư vấn, tham vấn, lập kế hoạch.<br>
+- Nhân ái, kiên nhẫn, chịu được áp lực cao.
+</p>
 
 <h3 class="highlight">Những điều tôi đã chuẩn bị</h3>
 <ul class="prepare-list">
-<li>✔ Ôn tập kỹ kiến thức lớp 12</li>
+<li>✔ Ôn tập đầy đủ kiến thức lớp 12</li>
 <li>✔ Luyện đề thường xuyên</li>
 <li>✔ Chuẩn bị tâm lý vững vàng</li>
-<li>✔ Tìm hiểu thông tin các trường đại học</li>
+<li>✔ Tìm hiểu kỹ ngành CTXH và các trường đào tạo</li>
 <li>✔ Rèn luyện kỹ năng giao tiếp và thấu cảm</li>
 </ul>
 
