@@ -8,9 +8,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
-html{
-scroll-behavior:smooth; /* CUỘN MƯỢT */
-}
+html{scroll-behavior:smooth;}
 
 body{
 font-family:'Segoe UI',sans-serif;
@@ -19,19 +17,12 @@ color:white;
 overflow-x:hidden;
 }
 
-/* Thanh cuộn đẹp */
-::-webkit-scrollbar{
-width:8px;
-}
-::-webkit-scrollbar-track{
-background:black;
-}
-::-webkit-scrollbar-thumb{
-background:#00f2ff;
-border-radius:10px;
-}
+/* Thanh cuộn */
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-thumb{background:#00f2ff;border-radius:10px;}
+::-webkit-scrollbar-track{background:black;}
 
-/* VIDEO */
+/* Video nền */
 #bgVideo{
 position:fixed;
 top:0;
@@ -42,7 +33,7 @@ object-fit:cover;
 z-index:-3;
 }
 
-/* OVERLAY */
+/* Overlay bật nhạc */
 #musicOverlay{
 position:fixed;
 top:0;
@@ -57,7 +48,6 @@ z-index:2000;
 font-size:28px;
 font-weight:bold;
 color:#00f2ff;
-text-align:center;
 cursor:pointer;
 transition:opacity 0.8s ease;
 }
@@ -66,7 +56,7 @@ opacity:0;
 pointer-events:none;
 }
 
-/* NAVBAR */
+/* Navbar */
 .navbar{
 position:fixed;
 top:0;
@@ -88,7 +78,7 @@ transition:0.3s;
 text-shadow:0 0 15px #00f2ff;
 }
 
-/* PAGE */
+/* Page */
 .page{
 display:none;
 min-height:100vh;
@@ -105,7 +95,7 @@ from{opacity:0;transform:translateY(20px);}
 to{opacity:1;transform:translateY(0);}
 }
 
-/* BOX */
+/* Box */
 .box{
 background:rgba(0,0,0,0.5);
 backdrop-filter:blur(6px);
@@ -134,20 +124,25 @@ margin:20px 0;
 box-shadow:0 0 20px #00f2ff;
 }
 
+.school-info{
+margin-top:20px;
+padding:15px;
+border-left:4px solid #00f2ff;
+background:rgba(0,242,255,0.08);
+border-radius:10px;
+}
+
 .highlight{
 color:#00f2ff;
 font-weight:bold;
 margin-top:15px;
 }
 
-/* Danh sách chuẩn bị */
 .prepare-list{
 margin-top:15px;
 padding-left:20px;
 }
-.prepare-list li{
-margin-bottom:8px;
-}
+.prepare-list li{margin-bottom:8px;}
 </style>
 </head>
 <body>
@@ -176,6 +171,16 @@ margin-bottom:8px;
 <p><b>Lớp:</b> 12XH1A</p>
 <p><b>Trường:</b> THCS & THPT Việt Hoa Quang Chánh</p>
 
+<div class="school-info">
+<h3>Giới thiệu về trường:</h3>
+<p>Trường THCS & THPT Việt Hoa Quang Chánh là cơ sở giáo dục đào tạo học sinh từ cấp THCS đến THPT, chú trọng phát triển toàn diện về kiến thức, đạo đức và kỹ năng sống.</p>
+<p><b>Địa chỉ:</b><br>
+Số 138 đường Hồ Thị Hương, khu phố 12,<br>
+phường Xuân An (Phường Xuân Trung cũ),<br>
+thành phố Long Khánh, tỉnh Đồng Nai.
+</p>
+</div>
+
 <h3 class="highlight">⏳ Đếm ngược đến kỳ thi:</h3>
 <p id="countdown"></p>
 
@@ -192,11 +197,11 @@ margin-bottom:8px;
 
 <p><b>Thời gian:</b> 11-12/6/2026</p>
 
-<h3 class="highlight">Dự kiến điểm mới</h3>
-<p>- Tổ chức sớm hơn so với các năm trước.</p>
-<p>- Ổn định như năm 2025.</p>
-<p>- Điều chỉnh thanh tra phù hợp mô hình chính quyền 2 cấp.</p>
-<p>- Rút ngắn thời gian phúc khảo.</p>
+<h3 class="highlight">Dự kiến những điểm mới</h3>
+<p>Kỳ thi tổ chức sớm hơn so với các năm trước.</p>
+<p>Giữ ổn định như năm 2025 và điều chỉnh phù hợp mô hình chính quyền 2 cấp.</p>
+<p>Sửa đổi quy định thanh tra.</p>
+<p>Giảm thời gian nhận đơn phúc khảo và điều chỉnh quy trình chấm phúc khảo.</p>
 
 </div>
 </div>
@@ -208,15 +213,15 @@ margin-bottom:8px;
 <img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="exam-img">
 
 <h3 class="highlight">Ngành Công tác xã hội</h3>
-<p>Ngành CTXH hỗ trợ cá nhân, gia đình và cộng đồng vượt qua khó khăn, nâng cao chất lượng cuộc sống.</p>
+<p>Ngành Công tác xã hội hỗ trợ cá nhân, gia đình và cộng đồng vượt qua khó khăn, nâng cao chất lượng cuộc sống và phát huy năng lực tự giải quyết vấn đề.</p>
 
 <h3 class="highlight">Những điều tôi đã chuẩn bị</h3>
 <ul class="prepare-list">
 <li>✔ Ôn tập kỹ kiến thức lớp 12</li>
 <li>✔ Luyện đề thường xuyên</li>
-<li>✔ Rèn luyện kỹ năng giao tiếp và thấu cảm</li>
+<li>✔ Chuẩn bị tâm lý vững vàng</li>
 <li>✔ Tìm hiểu thông tin các trường đại học</li>
-<li>✔ Chuẩn bị tâm lý vững vàng trước kỳ thi</li>
+<li>✔ Rèn luyện kỹ năng giao tiếp và thấu cảm</li>
 </ul>
 
 </div>
