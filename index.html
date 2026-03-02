@@ -66,7 +66,6 @@ box-shadow:0 0 25px rgba(0,242,255,0.4);
 .intro{
 display:flex;
 gap:40px;
-align-items:flex-start;
 flex-wrap:wrap;
 }
 .intro img{
@@ -81,20 +80,17 @@ border-radius:15px;
 margin:20px 0;
 box-shadow:0 0 20px #00f2ff;
 }
-button{
-padding:10px 20px;
-margin:15px 10px 0 0;
-border-radius:8px;
+#soundBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+background:rgba(0,0,0,0.6);
 border:1px solid #00f2ff;
-background:transparent;
 color:#00f2ff;
+padding:10px 15px;
+border-radius:50px;
 cursor:pointer;
-transition:0.3s;
-}
-button:hover{
-background:#00f2ff;
-color:black;
-box-shadow:0 0 15px #00f2ff;
+z-index:1000;
 }
 .school-info{
 margin-top:20px;
@@ -107,9 +103,12 @@ border-radius:10px;
 </head>
 <body>
 
-<video id="bgVideo" autoplay muted loop playsinline>
+<!-- VIDEO BACKGROUND CÓ NHẠC -->
+<video id="bgVideo" autoplay loop playsinline>
 <source src="./snaptik.vn_cwAXi.mp4" type="video/mp4">
 </video>
+
+<button id="soundBtn">🔊 Bật nhạc</button>
 
 <div class="navbar">
 <a href="#" onclick="showPage(1)">Trang Chủ</a>
@@ -120,92 +119,46 @@ border-radius:10px;
 <!-- PAGE 1 -->
 <div id="page1" class="page active">
 <div class="box">
-
 <h1>Giới Thiệu Bản Thân</h1>
-
 <div class="intro">
-<img src="./retouch_2026020222520653.jpg" alt="Ảnh Điểu Gia Bảo">
+<img src="./retouch_2026020222520653.jpg">
 <div>
-
 <p><b>Họ và tên:</b> Điểu Gia Bảo</p>
 <p><b>Lớp:</b> 12XH1A</p>
 <p><b>Trường:</b> THCS & THPT Việt Hoa Quang Chánh</p>
 
 <div class="school-info">
 <h3>Giới thiệu về trường:</h3>
-<p>
-Trường THCS & THPT Việt Hoa Quang Chánh là cơ sở giáo dục đào tạo học sinh từ cấp THCS đến THPT, chú trọng phát triển toàn diện về kiến thức, đạo đức và kỹ năng sống.
-</p>
-
+<p>Trường THCS & THPT Việt Hoa Quang Chánh là cơ sở giáo dục đào tạo học sinh từ cấp THCS đến THPT.</p>
 <p><b>Địa chỉ:</b><br>
 Số 138 đường Hồ Thị Hương, khu phố 12,<br>
-phường Xuân An (Phường Xuân Trung cũ),<br>
-thành phố Long Khánh, tỉnh Đồng Nai,<br>
-Long Khanh, Vietnam
+phường Xuân An, thành phố Long Khánh, tỉnh Đồng Nai.
 </p>
 </div>
 
 <h3>⏳ Đếm ngược đến kỳ thi:</h3>
 <p id="countdown"></p>
-
 </div>
 </div>
-
 </div>
 </div>
 
 <!-- PAGE 2 -->
 <div id="page2" class="page">
 <div class="box">
-
 <h1>Kỳ Thi Tốt Nghiệp THPT 2026</h1>
 <img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="exam-img">
-
 <p><b>Thời gian:</b> 11-12/6/2026</p>
-
-<h3>Dự kiến những điểm mới năm 2026</h3>
-
-<p>
-Theo dự kiến, kỳ thi tổ chức vào ngày 11, 12/6/2026 - sớm hơn các năm trước.
-</p>
-
-<p>
-Kỳ thi giữ ổn định như năm 2025 và có một số điều chỉnh phù hợp với mô hình chính quyền địa phương 2 cấp, tiếp tục áp dụng công nghệ thông tin.
-</p>
-
-<p><b>Cụ thể:</b></p>
-<p>- Điều chỉnh quy định thanh tra.</p>
-<p>- Điều chỉnh quy trình tổ chức thi.</p>
-<p>- Giảm thời gian phúc khảo để công bố sớm hơn.</p>
-
+<p>Kỳ thi năm 2026 tổ chức sớm hơn, giữ ổn định và có một số điều chỉnh phù hợp mô hình quản lý mới.</p>
 </div>
 </div>
 
 <!-- PAGE 3 -->
 <div id="page3" class="page">
 <div class="box">
-
 <h1>Hành Trang Tiếp Ứng</h1>
 <img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="exam-img">
-
-<h3>Ngành Công tác xã hội (CTXH)</h3>
-
-<p>
-Ngành Công tác xã hội là lĩnh vực chuyên môn hỗ trợ cá nhân, gia đình và cộng đồng vượt qua khó khăn, nâng cao chất lượng cuộc sống và phát huy năng lực tự giải quyết vấn đề.
-</p>
-
-<p>
-Mã ngành: 7760101<br>
-Thời gian đào tạo: 4 năm<br>
-Văn bằng: Cử nhân Công tác xã hội
-</p>
-
-<h3>Cơ hội việc làm</h3>
-<p>
-- NGO, bệnh viện, trường học, trung tâm bảo trợ<br>
-- Thu nhập từ 8–10 triệu/tháng, có thể cao hơn nếu làm quốc tế
-</p>
-
+<p>Ngành Công tác xã hội hỗ trợ cá nhân và cộng đồng vượt qua khó khăn.</p>
 </div>
 </div>
 
@@ -228,6 +181,22 @@ d+" ngày "+h+" giờ "+m+" phút "+s+" giây";
 }
 setInterval(countdown,1000);
 countdown();
+
+const video=document.getElementById("bgVideo");
+const btn=document.getElementById("soundBtn");
+
+video.muted=true;
+
+btn.onclick=function(){
+if(video.muted){
+video.muted=false;
+video.volume=1;
+btn.innerHTML="🔇 Tắt nhạc";
+}else{
+video.muted=true;
+btn.innerHTML="🔊 Bật nhạc";
+}
+};
 </script>
 
 </body>
