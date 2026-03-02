@@ -96,28 +96,12 @@ background:#00f2ff;
 color:black;
 box-shadow:0 0 15px #00f2ff;
 }
-#soundBtn{
-position:fixed;
-bottom:20px;
-right:20px;
-background:rgba(0,0,0,0.6);
-border:1px solid #00f2ff;
-color:#00f2ff;
-padding:10px 15px;
-border-radius:50px;
-cursor:pointer;
-z-index:1000;
-}
 .school-info{
 margin-top:20px;
 padding:15px;
 border-left:4px solid #00f2ff;
 background:rgba(0,242,255,0.08);
 border-radius:10px;
-}
-@media(max-width:768px){
-.intro{flex-direction:column;}
-.intro img{width:200px;}
 }
 </style>
 </head>
@@ -126,8 +110,6 @@ border-radius:10px;
 <video id="bgVideo" autoplay muted loop playsinline>
 <source src="./snaptik.vn_cwAXi.mp4" type="video/mp4">
 </video>
-
-<button id="soundBtn">🔊 Bật nhạc</button>
 
 <div class="navbar">
 <a href="#" onclick="showPage(1)">Trang Chủ</a>
@@ -138,42 +120,63 @@ border-radius:10px;
 <!-- PAGE 1 -->
 <div id="page1" class="page active">
 <div class="box">
+
 <h1>Giới Thiệu Bản Thân</h1>
+
 <div class="intro">
 <img src="./retouch_2026020222520653.jpg" alt="Ảnh Điểu Gia Bảo">
 <div>
+
 <p><b>Họ và tên:</b> Điểu Gia Bảo</p>
 <p><b>Lớp:</b> 12XH1A</p>
 <p><b>Trường:</b> THCS & THPT Việt Hoa Quang Chánh</p>
 
+<div class="school-info">
+<h3>Giới thiệu về trường:</h3>
+<p>
+Trường THCS & THPT Việt Hoa Quang Chánh là cơ sở giáo dục đào tạo học sinh từ cấp THCS đến THPT, chú trọng phát triển toàn diện về kiến thức, đạo đức và kỹ năng sống.
+</p>
+
+<p><b>Địa chỉ:</b><br>
+Số 138 đường Hồ Thị Hương, khu phố 12,<br>
+phường Xuân An (Phường Xuân Trung cũ),<br>
+thành phố Long Khánh, tỉnh Đồng Nai,<br>
+Long Khanh, Vietnam
+</p>
+</div>
+
 <h3>⏳ Đếm ngược đến kỳ thi:</h3>
 <p id="countdown"></p>
+
 </div>
 </div>
+
 </div>
 </div>
 
 <!-- PAGE 2 -->
 <div id="page2" class="page">
 <div class="box">
-<h1>Kỳ Thi Tốt Nghiệp THPT 2026</h1>
 
+<h1>Kỳ Thi Tốt Nghiệp THPT 2026</h1>
 <img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="exam-img">
 
 <p><b>Thời gian:</b> 11-12/6/2026</p>
 
 <h3>Dự kiến những điểm mới năm 2026</h3>
 
-<p>Tại Hội nghị tổng kết công tác tổ chức Kỳ thi tốt nghiệp THPT năm 2025 và chuẩn bị Kỳ thi năm 2026, Cục trưởng Cục Quản lý chất lượng Huỳnh Văn Chương đã thông tin về dự kiến công tác tổ chức.</p>
+<p>
+Theo dự kiến, kỳ thi tổ chức vào ngày 11, 12/6/2026 - sớm hơn các năm trước.
+</p>
 
-<p>Kỳ thi năm 2026 dự kiến tổ chức vào ngày 11, 12/6/2026 - sớm hơn các năm trước.</p>
-
-<p>Kỳ thi giữ ổn định như năm 2025 và có một số điều chỉnh phù hợp mô hình chính quyền địa phương 2 cấp, tiếp tục áp dụng công nghệ thông tin.</p>
+<p>
+Kỳ thi giữ ổn định như năm 2025 và có một số điều chỉnh phù hợp với mô hình chính quyền địa phương 2 cấp, tiếp tục áp dụng công nghệ thông tin.
+</p>
 
 <p><b>Cụ thể:</b></p>
-<p>- Sửa đổi quy định thanh tra phù hợp với việc chuyển về Thanh tra Chính phủ và Thanh tra tỉnh.</p>
-<p>- Điều chỉnh quy trình tổ chức thi phù hợp sắp xếp đơn vị hành chính cấp tỉnh.</p>
-<p>- Giảm thời gian nhận đơn phúc khảo, thông báo kết quả sớm hơn.</p>
+<p>- Điều chỉnh quy định thanh tra.</p>
+<p>- Điều chỉnh quy trình tổ chức thi.</p>
+<p>- Giảm thời gian phúc khảo để công bố sớm hơn.</p>
 
 </div>
 </div>
@@ -181,31 +184,27 @@ border-radius:10px;
 <!-- PAGE 3 -->
 <div id="page3" class="page">
 <div class="box">
-<h1>Hành Trang Tiếp Ứng</h1>
 
+<h1>Hành Trang Tiếp Ứng</h1>
 <img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="exam-img">
 
 <h3>Ngành Công tác xã hội (CTXH)</h3>
 
-<p>Ngành Công tác xã hội là lĩnh vực chuyên môn hỗ trợ cá nhân, gia đình và cộng đồng vượt qua khó khăn, nâng cao chất lượng cuộc sống.</p>
+<p>
+Ngành Công tác xã hội là lĩnh vực chuyên môn hỗ trợ cá nhân, gia đình và cộng đồng vượt qua khó khăn, nâng cao chất lượng cuộc sống và phát huy năng lực tự giải quyết vấn đề.
+</p>
 
-<h3>Tổng quan:</h3>
-<p>Mã ngành: 7760101</p>
-<p>Thời gian đào tạo: 4 năm</p>
-<p>Văn bằng: Cử nhân Công tác xã hội</p>
+<p>
+Mã ngành: 7760101<br>
+Thời gian đào tạo: 4 năm<br>
+Văn bằng: Cử nhân Công tác xã hội
+</p>
 
-<h3>Cơ hội việc làm:</h3>
-<p>- NGO, bệnh viện, trường học, trung tâm bảo trợ</p>
-<p>- Thu nhập: 8–10 triệu/tháng; 15–40 triệu nếu làm quốc tế</p>
-
-<h3>Yêu cầu kỹ năng:</h3>
-<p>- Giao tiếp, lắng nghe, thấu cảm</p>
-<p>- Nhân ái, kiên nhẫn</p>
-
-<h3>Tại sao nên học?</h3>
-<p>- Nhu cầu xã hội cao</p>
-<p>- Giá trị nhân văn lớn</p>
-<p>- Góp phần phát triển bền vững</p>
+<h3>Cơ hội việc làm</h3>
+<p>
+- NGO, bệnh viện, trường học, trung tâm bảo trợ<br>
+- Thu nhập từ 8–10 triệu/tháng, có thể cao hơn nếu làm quốc tế
+</p>
 
 </div>
 </div>
