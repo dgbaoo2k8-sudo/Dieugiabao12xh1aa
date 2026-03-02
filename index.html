@@ -13,6 +13,8 @@ background:black;
 color:white;
 overflow-x:hidden;
 }
+
+/* VIDEO */
 #bgVideo{
 position:fixed;
 top:0;
@@ -22,6 +24,33 @@ height:100%;
 object-fit:cover;
 z-index:-3;
 }
+
+/* OVERLAY BẬT NHẠC */
+#musicOverlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:2000;
+font-size:28px;
+font-weight:bold;
+color:#00f2ff;
+text-align:center;
+cursor:pointer;
+transition:opacity 0.8s ease;
+}
+
+#musicOverlay.hide{
+opacity:0;
+pointer-events:none;
+}
+
+/* NAVBAR */
 .navbar{
 position:fixed;
 top:0;
@@ -40,6 +69,8 @@ font-weight:bold;
 transition:0.3s;
 }
 .navbar a:hover{ text-shadow:0 0 15px #00f2ff; }
+
+/* PAGE */
 .page{
 display:none;
 min-height:100vh;
@@ -55,6 +86,8 @@ animation:fade 0.6s ease;
 from{opacity:0;transform:translateY(20px);}
 to{opacity:1;transform:translateY(0);}
 }
+
+/* BOX */
 .box{
 background:rgba(0,0,0,0.45);
 backdrop-filter:blur(6px);
@@ -63,6 +96,7 @@ border-radius:20px;
 max-width:1100px;
 box-shadow:0 0 25px rgba(0,242,255,0.4);
 }
+
 .intro{
 display:flex;
 gap:40px;
@@ -80,18 +114,6 @@ border-radius:15px;
 margin:20px 0;
 box-shadow:0 0 20px #00f2ff;
 }
-#soundBtn{
-position:fixed;
-bottom:20px;
-right:20px;
-background:rgba(0,0,0,0.6);
-border:1px solid #00f2ff;
-color:#00f2ff;
-padding:10px 15px;
-border-radius:50px;
-cursor:pointer;
-z-index:1000;
-}
 .school-info{
 margin-top:20px;
 padding:15px;
@@ -103,13 +125,15 @@ border-radius:10px;
 </head>
 <body>
 
-<!-- VIDEO BACKGROUND CÓ NHẠC -->
-<video id="bgVideo" autoplay loop playsinline>
+<!-- OVERLAY -->
+<div id="musicOverlay">Chạm vào màn hình để bật nhạc</div>
+
+<!-- VIDEO -->
+<video id="bgVideo" autoplay loop playsinline muted>
 <source src="./snaptik.vn_cwAXi.mp4" type="video/mp4">
 </video>
 
-<button id="soundBtn">🔊 Bật nhạc</button>
-
+<!-- NAV -->
 <div class="navbar">
 <a href="#" onclick="showPage(1)">Trang Chủ</a>
 <a href="#" onclick="showPage(2)">Kỳ Thi Tốt Nghiệp THPT 2026</a>
@@ -129,11 +153,8 @@ border-radius:10px;
 
 <div class="school-info">
 <h3>Giới thiệu về trường:</h3>
-<p>Trường THCS & THPT Việt Hoa Quang Chánh là cơ sở giáo dục đào tạo học sinh từ cấp THCS đến THPT.</p>
-<p><b>Địa chỉ:</b><br>
-Số 138 đường Hồ Thị Hương, khu phố 12,<br>
-phường Xuân An, thành phố Long Khánh, tỉnh Đồng Nai.
-</p>
+<p>Trường THCS & THPT Việt Hoa Quang Chánh là cơ sở giáo dục đào tạo từ THCS đến THPT, chú trọng phát triển toàn diện.</p>
+<p><b>Địa chỉ:</b> Long Khánh, Đồng Nai</p>
 </div>
 
 <h3>⏳ Đếm ngược đến kỳ thi:</h3>
@@ -149,7 +170,6 @@ phường Xuân An, thành phố Long Khánh, tỉnh Đồng Nai.
 <h1>Kỳ Thi Tốt Nghiệp THPT 2026</h1>
 <img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="exam-img">
 <p><b>Thời gian:</b> 11-12/6/2026</p>
-<p>Kỳ thi năm 2026 tổ chức sớm hơn, giữ ổn định và có một số điều chỉnh phù hợp mô hình quản lý mới.</p>
 </div>
 </div>
 
@@ -183,20 +203,15 @@ setInterval(countdown,1000);
 countdown();
 
 const video=document.getElementById("bgVideo");
-const btn=document.getElementById("soundBtn");
+const overlay=document.getElementById("musicOverlay");
 
-video.muted=true;
-
-btn.onclick=function(){
-if(video.muted){
+overlay.addEventListener("click",function(){
 video.muted=false;
 video.volume=1;
-btn.innerHTML="🔇 Tắt nhạc";
-}else{
-video.muted=true;
-btn.innerHTML="🔊 Bật nhạc";
-}
-};
+video.play();
+overlay.classList.add("hide");
+setTimeout(()=>overlay.style.display="none",800);
+});
 </script>
 
 </body>
