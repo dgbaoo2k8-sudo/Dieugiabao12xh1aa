@@ -124,7 +124,7 @@ border-radius:10px;
 <body>
 
 <video id="bgVideo" autoplay muted loop playsinline>
-<source src="snaptik.vn_cwAXi.mp4" type="video/mp4">
+<source src="./snaptik.vn_cwAXi.mp4" type="video/mp4">
 </video>
 
 <button id="soundBtn">🔊 Bật nhạc</button>
@@ -149,13 +149,7 @@ border-radius:10px;
 
 <div class="school-info">
 <h3>Giới thiệu về trường:</h3>
-<p>Trường THCS & THPT Việt Hoa Quang Chánh là cơ sở giáo dục đào tạo học sinh từ cấp THCS đến THPT, chú trọng phát triển toàn diện về kiến thức, đạo đức và kỹ năng sống.</p>
-<p><b>Địa chỉ:</b><br>
-Số 138 đường Hồ Thị Hương, khu phố 12,<br>
-phường Xuân An (Phường Xuân Trung cũ),<br>
-thành phố Long Khánh, tỉnh Đồng Nai,<br>
-Long Khanh, Vietnam
-</p>
+<p>Trường THCS & THPT Việt Hoa Quang Chánh là cơ sở giáo dục đào tạo học sinh từ cấp THCS đến THPT, chú trọng phát triển toàn diện.</p>
 </div>
 
 <h3>⏳ Đếm ngược đến kỳ thi:</h3>
@@ -168,7 +162,36 @@ Long Khanh, Vietnam
 </div>
 </div>
 
-<!-- Các phần còn lại giữ nguyên -->
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+<div class="box">
+<h1>Kỳ Thi Tốt Nghiệp THPT 2026</h1>
+
+<img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="exam-img" alt="Kỳ thi THPT 2026">
+
+<p><b>Thời gian:</b> 11-12/6/2026</p>
+
+<p>Kỳ thi năm 2026 dự kiến tổ chức sớm hơn các năm trước và tiếp tục giữ ổn định như năm 2025.</p>
+
+<button onclick="showPage(1)">Trang Chủ</button>
+<button onclick="showPage(3)">Hành Trang</button>
+</div>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page">
+<div class="box">
+<h1>Hành Trang Tiếp Ứng</h1>
+
+<img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="exam-img" alt="Ngành CTXH">
+
+<p>Ngành Công tác xã hội là ngành nhân văn hỗ trợ cá nhân và cộng đồng vượt qua khó khăn.</p>
+
+<button onclick="showPage(1)">Trang Chủ</button>
+<button onclick="showPage(2)">Kỳ Thi</button>
+</div>
+</div>
+
 <script>
 function showPage(p){
 document.querySelectorAll(".page").forEach(e=>e.classList.remove("active"));
@@ -188,30 +211,6 @@ d+" ngày "+h+" giờ "+m+" phút "+s+" giây";
 }
 setInterval(countdown,1000);
 countdown();
-
-const video=document.getElementById("bgVideo");
-const soundBtn=document.getElementById("soundBtn");
-
-video.play().catch(()=>{});
-
-window.addEventListener("load",function(){
-setTimeout(function(){
-video.muted=false;
-video.volume=1;
-soundBtn.innerHTML="🔇 Tắt nhạc";
-},1000);
-});
-
-soundBtn.onclick=function(){
-if(video.muted){
-video.muted=false;
-video.volume=1;
-soundBtn.innerHTML="🔇 Tắt nhạc";
-}else{
-video.muted=true;
-soundBtn.innerHTML="🔊 Bật nhạc";
-}
-};
 </script>
 
 </body>
