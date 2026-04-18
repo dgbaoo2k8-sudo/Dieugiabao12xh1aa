@@ -54,30 +54,34 @@ opacity:0;
 pointer-events:none;
 }
 
-/* Navbar */
-.navbar{
-position:fixed;
-top:0;
-width:100%;
-padding:15px;
-text-align:center;
-background:rgba(0,0,0,0.5);
-backdrop-filter:blur(8px);
-z-index:999;
+/* Navbar mới - Đưa xuống dưới info */
+.nav-container{
+display: flex;
+gap: 15px;
+margin-top: 25px;
+flex-wrap: wrap;
 }
-.navbar a{
-color:#00f2ff;
-text-decoration:none;
-margin:0 25px;
-font-weight:bold;
-transition:0.3s;
+.nav-btn{
+background: rgba(0, 242, 255, 0.2);
+color: #00f2ff;
+padding: 10px 20px;
+border: 1px solid #00f2ff;
+border-radius: 30px;
+text-decoration: none;
+font-weight: bold;
+transition: 0.3s;
+cursor: pointer;
 }
-.navbar a:hover{ text-shadow:0 0 15px #00f2ff; }
+.nav-btn:hover{
+background: #00f2ff;
+color: black;
+box-shadow: 0 0 15px #00f2ff;
+}
 
 .page{
 display:none;
 min-height:100vh;
-padding:120px 20px 80px 20px;
+padding:60px 20px 80px 20px;
 justify-content:center;
 align-items:flex-start;
 }
@@ -133,6 +137,30 @@ margin-top:15px;
 }
 .prepare-list{margin-top:10px;padding-left:20px;}
 .prepare-list li{margin-bottom:8px;}
+
+/* Social Icons Footer */
+.social-footer {
+margin-top: 30px;
+display: flex;
+align-items: center;
+gap: 20px;
+padding-top: 20px;
+border-top: 1px solid rgba(255,255,255,0.1);
+}
+.social-icon {
+width: 40px;
+height: 40px;
+transition: 0.3s;
+}
+.social-icon:hover {
+transform: scale(1.2);
+filter: drop-shadow(0 0 8px #00f2ff);
+}
+.gmail-text {
+color: #00f2ff;
+font-size: 0.9em;
+text-decoration: none;
+}
 </style>
 </head>
 <body>
@@ -143,13 +171,6 @@ margin-top:15px;
 <source src="./snaptik.vn_cwAXi.mp4" type="video/mp4">
 </video>
 
-<div class="navbar">
-<a href="#" onclick="showPage(1)">Trang Chủ</a>
-<a href="#" onclick="showPage(2)">Kỳ Thi Tốt Nghiệp THPT 2026</a>
-<a href="#" onclick="showPage(3)">Hành Trang Tiếp Ứng</a>
-</div>
-
-<!-- PAGE 1 -->
 <div id="page1" class="page active">
 <div class="box">
 <h1>Giới Thiệu Bản Thân</h1>
@@ -159,6 +180,12 @@ margin-top:15px;
 <p><b>Họ và tên:</b> Điểu Gia Bảo</p>
 <p><b>Lớp:</b> 12XH1A</p>
 <p><b>Trường:</b> THCS & THPT Việt Hoa Quang Chánh</p>
+
+<div class="nav-container">
+<div class="nav-btn" onclick="showPage(1)">Trang Chủ</div>
+<div class="nav-btn" onclick="showPage(2)">Kỳ Thi Tốt Nghiệp THPT 2026</div>
+<div class="nav-btn" onclick="showPage(3)">Hành Trang Tiếp Ứng</div>
+</div>
 
 <div class="school-info">
 <h3>Giới thiệu về trường:</h3>
@@ -172,12 +199,23 @@ thành phố Long Khánh, tỉnh Đồng Nai.
 
 <h3 class="highlight">⏳ Đếm ngược đến kỳ thi:</h3>
 <p id="countdown"></p>
+
+<div class="social-footer">
+<a href="https://www.facebook.com/share/14aBRYBcUNa/" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" class="social-icon" alt="Facebook">
+</a>
+<a href="https://tiktok.com/@giabaoo1605" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" class="social-icon" alt="TikTok">
+</a>
+<a href="mailto:dgbaoo2k8@gmail.com" class="gmail-text">
+<b>Email:</b> dgbaoo2k8@gmail.com
+</a>
+</div>
 </div>
 </div>
 </div>
 </div>
 
-<!-- PAGE 2 -->
 <div id="page2" class="page">
 <div class="box">
 <h1>Kỳ Thi Tốt Nghiệp THPT 2026</h1>
@@ -198,10 +236,11 @@ thành phố Long Khánh, tỉnh Đồng Nai.
 <p>- Điều chỉnh lại một số quy định, quy trình tổ chức thi để bảo đảm phù hợp và thuận tiện hơn cho các đơn vị trong bối cảnh sắp xếp lại đơn vị hành chính cấp tỉnh.</p>
 <p>- Giảm thời gian thu nhận đơn phúc khảo để thông báo kết quả phúc khảo sớm hơn đồng thời thuận tiện cho công tác tuyển sinh của các cơ sở giáo dục đại học, giáo dục nghề nghiệp. Điều chỉnh quy trình chấm phúc khảo để tăng cường hiệu quả, chất lượng.</p>
 <p><a href="https://xaydungchinhsach.chinhphu.vn/thoi-gian-to-chuc-thi-tot-nghiep-thpt-nam-2026-cac-dieu-chinh-co-anh-huong-den-thi-sinh-khi-nao-thi-tot-nghiep-thpt-tren-may-tinh-11925092708572251.htm" target="_blank" style="color:#00f2ff; text-decoration:underline;">Xem chi tiết tại đây</a></p>
+
+<div class="nav-btn" style="display:inline-block; margin-top:20px;" onclick="showPage(1)">Quay lại trang chủ</div>
 </div>
 </div>
 
-<!-- PAGE 3 -->
 <div id="page3" class="page">
 <div class="box">
 <h1>Hành Trang Tiếp Ứng</h1>
@@ -238,6 +277,7 @@ Tính chất: Nhân văn, hướng tới xã hội công bằng và phát triể
 <li>✔ Rèn luyện kỹ năng giao tiếp và thấu cảm</li>
 </ul>
 
+<div class="nav-btn" style="display:inline-block; margin-top:20px;" onclick="showPage(1)">Quay lại trang chủ</div>
 </div>
 </div>
 
