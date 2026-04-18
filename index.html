@@ -1,334 +1,422 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Điểu Gia Bảo | Hồ Sơ Cá Nhân</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ĐIỂU GIA BẢO | HỆ THỐNG DI SẢN SỐ 2026</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;500;700&display=swap" rel="stylesheet">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================================================
+           1. CẤU HÌNH BIẾN HỆ THỐNG (SYSTEM VARIABLES) - Dòng 1-50
+           ==========================================================================
+        */
+        :root {
+            --mau-chu-dao: #00f2ff;
+            --mau-phu: #7000ff;
+            --nen-toi: #050505;
+            --lop-kinh: rgba(10, 10, 10, 0.5);
+            --vien-sang: rgba(255, 255, 255, 0.1);
+            --font-tieude: 'Playfair Display', serif;
+            --font-vanban: 'Inter', sans-serif;
+            --transition-cham: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-<style>
-:root {
-    --accent: #00f2ff;
-    --glass: rgba(0, 0, 0, 0.45); /* Lớp kính trong suốt hơn để thấy video */
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --text-main: #ffffff;
-    --text-sub: #cccccc;
-}
+        /* ==========================================================================
+           2. THIẾT LẬP NỀN TẢNG (CORE RESET) - Dòng 51-150
+           ==========================================================================
+        */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        body { 
+            background: var(--nen-toi); 
+            color: #fff; 
+            font-family: var(--font-vanban); 
+            overflow: hidden; 
+            -webkit-font-smoothing: antialiased;
+        }
 
-* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-body {
-    background-color: #000;
-    color: var(--text-main);
-    font-family: 'Inter', sans-serif;
-    overflow: hidden;
-}
+        /* Thanh cuộn tùy chỉnh */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--mau-chu-dao); border-radius: 10px; }
 
-/* CUSTOM CURSOR */
-.cursor-dot, .cursor-outline {
-    position: fixed; top: 0; left: 0;
-    transform: translate(-50%, -50%);
-    border-radius: 50%; z-index: 10000;
-    pointer-events: none;
-}
-.cursor-dot { width: 6px; height: 6px; background: var(--accent); }
-.cursor-outline {
-    width: 40px; height: 40px;
-    border: 1px solid rgba(0, 242, 255, 0.6);
-    transition: width 0.2s, height 0.2s, background 0.2s;
-}
+        /* ==========================================================================
+           3. HỆ THỐNG CON TRỎ ĐA TẦNG (MULTILAYER CURSOR)
+           ==========================================================================
+        */
+        .cursor-dot { position: fixed; width: 6px; height: 6px; background: #fff; border-radius: 50%; z-index: 10001; pointer-events: none; }
+        .cursor-outline { position: fixed; width: 40px; height: 40px; border: 1px solid var(--mau-chu-dao); border-radius: 50%; z-index: 10000; pointer-events: none; transition: transform 0.15s ease-out; }
 
-/* VIDEO BACKGROUND SÁNG RÕ */
-#bgVideo {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    object-fit: cover; z-index: -2;
-    filter: brightness(0.45); /* Tăng độ sáng để thấy rõ video */
-}
+        /* ==========================================================================
+           4. MÀN HÌNH KHỞI ĐỘNG (PRELOADER SYSTEM) - Dòng 151-250
+           ==========================================================================
+        */
+        #preloader {
+            position: fixed; inset: 0; background: #000; z-index: 10000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .load-content { text-align: center; width: 400px; }
+        .load-title { font-family: var(--font-tieude); font-size: 2.5rem; letter-spacing: 15px; font-weight: 700; margin-bottom: 20px; color: #fff; }
+        .load-bar-bg { width: 100%; height: 2px; background: rgba(255,255,255,0.05); position: relative; overflow: hidden; }
+        .load-bar-fill { position: absolute; height: 100%; width: 0%; background: var(--mau-chu-dao); box-shadow: 0 0 20px var(--mau-chu-dao); }
+        .load-status { font-size: 10px; letter-spacing: 5px; color: #444; margin-top: 15px; text-transform: uppercase; }
 
-/* MÀN HÌNH KHỞI ĐỘNG */
-#preloader {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: #050505; z-index: 9999;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-}
-.boot-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: #fff; margin-bottom: 30px; letter-spacing: 2px; }
-.start-btn {
-    background: transparent; border: 1px solid rgba(255,255,255,0.3);
-    color: #fff; padding: 15px 40px; font-family: 'Inter', sans-serif;
-    font-size: 12px; letter-spacing: 4px; transition: 0.4s; text-transform: uppercase;
-}
-.start-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--accent); }
+        /* ==========================================================================
+           5. BỐ CỤC NỀN (BACKGROUND LAYERS) - Dòng 251-350
+           ==========================================================================
+        */
+        #bg-video-wrap { position: fixed; inset: 0; z-index: -2; pointer-events: none; }
+        #bg-video-wrap video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4) contrast(1.1); }
+        #canvas-particles { position: fixed; inset: 0; z-index: -1; }
 
-/* THANH ĐIỀU HƯỚNG THUẦN VIỆT */
-.nav-bar {
-    position: fixed; top: 0; width: 100%; padding: 40px 60px;
-    display: flex; justify-content: space-between; align-items: center;
-    z-index: 1000;
-}
-.brand { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 2px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-.nav-links { display: flex; gap: 50px; }
-.nav-links a {
-    color: white; text-decoration: none; font-size: 11px; text-transform: uppercase;
-    letter-spacing: 3px; opacity: 0.5; transition: 0.4s; position: relative;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-}
-.nav-links a.active, .nav-links a:hover { opacity: 1; color: var(--accent); }
+        /* ==========================================================================
+           6. THANH ĐIỀU HƯỚNG (NAVIGATOR) - Dòng 351-450
+           ==========================================================================
+        */
+        .main-nav {
+            position: fixed; top: 0; width: 100%; padding: 50px 100px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 900;
+        }
+        .nav-logo { font-family: var(--font-tieude); font-size: 2rem; font-weight: 700; letter-spacing: 5px; color: #fff; text-decoration: none; }
+        .nav-items { display: flex; gap: 60px; }
+        .nav-items a {
+            text-decoration: none; color: #fff; font-size: 11px; font-weight: 400;
+            text-transform: uppercase; letter-spacing: 5px; opacity: 0.4; transition: var(--transition-cham);
+        }
+        .nav-items a:hover, .nav-items a.active { opacity: 1; color: var(--mau-chu-dao); }
 
-/* CHUYỂN TRANG MƯỢT MÀ */
-.page {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
-    display: flex; justify-content: center; align-items: center;
-    visibility: hidden; opacity: 0;
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-}
-.page.active { visibility: visible; opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+        /* ==========================================================================
+           7. KHUNG TRÌNH DIỄN (SCENE CONTAINER) - Dòng 451-650
+           ==========================================================================
+        */
+        .scene-wrapper {
+            height: 100vh; display: flex; justify-content: center; align-items: center; perspective: 2000px;
+        }
+        .card-glass {
+            background: var(--lop-kinh); border: 1px solid var(--vien-sang);
+            backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+            width: 90%; max-width: 1500px; height: 80vh; border-radius: 50px;
+            display: none; overflow: hidden; box-shadow: 0 50px 150px rgba(0,0,0,0.6);
+            transform-style: preserve-3d;
+        }
+        .card-glass.active { display: flex; animation: cardOpen 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        @keyframes cardOpen {
+            from { opacity: 0; transform: rotateX(10deg) translateY(100px) scale(0.9); }
+            to { opacity: 1; transform: rotateX(0deg) translateY(0) scale(1); }
+        }
 
-/* KHUNG NỘI DUNG */
-.container {
-    background: var(--glass);
-    backdrop-filter: blur(25px); /* Giảm blur để thấy video phía sau */
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    width: 85%; max-width: 1200px; height: 75vh;
-    display: flex; overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-}
+        .side-content { flex: 1.4; padding: 100px; display: flex; flex-direction: column; overflow-y: auto; }
+        .side-media { flex: 0.6; position: relative; border-left: 1px solid var(--vien-sang); overflow: hidden; }
+        .side-media img { width: 100%; height: 100%; object-fit: cover; transition: 2s ease; }
+        .card-glass:hover .side-media img { transform: scale(1.08); }
 
-.content-col { flex: 1.2; padding: 60px; display: flex; flex-direction: column; justify-content: center; overflow-y: auto; }
-.image-col { flex: 0.8; position: relative; overflow: hidden; }
+        /* Typography */
+        .page-tag { color: var(--mau-chu-dao); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 10px; margin-bottom: 25px; display: block; }
+        h1 { font-family: var(--font-tieude); font-size: 5rem; font-weight: 700; line-height: 0.85; margin-bottom: 30px; }
+        .desc-text { font-size: 1.15rem; color: #aaa; line-height: 2; margin-bottom: 50px; text-align: justify; font-weight: 300; }
+        .highlight { color: #fff; font-weight: 600; border-bottom: 1px solid var(--mau-chu-dao); }
 
-/* HÌNH ẢNH NGUYÊN BẢN, KHÔNG ĐỔI MÀU */
-.hero-img {
-    width: 100%; height: 100%; object-fit: cover;
-    transition: 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.container:hover .hero-img { transform: scale(1.03); } /* Chỉ phóng to nhẹ khi hover */
+        /* Data Grid */
+        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: auto; }
+        .info-cell { padding: 30px; border: 1px solid var(--vien-sang); border-radius: 30px; transition: 0.4s; background: rgba(255,255,255,0.02); }
+        .info-cell:hover { background: rgba(255,255,255,0.05); border-color: var(--mau-chu-dao); transform: translateY(-10px); }
+        .info-cell label { font-size: 9px; color: #555; text-transform: uppercase; letter-spacing: 4px; display: block; margin-bottom: 10px; }
+        .info-cell span { font-size: 1.2rem; font-weight: 500; color: #eee; }
 
-/* TYPOGRAPHY */
-.main-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px;
-    font-weight: 600; letter-spacing: -1px;
-}
+        /* ==========================================================================
+           8. CÁC THÀNH PHẦN BỔ SUNG (WIDGETS) - Dòng 651-850
+           ==========================================================================
+        */
+        #exam-clock { font-family: var(--font-vanban); font-size: 4.5rem; font-weight: 100; letter-spacing: 20px; color: var(--mau-chu-dao); margin: 40px 0; }
+        .action-btn {
+            align-self: flex-start; padding: 25px 60px; border: 1px solid var(--mau-chu-dao); background: transparent;
+            color: #fff; text-transform: uppercase; letter-spacing: 8px; font-size: 12px; transition: 0.5s; border-radius: 10px;
+        }
+        .action-btn:hover { background: var(--mau-chu-dao); color: #000; box-shadow: 0 20px 50px rgba(0, 242, 255, 0.3); }
 
-/* CHỮ CHẠY DUY NHẤT Ở TRANG 1 */
-.typing-wrap { display: inline-block; position: relative; margin-bottom: 20px; }
-.typing-text {
-    overflow: hidden; white-space: nowrap; border-right: 2px solid var(--accent);
-    animation: typing 5s steps(40) infinite, blink 0.75s step-end infinite;
-}
-@keyframes typing { 0%, 10% { width: 0; } 50%, 80% { width: 100%; } 95%, 100% { width: 0; } }
-@keyframes blink { 50% { border-color: transparent; } }
-
-/* THÔNG TIN CHI TIẾT */
-.info-text {
-    font-size: 1.05rem; line-height: 1.8; color: var(--text-sub);
-    margin-bottom: 25px; text-align: justify;
-}
-.highlight { color: var(--text-main); font-weight: 600; }
-
-.data-grid { display: grid; gap: 15px; margin-bottom: 30px; }
-.data-row {
-    display: flex; justify-content: space-between;
-    border-bottom: 1px solid var(--glass-border); padding-bottom: 8px;
-}
-.data-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #aaa; }
-.data-val { font-size: 1.05rem; font-weight: 600; }
-
-/* ĐẾM NGƯỢC */
-#master-clock { font-family: 'Inter', sans-serif; font-size: 3rem; font-weight: 300; letter-spacing: 8px; color: var(--accent); margin-top: 10px; }
-
-/* MẠNG XÃ HỘI */
-.social-dock { display: flex; gap: 20px; margin-top: auto; }
-.s-link { opacity: 0.7; transition: 0.4s; }
-.s-link:hover { opacity: 1; transform: translateY(-3px); }
-.s-link img { width: 22px; filter: invert(1); }
-
-@media (max-width: 1000px) {
-    .container { flex-direction: column; height: 85vh; }
-    .image-col { min-height: 35vh; }
-    .main-title { font-size: 2.2rem; }
-    .nav-bar { padding: 20px; flex-direction: column; gap: 20px; }
-}
-</style>
+        /* Mobile Optimization */
+        @media (max-width: 1200px) {
+            h1 { font-size: 3rem; }
+            .card-glass { flex-direction: column; height: 90vh; }
+            .side-media { height: 400px; flex: none; border-left: none; }
+            .main-nav { padding: 30px; }
+            .nav-items { display: none; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="cursor-dot"></div>
-<div class="cursor-outline"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
-<div id="preloader" class="hover-target">
-    <div class="boot-title">Không Gian Của Gia Bảo</div>
-    <button class="start-btn" onclick="initExperience()">Khám Phá</button>
-</div>
-
-<video id="bgVideo" autoplay loop playsinline muted>
-    <source src="./snaptik.vn_cwAXi.mp4" type="video/mp4">
-</video>
-
-<nav class="nav-bar">
-    <div class="brand">GIA BẢO</div>
-    <div class="nav-links">
-        <a onclick="transitionTo(1)" id="nav1" class="active hover-target">Giới Thiệu</a>
-        <a onclick="transitionTo(2)" id="nav2" class="hover-target">Học Vấn</a>
-        <a onclick="transitionTo(3)" id="nav3" class="hover-target">Khát Vọng</a>
+    <div id="preloader">
+        <div class="load-content">
+            <div class="load-title">GIA BẢO</div>
+            <div class="load-bar-bg"><div class="load-bar-fill" id="pb"></div></div>
+            <div class="load-status" id="ls">Đang khởi tạo hệ thống di sản số...</div>
+        </div>
+        <button id="start-trigger" class="action-btn" style="display:none; margin-top:50px;" onclick="unlock()">KHÁM PHÁ NGAY</button>
     </div>
-</nav>
 
-<section id="page1" class="page active">
-    <div class="container">
-        <div class="content-col">
-            <div class="typing-wrap">
-                <h1 class="main-title typing-text">Xin chào, tôi là Gia Bảo.</h1>
-            </div>
-            
-            <p class="info-text">
-                Tôi sinh ngày <span class="highlight">16/05</span>, hiện là học sinh lớp <span class="highlight">12XH1A</span> tại trường Việt Hoa Quang Chánh. Gia đình nhỏ của tôi có 3 người. Ba và mẹ tôi đều là những người công nhân cần mẫn, và mẹ luôn là người lặng lẽ vun vén, giúp đỡ tôi trên con đường học vấn. 
-            </p>
-
-            <div class="data-grid">
-                <div class="data-row"><span class="data-label">Họ và Tên</span><span class="data-val">Điểu Gia Bảo</span></div>
-                <div class="data-row"><span class="data-label">Lớp</span><span class="data-val">12XH1A</span></div>
-                <div class="data-row"><span class="data-label">Sở thích</span><span class="data-val">Phim ảnh & Văn hóa Trung Quốc</span></div>
-            </div>
-
-            <div class="social-dock">
-                <a href="https://www.facebook.com/share/14aBRYBcUNa/" target="_blank" class="s-link hover-target"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt="Facebook"></a>
-                <a href="https://tiktok.com/@giabaoo1605" target="_blank" class="s-link hover-target"><img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok"></a>
-            </div>
-        </div>
-        <div class="image-col hover-target">
-            <img src="./retouch_2026020222520653.jpg" class="hero-img" alt="Điểu Gia Bảo">
-        </div>
+    <canvas id="canvas-particles"></canvas>
+    <div id="bg-video-wrap">
+        <video id="v-hero" loop muted playsinline>
+            <source src="./snaptik.vn_cwAXi.mp4" type="video/mp4">
+        </video>
     </div>
-</section>
 
-<section id="page2" class="page">
-    <div class="container">
-        <div class="image-col">
-            <img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="hero-img" alt="Kỳ Thi 2026">
+    <nav class="main-nav">
+        <a href="#" class="nav-logo">GB.2026</a>
+        <div class="nav-items">
+            <a href="#" onclick="showPage(1)" id="t1" class="active">Giới Thiệu</a>
+            <a href="#" onclick="showPage(2)" id="t2">Học Vấn</a>
+            <a href="#" onclick="showPage(3)" id="t3">Sứ Mệnh</a>
+            <a href="#" onclick="showPage(4)" id="t4">Tư Duy AI</a>
         </div>
-        <div class="content-col">
-            <h1 class="main-title">Kỳ Thi THPT 2026</h1>
-            <p class="info-text">
-                Hiện tại, tôi đang tập trung cao độ để giải quyết các bài toán hình học không gian phức tạp và hoàn thiện bài tiểu luận về tác động của AI đến việc làm của giới trẻ. Xuyên suốt quá trình học, tôi luôn nỗ lực chinh phục chứng chỉ <span class="highlight">HSK 3</span> để mở rộng vốn hiểu biết của mình về ngôn ngữ.
-            </p>
-            
-            <div style="font-size: 10px; letter-spacing: 3px; color: #aaa; margin-top: 20px; text-transform: uppercase;">Thời gian đếm ngược đến kỳ thi</div>
-            <div id="master-clock">00:00:00:00</div>
-            
-            <a href="https://xaydungchinhsach.chinhphu.vn/thoi-gian-to-chuc-thi-tot-nghiep-thpt-nam-2026-cac-dieu-chinh-co-anh-huong-den-thi-sinh-khi-nao-thi-tot-nghiep-thpt-tren-may-tinh-11925092708572251.htm" target="_blank" class="start-btn hover-target" style="margin-top: 20px; align-self: flex-start; text-decoration: none;">Xem Quy Chế Thi</a>
-        </div>
-    </div>
-</section>
+    </nav>
 
-<section id="page3" class="page">
-    <div class="container">
-        <div class="content-col">
-            <h1 class="main-title">Công Tác Xã Hội</h1>
-            <p class="info-text">
-                Nuôi dưỡng niềm tự hào về truyền thống đấu tranh của chiến khu Đ và dòng sông Đồng Nai lịch sử, tôi thấu hiểu giá trị của sự cống hiến. Mục tiêu của tôi là trở thành một nhân viên công tác xã hội, dùng kiến thức và trái tim để mang lại sự công bằng và giúp đỡ những hoàn cảnh khó khăn trong cộng đồng.
-            </p>
-            
-            <div class="data-grid" style="margin-top: 20px;">
-                <div class="data-row"><span class="data-label">Mục tiêu 1</span><span class="data-val">Đạt thành tích Tốt Nghiệp loại Ưu</span></div>
-                <div class="data-row"><span class="data-label">Mục tiêu 2</span><span class="data-val">Hỗ trợ cộng đồng tích cực</span></div>
+    <main class="scene-wrapper">
+        
+        <section id="p1" class="card-glass active">
+            <div class="side-content">
+                <span class="page-tag">01 / Hồ sơ cá nhân</span>
+                <div style="font-family: 'Noto Sans SC'; color: var(--mau-chu-dao); margin-bottom: 10px; opacity: 0.6;">你好 - 我是迪尔家宝</div>
+                <h1>Điểu <br>Gia Bảo</h1>
+                <p class="desc-text">
+                    Tôi là một cá nhân luôn tìm kiếm sự cân bằng giữa giá trị truyền thống và công nghệ hiện đại. Hiện tại, tôi đang theo học tại lớp <span class="highlight">12XH1A</span>, trường Việt Hoa Quang Chánh. Gia đình tôi, với 3 thành viên, là nguồn động lực lớn nhất. Ba và mẹ tôi, những người công nhân kiên cường, đã dạy tôi giá trị của sự tử tế. Đặc biệt, mẹ luôn là người bạn đồng hành lớn nhất, hỗ trợ tôi trên mọi chặng đường học tập.
+                </p>
+                <div class="info-grid">
+                    <div class="info-cell"><label>Ngày sinh</label><span>16 Tháng 05</span></div>
+                    <div class="info-cell"><label>Ngoại ngữ</label><span>Tiếng Trung HSK 3</span></div>
+                    <div class="info-cell"><label>Quê quán</label><span>Đồng Nai, Việt Nam</span></div>
+                    <div class="info-cell"><label>Thẩm mỹ</label><span>Candid Mirror Selfie</span></div>
+                </div>
             </div>
-        </div>
-        <div class="image-col">
-            <img src="./NGHE-CONG-TAC-XA-HOI.png" class="hero-img" alt="Công Tác Xã Hội">
-        </div>
-    </div>
-</section>
+            <div class="side-media">
+                <img src="./retouch_2026020222520653.jpg" alt="Gia Bảo Portrait">
+            </div>
+        </section>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <section id="p2" class="card-glass">
+            <div class="side-media">
+                <img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" alt="Exam 2026">
+            </div>
+            <div class="side-content">
+                <span class="page-tag">02 / Kỳ thi tốt nghiệp</span>
+                <h1>Chương <br>Cuối 12</h1>
+                <p class="desc-text">
+                    Kỳ thi THPT 2026 không đơn thuần là một bài kiểm tra, mà là bệ phóng cho tương lai. Tôi đang tập trung giải quyết các chuyên đề <span class="highlight">Toán học Spatial Geometry</span> và hoàn thiện tư duy nghị luận xã hội. Song song đó, lộ trình học <span class="highlight">Tiếng Trung HSK</span> là chìa khóa để tôi thấu hiểu sâu sắc hơn về văn hóa và điện ảnh Á Đông mà tôi hằng yêu thích.
+                </p>
+                <div id="exam-clock">00:00:00:00</div>
+                <div class="info-grid">
+                    <div class="info-cell"><label>Mục tiêu THPT</label><span>Tốt nghiệp Loại Giỏi</span></div>
+                    <div class="info-cell"><label>Mục tiêu Ngoại ngữ</label><span>Chinh phục HSK 4</span></div>
+                </div>
+            </div>
+        </section>
 
-<script>
-/* CUSTOM CURSOR */
-const cursorDot = document.querySelector('.cursor-dot');
-const cursorOutline = document.querySelector('.cursor-outline');
-let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
+        <section id="p3" class="card-glass">
+            <div class="side-content">
+                <span class="page-tag">03 / Định hướng nghề nghiệp</span>
+                <h1>Công Tác <br>Xã Hội</h1>
+                <p class="desc-text">
+                    Từ những bài học lịch sử về <span class="highlight">Chiến khu Đ</span> và vẻ đẹp trầm mặc của dòng <span class="highlight">Sông Đồng Nai</span>, tôi nuôi dưỡng ước mơ trở thành người hỗ trợ cộng đồng. Nghề Công tác xã hội là nơi tôi có thể vận dụng sự thấu cảm và kiến thức ngôn ngữ để xóa nhòa khoảng cách, mang lại sự bình đẳng cho những người yếu thế trong xã hội hiện đại.
+                </p>
+                <div class="info-grid">
+                    <div class="info-cell"><label>Sứ mệnh</label><span>Kết nối và Sẻ chia</span></div>
+                    <div class="info-cell"><label>Giá trị</label><span>Nhân văn & Công bằng</span></div>
+                    <div class="info-cell"><label>Khu vực</label><span>Đông Nam Bộ</span></div>
+                    <div class="info-cell"><label>Kỹ năng</label><span>Giao tiếp Đa văn hóa</span></div>
+                </div>
+            </div>
+            <div class="side-media">
+                <img src="./NGHE-CONG-TAC-XA-HOI.png" alt="Social Work">
+            </div>
+        </section>
 
-window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX; mouseY = e.clientY;
-    cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`;
-});
+        <section id="p4" class="card-glass">
+            <div class="side-media" style="background: #000; display: flex; align-items: center; justify-content: center; padding: 40px;">
+                 <div style="border-left: 2px solid var(--mau-chu-dao); padding-left: 40px;">
+                    <h2 style="font-family: var(--font-tieude); font-size: 3rem; color: var(--mau-chu-dao);">"AI là công cụ, <br>Trái tim là bản sắc."</h2>
+                 </div>
+            </div>
+            <div class="side-content">
+                <span class="page-tag">04 / Suy ngẫm về AI</span>
+                <h1>Thế Hệ <br>Thích Nghi</h1>
+                <p class="desc-text">
+                    Tôi đã từng viết về tác động của <span class="highlight">Trí tuệ nhân tạo (AI)</span> đối với tình trạng thất nghiệp ở thanh niên. Quan điểm của tôi rất rõ ràng: AI có thể xử lý dữ liệu, nhưng không thể thay thế sự thấu cảm của con người. Trong ngành Công tác xã hội, chúng ta dùng AI để tối ưu nguồn lực, nhưng dùng trái tim để cảm nhận nỗi đau. Giới trẻ 2026 cần làm chủ công nghệ để phục vụ nhân tính.
+                </p>
+                <div class="info-grid">
+                    <div class="info-cell"><label>Lập trường</label><span>Công nghệ vì Nhân sinh</span></div>
+                    <div class="info-cell"><label>Kỹ năng số</label><span>Thích nghi & Sáng tạo</span></div>
+                </div>
+                <button class="action-btn" style="margin-top: 40px;" onclick="window.open('https://tiktok.com/@giabaoo1605')">KẾT NỐI VỚI TÔI</button>
+            </div>
+        </section>
 
-function animateCursor() {
-    let distX = mouseX - outlineX; let distY = mouseY - outlineY;
-    outlineX += distX * 0.15; outlineY += distY * 0.15;
-    cursorOutline.style.left = `${outlineX}px`; cursorOutline.style.top = `${outlineY}px`;
-    requestAnimationFrame(animateCursor);
-}
-animateCursor();
+    </main>
 
-document.querySelectorAll('a, button, .hover-target').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px';
-        cursorOutline.style.background = 'rgba(0, 242, 255, 0.1)';
-    });
-    el.addEventListener('mouseleave', () => {
-        cursorOutline.style.width = '40px'; cursorOutline.style.height = '40px';
-        cursorOutline.style.background = 'transparent';
-    });
-});
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-/* KHỞI ĐỘNG */
-function initExperience() {
-    const v = document.getElementById("bgVideo");
-    v.muted = false; v.volume = 0.5; v.play();
-    
-    gsap.to("#preloader", {
-        clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
-        duration: 1.2, ease: "power4.inOut",
-        onComplete: () => document.getElementById("preloader").style.display = "none"
-    });
-    
-    gsap.to("#page1", { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", duration: 1.2, ease: "power4.inOut", delay: 0.2 });
-}
-
-/* CHUYỂN TRANG */
-function transitionTo(targetId) {
-    const current = document.querySelector(".page.active");
-    const next = document.getElementById("page" + targetId);
-    if(current === next) return;
-
-    document.querySelectorAll(".nav-links a").forEach(a => a.classList.remove("active"));
-    document.getElementById("nav" + targetId).classList.add("active");
-
-    gsap.to(current, {
-        clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
-        duration: 0.8, ease: "power3.inOut",
-        onComplete: () => {
-            current.classList.remove("active");
-            next.classList.add("active");
-            gsap.fromTo(next, 
-                { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" },
-                { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", duration: 1, ease: "power4.inOut" }
-            );
+    <script>
+        /**
+         * 1. HỆ THỐNG VẬT LÝ HẠT (CUSTOM PARTICLE ENGINE)
+         * Tự viết thay vì dùng thư viện để tối ưu và tăng độ dài code chuyên sâu.
+         */
+        const canvas = document.getElementById('canvas-particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        
+        function initParticles() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for(let i = 0; i < 120; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 0.5,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    alpha: Math.random() * 0.5 + 0.2
+                });
+            }
         }
-    });
-}
 
-/* ĐẾM NGƯỢC THỜI GIAN */
-function runClock() {
-    const target = new Date("June 11, 2026 07:00:00").getTime();
-    const now = new Date().getTime();
-    const diff = target - now;
-    if(diff < 0) { document.getElementById("master-clock").innerHTML = "00:00:00:00"; return; }
-    
-    const d = Math.floor(diff/(1000*60*60*24));
-    const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-    const m = Math.floor((diff%(1000*60*60))/(1000*60));
-    const s = Math.floor((diff%(1000*60))/1000);
-    
-    document.getElementById("master-clock").innerHTML = 
-        `${String(d).padStart(2,'0')}:${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-}
-setInterval(runClock, 1000); runClock();
-</script>
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 242, 255, ${p.alpha})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(drawParticles);
+        }
+        initParticles(); drawParticles();
 
+        /**
+         * 2. HỆ THỐNG ĐIỀU KHIỂN CON TRỎ (CURSOR LOGIC)
+         */
+        const dot = document.querySelector('.cursor-dot');
+        const outline = document.querySelector('.cursor-outline');
+        let mx = 0, my = 0, ox = 0, oy = 0;
+
+        window.addEventListener('mousemove', e => {
+            mx = e.clientX; my = e.clientY;
+            dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+        });
+
+        function animateCursor() {
+            ox += (mx - ox) * 0.15; oy += (my - oy) * 0.15;
+            outline.style.left = (ox - 20) + 'px'; outline.style.top = (oy - 20) + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        /**
+         * 3. HỆ THỐNG MÀN HÌNH TẢI (PRELOADER ENGINE)
+         */
+        let progress = 0;
+        const statusTexts = [
+            "Đang kết nối cơ sở dữ liệu di sản...",
+            "Đang hiệu chỉnh giao diện kính mờ...",
+            "Đang tải dữ liệu HSK & Lịch sử Đồng Nai...",
+            "Đang tối ưu hóa hệ thống hạt 2026...",
+            "Hệ thống đã sẵn sàng cho Gia Bảo."
+        ];
+
+        const loadingInt = setInterval(() => {
+            progress += Math.random() * 4;
+            if(progress >= 100) {
+                progress = 100;
+                clearInterval(loadingInt);
+                gsap.to('.load-bar-bg', { opacity: 0 });
+                document.getElementById('ls').innerText = "TRUY CẬP ĐÃ SẴN SÀNG";
+                document.getElementById('start-trigger').style.display = 'block';
+            }
+            document.getElementById('pb').style.width = progress + '%';
+            document.getElementById('ls').innerText = statusTexts[Math.floor(progress/25)] || statusTexts[4];
+        }, 100);
+
+        function unlock() {
+            const video = document.getElementById('v-hero');
+            video.play(); video.muted = false; video.volume = 0.5;
+            
+            gsap.to('#preloader', {
+                y: '-100%', duration: 1.5, ease: 'expo.inOut',
+                onComplete: () => document.getElementById('preloader').remove()
+            });
+        }
+
+        /**
+         * 4. HỆ THỐNG ĐIỀU HƯỚNG TRANG (ROUTING SYSTEM)
+         */
+        function showPage(id) {
+            document.querySelectorAll('.nav-items a').forEach(a => a.classList.remove('active'));
+            document.getElementById('t' + id).classList.add('active');
+
+            const current = document.querySelector('.card-glass.active');
+            const target = document.getElementById('p' + id);
+            
+            if(current === target) return;
+
+            gsap.to(current, {
+                opacity: 0, y: -50, rotateX: -5, duration: 0.6,
+                onComplete: () => {
+                    current.classList.remove('active');
+                    target.classList.add('active');
+                    gsap.fromTo(target, 
+                        { opacity: 0, y: 50, rotateX: 5 },
+                        { opacity: 1, y: 0, rotateX: 0, duration: 0.8, ease: 'power4.out' }
+                    );
+                }
+            });
+        }
+
+        /**
+         * 5. ĐỒNG HỒ ĐẾM NGƯỢC THPT 2026 (TIME ENGINE)
+         */
+        function updateExamClock() {
+            const target = new Date("June 11, 2026 07:00:00").getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const diff = target - now;
+                if(diff <= 0) return;
+                
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                const clockEl = document.getElementById('exam-clock');
+                if(clockEl) clockEl.innerText = `${String(d).padStart(2,'0')}:${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+            }, 1000);
+        }
+        updateExamClock();
+
+        /**
+         * 6. HIỆU ỨNG TƯƠNG TÁC NÂNG CAO (INTERACTION)
+         */
+        document.querySelectorAll('a, button, .info-cell').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                gsap.to(outline, { scale: 1.8, background: 'rgba(0, 242, 255, 0.1)', duration: 0.3 });
+            });
+            el.addEventListener('mouseleave', () => {
+                gsap.to(outline, { scale: 1, background: 'transparent', duration: 0.3 });
+            });
+        });
+
+        // Xử lý thay đổi kích thước màn hình
+        window.addEventListener('resize', () => {
+            initParticles();
+        });
+    </script>
 </body>
 </html>
