@@ -3,340 +3,329 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Điểu Gia Bảo - Portfolio</title>
+<title>Điểu Gia Bảo | Personal Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
+:root {
+    --bg: #0a0a0a;
+    --card-bg: rgba(20, 20, 20, 0.6);
+    --accent: #00f2ff; /* Màu nhấn tinh tế */
+    --text-main: #ffffff;
+    --text-dim: #a0a0a0;
+    --border: rgba(255, 255, 255, 0.08);
+}
+
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;}
 
 body{
-font-family:'Segoe UI',sans-serif;
-background:black;
-color:white;
-overflow-x:hidden;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
+    overflow-x: hidden;
+    line-height: 1.6;
 }
 
-/* Scroll đẹp */
-::-webkit-scrollbar{width:8px;}
-::-webkit-scrollbar-thumb{background:#00f2ff;border-radius:10px;}
-::-webkit-scrollbar-track{background:black;}
-
+/* Video nền làm mờ sâu để tạo sự sang trọng */
 #bgVideo{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-3;
+    position:fixed;
+    top:0; left:0; width:100%; height:100%;
+    object-fit:cover;
+    z-index:-3;
+    filter: brightness(0.2) blur(2px);
 }
 
-/* Overlay nhạc */
+/* Màn hình chào tối giản */
 #musicOverlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.75);
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:2000;
-font-size:28px;
-font-weight:bold;
-color:#00f2ff;
-cursor:pointer;
-transition:opacity 0.8s ease;
+    position:fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: #000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:2000;
+    transition: opacity 1s ease;
 }
-#musicOverlay.hide{
-opacity:0;
-pointer-events:none;
+.start-btn {
+    padding: 15px 40px;
+    border: 1px solid var(--text-dim);
+    background: transparent;
+    color: white;
+    letter-spacing: 5px;
+    cursor: pointer;
+    transition: 0.5s;
 }
+.start-btn:hover { background: white; color: black; border-color: white; }
 
-/* Navbar ở trên đầu */
+/* Thanh điều hướng tối giản */
 .navbar{
-position:fixed;
-top:0;
-width:100%;
-padding:15px;
-text-align:center;
-background:rgba(0,0,0,0.5);
-backdrop-filter:blur(8px);
-z-index:999;
+    position:fixed;
+    top:0; width:100%;
+    padding:30px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    z-index:999;
+    background: linear-gradient(to bottom, var(--bg), transparent);
 }
 .navbar a{
-color:#00f2ff;
-text-decoration:none;
-margin:0 25px;
-font-weight:bold;
-transition:0.3s;
-cursor: pointer;
+    color: var(--text-dim);
+    text-decoration:none;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 600;
+    transition: 0.4s;
+    cursor: pointer;
 }
-.navbar a:hover{ text-shadow:0 0 15px #00f2ff; }
+.navbar a:hover { color: white; }
 
-/* Hiệu ứng chữ hiện dần rồi biến mất */
-.box h1 {
-display: inline-block;
-overflow: hidden;
-white-space: nowrap;
-border-right: 3px solid #00f2ff;
-animation: typing 4s steps(30) infinite, fade-cycle 4s infinite;
+/* Hiệu ứng Tiêu đề mượt mà */
+.header-box {
+    margin-bottom: 50px;
+    text-align: left;
 }
-
-@keyframes typing {
-from { width: 0 }
-to { width: 100% }
-}
-
-@keyframes fade-cycle {
-0%, 100% { opacity: 0; }
-20%, 80% { opacity: 1; }
+.header-box h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -2px;
+    opacity: 0;
+    animation: revealText 5s infinite;
 }
 
+@keyframes revealText {
+    0% { opacity: 0; transform: translateX(-20px); }
+    20%, 80% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(20px); }
+}
+
+/* Pages */
 .page{
-display:none;
-min-height:100vh;
-padding:120px 20px 80px 20px;
-justify-content:center;
-align-items:flex-start;
+    display:none;
+    min-height:100vh;
+    padding: 160px 20px;
+    justify-content:center;
 }
-.active{
-display:flex;
-animation:fade 0.6s ease;
-}
-@keyframes fade{
-from{opacity:0;transform:translateY(20px);}
-to{opacity:1;transform:translateY(0);}
+.active{ display:flex; animation: slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
+/* Khung nội dung cao cấp */
 .box{
-background:rgba(0,0,0,0.5);
-backdrop-filter:blur(6px);
-padding:35px;
-border-radius:20px;
-max-width:1100px;
-box-shadow:0 0 25px rgba(0,242,255,0.4);
-line-height:1.7;
+    background: var(--card-bg);
+    backdrop-filter: blur(30px);
+    padding: 60px;
+    border-radius: 40px;
+    max-width: 1100px;
+    width: 100%;
+    border: 1px solid var(--border);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.4);
 }
 
-.intro{
-display:flex;
-gap:40px;
-flex-wrap:wrap;
-}
-.intro img{
-width:260px;
-border-radius:15px;
-box-shadow:0 0 20px #00f2ff;
-}
-.exam-img{
-width:100%;
-max-width:500px;
-border-radius:15px;
-margin:20px 0;
-box-shadow:0 0 20px #00f2ff;
+.layout-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 80px;
 }
 
-.school-info{
-margin-top:20px;
-padding:15px;
-border-left:4px solid #00f2ff;
-background:rgba(0,242,255,0.08);
-border-radius:10px;
+/* Ảnh đại diện tối giản */
+.profile-img-wrap {
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
 }
-
-.highlight{
-color:#00f2ff;
-font-weight:bold;
-margin-top:15px;
+.profile-img-wrap img {
+    width: 100%;
+    display: block;
+    transition: transform 1s ease;
 }
-.prepare-list{margin-top:10px;padding-left:20px;}
-.prepare-list li{margin-bottom:8px;}
+.profile-img-wrap:hover img { transform: scale(1.05); }
 
-/* Social Icons hình tròn nhỏ */
+/* Chi tiết thông tin */
+.info-section h2 { font-size: 2.5rem; margin-bottom: 30px; font-weight: 700; }
+.detail-item {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+}
+.detail-item b { color: var(--text-dim); font-weight: 400; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
+.detail-item span { font-weight: 600; color: white; }
+
+/* Social Icons tối giản */
 .social-links {
-margin-top: 20px;
-display: flex;
-gap: 15px;
+    display: flex;
+    gap: 25px;
+    margin-top: 40px;
 }
 .social-circle {
-width: 35px;
-height: 35px;
-border-radius: 50%;
-overflow: hidden;
-display: flex;
-justify-content: center;
-align-items: center;
-background: white;
-transition: 0.3s;
-border: 2px solid #00f2ff;
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex; justify-content: center; align-items: center;
+    transition: 0.4s;
 }
-.social-circle:hover {
-transform: scale(1.2);
-box-shadow: 0 0 10px #00f2ff;
+.social-circle:hover { background: white; border-color: white; transform: translateY(-3px); }
+.social-circle img { width: 20px; filter: invert(1); }
+.social-circle:hover img { filter: invert(0); }
+
+/* Đếm ngược tinh tế */
+.countdown-box {
+    margin-top: 60px;
+    padding: 30px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 20px;
+    text-align: center;
 }
-.social-circle img {
-width: 100%;
-height: 100%;
-object-fit: cover;
+#countdown {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    color: var(--accent);
 }
 
-.footer-mail {
-margin-top: 30px;
-font-size: 13px;
-opacity: 0.6;
-text-align: right;
+.school-desc { margin-top: 30px; font-size: 0.95rem; color: var(--text-dim); font-weight: 300; }
+
+.footer-mail { margin-top: 50px; font-size: 11px; text-align: center; opacity: 0.4; letter-spacing: 2px; }
+
+/* Ảnh kỳ thi & ngành học */
+.sub-img { width: 100%; border-radius: 25px; margin: 40px 0; border: 1px solid var(--border); }
+
+@media (max-width: 900px) {
+    .layout-grid { grid-template-columns: 1fr; gap: 40px; }
+    .header-box h1 { font-size: 2.2rem; }
 }
 </style>
 </head>
 <body>
 
-<div id="musicOverlay">Chạm vào màn hình để bật nhạc</div>
+<div id="musicOverlay">
+    <button class="start-btn" onclick="start()">ENTER PORTFOLIO</button>
+</div>
 
 <video id="bgVideo" autoplay loop playsinline muted>
-<source src="./snaptik.vn_cwAXi.mp4" type="video/mp4">
+    <source src="./snaptik.vn_cwAXi.mp4" type="video/mp4">
 </video>
 
 <div class="navbar">
-<a onclick="showPage(1)">Trang Chủ</a>
-<a onclick="showPage(2)">Kỳ Thi 2026</a>
-<a onclick="showPage(3)">Hành Trang</a>
+    <a onclick="showPage(1)">Overview</a>
+    <a onclick="showPage(2)">Examination</a>
+    <a onclick="showPage(3)">Career Path</a>
 </div>
 
 <div id="page1" class="page active">
-<div class="box">
-<h1>Giới Thiệu Bản Thân</h1>
-<div class="intro">
-<img src="./retouch_2026020222520653.jpg">
-<div>
-<p><b>Họ và tên:</b> Điểu Gia Bảo</p>
-<p><b>Lớp:</b> 12XH1A</p>
-<p><b>Trường:</b> THCS & THPT Việt Hoa Quang Chánh</p>
+    <div class="box">
+        <div class="header-box">
+            <h1>Giới Thiệu Bản Thân</h1>
+        </div>
 
-<div class="social-links">
-<a href="https://www.facebook.com/share/14aBRYBcUNa/" target="_blank" class="social-circle">
-<img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt="Facebook">
-</a>
-<a href="https://tiktok.com/@giabaoo1605" target="_blank" class="social-circle">
-<img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok">
-</a>
-</div>
+        <div class="layout-grid">
+            <div class="profile-img-wrap">
+                <img src="./retouch_2026020222520653.jpg" alt="Gia Bảo">
+            </div>
 
-<div class="school-info">
-<h3>Giới thiệu về trường:</h3>
-<p>Trường THCS & THPT Việt Hoa Quang Chánh là cơ sở giáo dục đào tạo học sinh từ cấp THCS đến THPT, chú trọng phát triển toàn diện về kiến thức, đạo đức và kỹ năng sống. Đặc biệt trường còn đào tạo tiếng Trung với phương pháp giảng dạy hiện đại và hiệu quả. Đội ngũ giáo viên giàu kinh nghiệm, tận tâm giúp học viên phát triển toàn diện các kỹ năng nghe, nói, đọc, viết. Ngoài ra, chương trình học được thiết kế phù hợp với nhiều trình độ, từ cơ bản đến nâng cao.</p>
-<p><b>Địa chỉ:</b><br>
-Số 138 đường Hồ Thị Hương, khu phố 12,<br>
-phường Xuân An (Phường Xuân Trung cũ),<br>
-thành phố Long Khánh, tỉnh Đồng Nai.
-</p>
-</div>
+            <div class="info-section">
+                <h2>Cá Nhân.</h2>
+                <div class="detail-item"><b>Họ và tên</b> <span>Điểu Gia Bảo</span></div>
+                <div class="detail-item"><b>Lớp hiện tại</b> <span>12XH1A</span></div>
+                <div class="detail-item"><b>Tổ chức</b> <span>Việt Hoa Quang Chánh</span></div>
 
-<h3 class="highlight">⏳ Đếm ngược đến kỳ thi:</h3>
-<p id="countdown"></p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/14aBRYBcUNa/" target="_blank" class="social-circle">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="FB">
+                    </a>
+                    <a href="https://tiktok.com/@giabaoo1605" target="_blank" class="social-circle">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TT">
+                    </a>
+                </div>
 
-<div class="footer-mail">
-Email: dgbaoo2k8@gmail.com
-</div>
-</div>
-</div>
-</div>
+                <div class="school-desc">
+                    Trường THCS & THPT Việt Hoa Quang Chánh là môi trường giáo dục khai phóng, tập trung vào việc kiến tạo nền tảng đạo đức và ngoại ngữ (Tiếng Trung) vượt trội cho học sinh.
+                    <p style="margin-top: 10px; color: white;">📍 Long Khánh, Đồng Nai.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="countdown-box">
+            <div style="font-size: 10px; letter-spacing: 5px; margin-bottom: 15px; opacity: 0.6;">TIME REMAINING UNTIL FINALS</div>
+            <div id="countdown">00 : 00 : 00 : 00</div>
+        </div>
+
+        <div class="footer-mail">CONNECT VIA EMAIL: DGBAOO2K8@GMAIL.COM</div>
+    </div>
 </div>
 
 <div id="page2" class="page">
-<div class="box">
-<h1>Kỳ Thi Tốt Nghiệp THPT 2026</h1>
-<img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="exam-img">
-
-<p><b>Thời gian:</b> 11-12/6/2026</p>
-
-<h3 class="highlight">Dự kiến những điểm mới</h3>
-
-<p>Tại Hội nghị tổng kết công tác tổ chức Kỳ thi tốt nghiệp THPT năm 2025 và chuẩn bị Kỳ thi tốt nghiệp THPT năm 2026, Cục trưởng Cục Quản lý chất lượng Huỳnh Văn Chương đã thông tin về dự kiến công tác tổ chức Kỳ thi tốt nghiệp THPT năm 2026.</p>
-
-<p>Theo dự kiến, Kỳ thi tốt nghiệp THPT năm 2026 tổ chức vào ngày 11, 12/6/2026 - sớm hơn so với các năm trước.</p>
-
-<p>Kỳ thi năm 2026 giữ ổn định như năm 2025 và dự kiến có một vài điều chỉnh để bảo đảm phù hợp với mô hình quản lý chính quyền địa phương 2 cấp, đồng thời tiếp tục áp dụng công nghệ thông tin trong các khâu tổ chức thi. Các điều chỉnh dự kiến không ảnh hưởng tới thí sinh.</p>
-
-<p><b>Cụ thể:</b></p>
-<p>- Sửa đổi các quy định liên quan đến thanh tra, kiểm tra trong Kỳ thi để bảo đảm phù hợp với việc chuyển bộ phận thanh tra giáo dục các cấp về Thanh tra Chính phủ và Thanh tra tỉnh.</p>
-<p>- Điều chỉnh lại một số quy định, quy trình tổ chức thi để bảo đảm phù hợp và thuận tiện hơn cho các đơn vị trong bối cảnh sắp xếp lại đơn vị hành chính cấp tỉnh.</p>
-<p>- Giảm thời gian thu nhận đơn phúc khảo để thông báo kết quả phúc khảo sớm hơn đồng thời thuận tiện cho công tác tuyển sinh của các cơ sở giáo dục đại học, giáo dục nghề nghiệp. Điều chỉnh quy trình chấm phúc khảo để tăng cường hiệu quả, chất lượng.</p>
-<p><a href="https://xaydungchinhsach.chinhphu.vn/thoi-gian-to-chuc-thi-tot-nghiep-thpt-nam-2026-cac-dieu-chinh-co-anh-huong-den-thi-sinh-khi-nao-thi-tot-nghiep-thpt-tren-may-tinh-11925092708572251.htm" target="_blank" style="color:#00f2ff; text-decoration:underline;">Xem chi tiết tại đây</a></p>
-</div>
+    <div class="box">
+        <h1 style="font-size: 3rem; margin-bottom: 30px;">Kỳ Thi Tốt Nghiệp 2026.</h1>
+        <img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="sub-img">
+        <div style="max-width: 800px; color: var(--text-dim); font-size: 1.1rem;">
+            <p style="color: white; margin-bottom: 20px;">Thời gian: 11-12/06/2026</p>
+            <p>Dự kiến kỳ thi năm 2026 sẽ tiếp tục duy trì sự ổn định về cấu trúc đề thi, đồng thời tăng cường yếu tố ứng dụng số hóa trong công tác quản lý thí sinh. Điểm mới quan trọng nằm ở việc tối ưu hóa quy trình hành chính và rút ngắn thời gian công bố kết quả phúc khảo.</p>
+            <a href="https://xaydungchinhsach.chinhphu.vn/thoi-gian-to-chuc-thi-tot-nghiep-thpt-nam-2026-cac-dieu-chinh-co-anh-huong-den-thi-sinh-khi-nao-thi-tot-nghiep-thpt-tren-may-tinh-11925092708572251.htm" target="_blank" style="display: inline-block; margin-top: 30px; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent);">Tìm hiểu văn bản gốc →</a>
+        </div>
+    </div>
 </div>
 
 <div id="page3" class="page">
-<div class="box">
-<h1>Hành Trang Tiếp Ứng</h1>
-<img src="./NGHE-CONG-TAC-XA-HOI.png" class="exam-img">
-
-<h3 class="highlight">Ngành Công tác xã hội (CTXH)</h3>
-
-<p>Ngành Công tác xã hội (CTXH) là lĩnh vực chuyên môn hỗ trợ, can thiệp giúp cá nhân, gia đình và cộng đồng vượt qua khó khăn, nâng cao chất lượng cuộc sống và phát huy năng lực tự giải quyết vấn đề. Đây là ngành nhân văn, kết hợp kiến thức khoa học và kỹ năng thực hành để hỗ trợ nhóm người yếu thế, với cơ hội việc làm rộng mở tại các cơ quan, tổ chức phi chính phủ, bệnh viện, trường học và trung tâm bảo trợ.</p>
-
-<p><b>Tổng quan:</b><br>
-Mã ngành: 7760101.<br>
-Thời gian đào tạo: Đại học (4 năm).<br>
-Văn bằng: Cử nhân Công tác xã hội.<br>
-Tính chất: Nhân văn, hướng tới xã hội công bằng và phát triển bền vững.
-</p>
-
-<p><b>Cơ hội việc làm:</b><br>
-- Tổ chức phi chính phủ (NGO), trung tâm bảo trợ xã hội, trại giam, bệnh viện, trường học.<br>
-- Vị trí: Chuyên viên tham vấn tâm lý, cán bộ phát triển cộng đồng, quản lý ca, nhân viên bảo vệ trẻ em/người cao tuổi, nhà nghiên cứu chính sách.<br>
-- Thu nhập: Khởi điểm từ 8-10 triệu đồng/tháng, có thể cao hơn (15-40 triệu đồng) nếu làm tại các tổ chức quốc tế.
-</p>
-
-<p><b>Yêu cầu kỹ năng:</b><br>
-- Giao tiếp, lắng nghe, thấu cảm (EQ cao), tư vấn, tham vấn, lập kế hoạch.<br>
-- Nhân ái, kiên nhẫn, chịu được áp lực cao.
-</p>
-
-<h3 class="highlight">Những điều tôi đã chuẩn bị</h3>
-<ul class="prepare-list">
-<li>✔ Ôn tập đầy đủ kiến thức lớp 12</li>
-<li>✔ Luyện đề thường xuyên</li>
-<li>✔ Chuẩn bị tâm lý vững vàng</li>
-<li>✔ Tìm hiểu kỹ ngành CTXH và các trường đào tạo</li>
-<li>✔ Rèn luyện kỹ năng giao tiếp và thấu cảm</li>
-</ul>
-
-</div>
+    <div class="box">
+        <h1 style="font-size: 3rem; margin-bottom: 30px;">Định Hướng Tương Lai.</h1>
+        <img src="./NGHE-CONG-TAC-XA-HOI.png" class="sub-img">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+            <div>
+                <h3 style="margin-bottom: 15px;">Ngành Công Tác Xã Hội</h3>
+                <p style="color: var(--text-dim);">Một sứ mệnh nhân văn nhằm hỗ trợ những mảnh đời khó khăn và thúc đẩy sự công bằng xã hội. Đây là con đường tôi lựa chọn để đóng góp giá trị thực cho cộng đồng.</p>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 15px;">Cam Kết Cá Nhân</h3>
+                <ul style="list-style: none; color: var(--text-dim);">
+                    <li style="margin-bottom: 10px;">• Hoàn thành xuất sắc kỳ thi THPT</li>
+                    <li style="margin-bottom: 10px;">• Nâng cao trình độ Hán ngữ</li>
+                    <li style="margin-bottom: 10px;">• Trau dồi tư duy phản biện</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
+function start() {
+    const video = document.getElementById("bgVideo");
+    const overlay = document.getElementById("musicOverlay");
+    video.muted = false;
+    video.volume = 0.5;
+    video.play();
+    overlay.style.opacity = "0";
+    setTimeout(() => overlay.style.display = "none", 1000);
+}
+
 function showPage(p){
-document.querySelectorAll(".page").forEach(e=>e.classList.remove("active"));
-document.getElementById("page"+p).classList.add("active");
-window.scrollTo({top:0,behavior:'smooth'});
+    document.querySelectorAll(".page").forEach(e => e.classList.remove("active"));
+    document.getElementById("page" + p).classList.add("active");
+    window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function countdown(){
-let target=new Date("June 11, 2026 07:00:00").getTime();
-let now=new Date().getTime();
-let diff=target-now;
-let d=Math.floor(diff/(1000*60*60*24));
-let h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-let m=Math.floor((diff%(1000*60*60))/(1000*60));
-let s=Math.floor((diff%(1000*60))/1000);
-document.getElementById("countdown").innerHTML=
-d+" ngày "+h+" giờ "+m+" phút "+s+" giây";
+    let target = new Date("June 11, 2026 07:00:00").getTime();
+    let now = new Date().getTime();
+    let diff = target - now;
+    if(diff < 0) { document.getElementById("countdown").innerHTML = "START"; return; }
+    
+    let d = Math.floor(diff/(1000*60*60*24));
+    let h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    let m = Math.floor((diff%(1000*60*60))/(1000*60));
+    let s = Math.floor((diff%(1000*60))/1000);
+    
+    document.getElementById("countdown").innerHTML = 
+        `${d}D : ${h}H : ${m}M : ${s}S`;
 }
-setInterval(countdown,1000);
+setInterval(countdown, 1000);
 countdown();
-
-const video=document.getElementById("bgVideo");
-const overlay=document.getElementById("musicOverlay");
-
-overlay.addEventListener("click",function(){
-video.muted=false;
-video.volume=1;
-video.play();
-overlay.classList.add("hide");
-setTimeout(()=>overlay.style.display="none",800);
-});
 </script>
 
 </body>
