@@ -54,34 +54,50 @@ opacity:0;
 pointer-events:none;
 }
 
-/* Navbar mới - Đưa xuống dưới info */
-.nav-container{
-display: flex;
-gap: 15px;
-margin-top: 25px;
-flex-wrap: wrap;
+/* Navbar ở trên đầu */
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+padding:15px;
+text-align:center;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(8px);
+z-index:999;
 }
-.nav-btn{
-background: rgba(0, 242, 255, 0.2);
-color: #00f2ff;
-padding: 10px 20px;
-border: 1px solid #00f2ff;
-border-radius: 30px;
-text-decoration: none;
-font-weight: bold;
-transition: 0.3s;
+.navbar a{
+color:#00f2ff;
+text-decoration:none;
+margin:0 25px;
+font-weight:bold;
+transition:0.3s;
 cursor: pointer;
 }
-.nav-btn:hover{
-background: #00f2ff;
-color: black;
-box-shadow: 0 0 15px #00f2ff;
+.navbar a:hover{ text-shadow:0 0 15px #00f2ff; }
+
+/* Hiệu ứng chữ hiện dần rồi biến mất */
+.box h1 {
+display: inline-block;
+overflow: hidden;
+white-space: nowrap;
+border-right: 3px solid #00f2ff;
+animation: typing 4s steps(30) infinite, fade-cycle 4s infinite;
+}
+
+@keyframes typing {
+from { width: 0 }
+to { width: 100% }
+}
+
+@keyframes fade-cycle {
+0%, 100% { opacity: 0; }
+20%, 80% { opacity: 1; }
 }
 
 .page{
 display:none;
 min-height:100vh;
-padding:60px 20px 80px 20px;
+padding:120px 20px 80px 20px;
 justify-content:center;
 align-items:flex-start;
 }
@@ -138,28 +154,39 @@ margin-top:15px;
 .prepare-list{margin-top:10px;padding-left:20px;}
 .prepare-list li{margin-bottom:8px;}
 
-/* Social Icons Footer */
-.social-footer {
-margin-top: 30px;
+/* Social Icons hình tròn nhỏ */
+.social-links {
+margin-top: 20px;
 display: flex;
+gap: 15px;
+}
+.social-circle {
+width: 35px;
+height: 35px;
+border-radius: 50%;
+overflow: hidden;
+display: flex;
+justify-content: center;
 align-items: center;
-gap: 20px;
-padding-top: 20px;
-border-top: 1px solid rgba(255,255,255,0.1);
-}
-.social-icon {
-width: 40px;
-height: 40px;
+background: white;
 transition: 0.3s;
+border: 2px solid #00f2ff;
 }
-.social-icon:hover {
+.social-circle:hover {
 transform: scale(1.2);
-filter: drop-shadow(0 0 8px #00f2ff);
+box-shadow: 0 0 10px #00f2ff;
 }
-.gmail-text {
-color: #00f2ff;
-font-size: 0.9em;
-text-decoration: none;
+.social-circle img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.footer-mail {
+margin-top: 30px;
+font-size: 13px;
+opacity: 0.6;
+text-align: right;
 }
 </style>
 </head>
@@ -171,6 +198,12 @@ text-decoration: none;
 <source src="./snaptik.vn_cwAXi.mp4" type="video/mp4">
 </video>
 
+<div class="navbar">
+<a onclick="showPage(1)">Trang Chủ</a>
+<a onclick="showPage(2)">Kỳ Thi 2026</a>
+<a onclick="showPage(3)">Hành Trang</a>
+</div>
+
 <div id="page1" class="page active">
 <div class="box">
 <h1>Giới Thiệu Bản Thân</h1>
@@ -181,10 +214,13 @@ text-decoration: none;
 <p><b>Lớp:</b> 12XH1A</p>
 <p><b>Trường:</b> THCS & THPT Việt Hoa Quang Chánh</p>
 
-<div class="nav-container">
-<div class="nav-btn" onclick="showPage(1)">Trang Chủ</div>
-<div class="nav-btn" onclick="showPage(2)">Kỳ Thi Tốt Nghiệp THPT 2026</div>
-<div class="nav-btn" onclick="showPage(3)">Hành Trang Tiếp Ứng</div>
+<div class="social-links">
+<a href="https://www.facebook.com/share/14aBRYBcUNa/" target="_blank" class="social-circle">
+<img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt="Facebook">
+</a>
+<a href="https://tiktok.com/@giabaoo1605" target="_blank" class="social-circle">
+<img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok">
+</a>
 </div>
 
 <div class="school-info">
@@ -200,16 +236,8 @@ thành phố Long Khánh, tỉnh Đồng Nai.
 <h3 class="highlight">⏳ Đếm ngược đến kỳ thi:</h3>
 <p id="countdown"></p>
 
-<div class="social-footer">
-<a href="https://www.facebook.com/share/14aBRYBcUNa/" target="_blank">
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" class="social-icon" alt="Facebook">
-</a>
-<a href="https://tiktok.com/@giabaoo1605" target="_blank">
-<img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" class="social-icon" alt="TikTok">
-</a>
-<a href="mailto:dgbaoo2k8@gmail.com" class="gmail-text">
-<b>Email:</b> dgbaoo2k8@gmail.com
-</a>
+<div class="footer-mail">
+Email: dgbaoo2k8@gmail.com
 </div>
 </div>
 </div>
@@ -236,8 +264,6 @@ thành phố Long Khánh, tỉnh Đồng Nai.
 <p>- Điều chỉnh lại một số quy định, quy trình tổ chức thi để bảo đảm phù hợp và thuận tiện hơn cho các đơn vị trong bối cảnh sắp xếp lại đơn vị hành chính cấp tỉnh.</p>
 <p>- Giảm thời gian thu nhận đơn phúc khảo để thông báo kết quả phúc khảo sớm hơn đồng thời thuận tiện cho công tác tuyển sinh của các cơ sở giáo dục đại học, giáo dục nghề nghiệp. Điều chỉnh quy trình chấm phúc khảo để tăng cường hiệu quả, chất lượng.</p>
 <p><a href="https://xaydungchinhsach.chinhphu.vn/thoi-gian-to-chuc-thi-tot-nghiep-thpt-nam-2026-cac-dieu-chinh-co-anh-huong-den-thi-sinh-khi-nao-thi-tot-nghiep-thpt-tren-may-tinh-11925092708572251.htm" target="_blank" style="color:#00f2ff; text-decoration:underline;">Xem chi tiết tại đây</a></p>
-
-<div class="nav-btn" style="display:inline-block; margin-top:20px;" onclick="showPage(1)">Quay lại trang chủ</div>
 </div>
 </div>
 
@@ -277,7 +303,6 @@ Tính chất: Nhân văn, hướng tới xã hội công bằng và phát triể
 <li>✔ Rèn luyện kỹ năng giao tiếp và thấu cảm</li>
 </ul>
 
-<div class="nav-btn" style="display:inline-block; margin-top:20px;" onclick="showPage(1)">Quay lại trang chủ</div>
 </div>
 </div>
 
