@@ -3,330 +3,367 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Điểu Gia Bảo | Personal Portfolio</title>
+<title>Điểu Gia Bảo | The Signature Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --bg: #0a0a0a;
-    --card-bg: rgba(20, 20, 20, 0.6);
-    --accent: #00f2ff; /* Màu nhấn tinh tế */
-    --text-main: #ffffff;
-    --text-dim: #a0a0a0;
-    --border: rgba(255, 255, 255, 0.08);
+    --obsidian: #030303;
+    --platinum: #e5e5e5;
+    --accent: #00f2ff;
+    --glass: rgba(10, 10, 12, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.04);
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;}
-
-body{
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text-main);
-    overflow-x: hidden;
-    line-height: 1.6;
-}
-
-/* Video nền làm mờ sâu để tạo sự sang trọng */
-#bgVideo{
-    position:fixed;
-    top:0; left:0; width:100%; height:100%;
-    object-fit:cover;
-    z-index:-3;
-    filter: brightness(0.2) blur(2px);
-}
-
-/* Màn hình chào tối giản */
-#musicOverlay{
-    position:fixed;
-    top:0; left:0; width:100%; height:100%;
-    background: #000;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:2000;
-    transition: opacity 1s ease;
-}
-.start-btn {
-    padding: 15px 40px;
-    border: 1px solid var(--text-dim);
-    background: transparent;
-    color: white;
-    letter-spacing: 5px;
-    cursor: pointer;
-    transition: 0.5s;
-}
-.start-btn:hover { background: white; color: black; border-color: white; }
-
-/* Thanh điều hướng tối giản */
-.navbar{
-    position:fixed;
-    top:0; width:100%;
-    padding:30px;
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    z-index:999;
-    background: linear-gradient(to bottom, var(--bg), transparent);
-}
-.navbar a{
-    color: var(--text-dim);
-    text-decoration:none;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 600;
-    transition: 0.4s;
-    cursor: pointer;
-}
-.navbar a:hover { color: white; }
-
-/* Hiệu ứng Tiêu đề mượt mà */
-.header-box {
-    margin-bottom: 50px;
-    text-align: left;
-}
-.header-box h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
-    letter-spacing: -2px;
-    opacity: 0;
-    animation: revealText 5s infinite;
-}
-
-@keyframes revealText {
-    0% { opacity: 0; transform: translateX(-20px); }
-    20%, 80% { opacity: 1; transform: translateX(0); }
-    100% { opacity: 0; transform: translateX(20px); }
-}
-
-/* Pages */
-.page{
-    display:none;
-    min-height:100vh;
-    padding: 160px 20px;
-    justify-content:center;
-}
-.active{ display:flex; animation: slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
-
-@keyframes slideIn {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Khung nội dung cao cấp */
-.box{
-    background: var(--card-bg);
-    backdrop-filter: blur(30px);
-    padding: 60px;
-    border-radius: 40px;
-    max-width: 1100px;
-    width: 100%;
-    border: 1px solid var(--border);
-    box-shadow: 0 40px 100px rgba(0,0,0,0.4);
-}
-
-.layout-grid {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: 80px;
-}
-
-/* Ảnh đại diện tối giản */
-.profile-img-wrap {
-    position: relative;
-    border-radius: 30px;
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Ẩn chuột thật để dùng chuột Custom */ }
+body {
+    background-color: var(--obsidian);
+    color: var(--platinum);
+    font-family: 'Inter', sans-serif;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
 }
-.profile-img-wrap img {
-    width: 100%;
-    display: block;
-    transition: transform 1s ease;
-}
-.profile-img-wrap:hover img { transform: scale(1.05); }
 
-/* Chi tiết thông tin */
-.info-section h2 { font-size: 2.5rem; margin-bottom: 30px; font-weight: 700; }
-.detail-item {
-    padding: 15px 0;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
+/* CUSTOM CURSOR */
+.cursor-dot, .cursor-outline {
+    position: fixed; top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%; z-index: 10000;
+    pointer-events: none;
 }
-.detail-item b { color: var(--text-dim); font-weight: 400; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
-.detail-item span { font-weight: 600; color: white; }
+.cursor-dot { width: 5px; height: 5px; background: var(--accent); }
+.cursor-outline {
+    width: 30px; height: 30px;
+    border: 1px solid rgba(0, 242, 255, 0.5);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+}
 
-/* Social Icons tối giản */
-.social-links {
-    display: flex;
-    gap: 25px;
-    margin-top: 40px;
+/* WEBGL & VIDEO BACKGROUND */
+#webgl-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+#bgVideo {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: -2;
+    filter: brightness(0.1) contrast(1.1);
 }
-.social-circle {
-    width: 45px; height: 45px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
+
+/* PRELOADER CINEMATIC */
+#preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #000; z-index: 9999;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+}
+.boot-sequence { font-family: 'Cinzel', serif; font-size: 1.5rem; letter-spacing: 5px; color: var(--platinum); margin-bottom: 30px; }
+.start-btn {
+    background: transparent; border: 1px solid rgba(255,255,255,0.2);
+    color: #888; padding: 15px 40px; font-family: 'Inter', sans-serif;
+    font-size: 10px; letter-spacing: 4px; transition: 0.4s;
+}
+.start-btn:hover { color: #fff; border-color: #fff; letter-spacing: 8px; }
+
+/* LUXURY NAVIGATION */
+.nav-bar {
+    position: fixed; top: 0; width: 100%; padding: 40px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 1000; mix-blend-mode: difference;
+}
+.brand { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 600; letter-spacing: 3px; }
+.nav-links { display: flex; gap: 40px; }
+.nav-links a {
+    color: white; text-decoration: none; font-size: 10px; text-transform: uppercase;
+    letter-spacing: 3px; opacity: 0.4; transition: 0.4s; position: relative;
+}
+.nav-links a.active, .nav-links a:hover { opacity: 1; }
+
+/* PAGE STRUCTURE WITH CLIP-PATH */
+.page {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
     display: flex; justify-content: center; align-items: center;
-    transition: 0.4s;
+    visibility: hidden; opacity: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); /* Khởi tạo ẩn */
 }
-.social-circle:hover { background: white; border-color: white; transform: translateY(-3px); }
-.social-circle img { width: 20px; filter: invert(1); }
-.social-circle:hover img { filter: invert(0); }
+.page.active { visibility: visible; opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
 
-/* Đếm ngược tinh tế */
-.countdown-box {
-    margin-top: 60px;
-    padding: 30px;
-    background: rgba(255,255,255,0.03);
+/* THE MASTERPIECE CONTAINER */
+.container {
+    background: var(--glass);
+    backdrop-filter: blur(40px);
+    border: 1px solid var(--glass-border);
     border-radius: 20px;
-    text-align: center;
-}
-#countdown {
-    font-size: 2rem;
-    font-weight: 300;
-    letter-spacing: 4px;
-    color: var(--accent);
+    width: 85%; max-width: 1300px; height: 75vh;
+    display: flex; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
 }
 
-.school-desc { margin-top: 30px; font-size: 0.95rem; color: var(--text-dim); font-weight: 300; }
+/* LAYOUT SPLIT */
+.content-col { flex: 1; padding: 60px; display: flex; flex-direction: column; justify-content: center; }
+.image-col { flex: 0.8; position: relative; overflow: hidden; }
 
-.footer-mail { margin-top: 50px; font-size: 11px; text-align: center; opacity: 0.4; letter-spacing: 2px; }
+/* DUOTONE IMAGE EFFECT */
+.hero-img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: sepia(0.3) hue-rotate(180deg) brightness(0.8) contrast(1.1);
+    transition: 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.container:hover .hero-img { transform: scale(1.05); filter: sepia(0) hue-rotate(0) brightness(1) contrast(1.1); }
 
-/* Ảnh kỳ thi & ngành học */
-.sub-img { width: 100%; border-radius: 25px; margin: 40px 0; border: 1px solid var(--border); }
+/* TYPOGRAPHY */
+.main-title {
+    font-family: 'Cinzel', serif;
+    font-size: 4vw; line-height: 1.1; margin-bottom: 20px;
+    font-weight: 600; letter-spacing: -1px;
+}
 
-@media (max-width: 900px) {
-    .layout-grid { grid-template-columns: 1fr; gap: 40px; }
-    .header-box h1 { font-size: 2.2rem; }
+/* HIỆU ỨNG GÕ CHỮ DUY NHẤT */
+.typing-wrap { display: inline-block; position: relative; }
+.typing-text {
+    overflow: hidden; white-space: nowrap; border-right: 2px solid var(--accent);
+    animation: typing 6s steps(40) infinite, blink 0.75s step-end infinite;
+}
+@keyframes typing { 0%, 10% { width: 0; } 45%, 70% { width: 100%; } 90%, 100% { width: 0; } }
+@keyframes blink { 50% { border-color: transparent; } }
+
+/* DATA ROWS */
+.data-grid { margin-top: 40px; display: grid; gap: 20px; }
+.data-row {
+    display: flex; justify-content: space-between;
+    border-bottom: 1px solid var(--glass-border); padding-bottom: 10px;
+}
+.data-label { font-size: 9px; text-transform: uppercase; letter-spacing: 3px; color: #777; }
+.data-val { font-size: 1rem; font-weight: 400; }
+
+/* COUNTDOWN */
+#master-clock { font-family: 'Inter', sans-serif; font-size: 3rem; font-weight: 200; letter-spacing: 8px; color: var(--accent); margin-top: 40px; }
+
+/* EXTRAS */
+.social-dock { display: flex; gap: 20px; margin-top: auto; }
+.s-link { opacity: 0.5; transition: 0.4s; }
+.s-link:hover { opacity: 1; transform: translateY(-3px); }
+.s-link img { width: 20px; filter: invert(1); }
+
+.desc-text { color: #888; line-height: 1.8; font-size: 1rem; font-weight: 200; margin-top: 20px; max-width: 90%; }
+.highlight { color: var(--platinum); font-weight: 600; border-bottom: 1px solid var(--accent); }
+
+@media (max-width: 1000px) {
+    .container { flex-direction: column; height: 85vh; overflow-y: auto; }
+    .image-col { min-height: 40vh; }
+    .main-title { font-size: 2.5rem; }
+    #master-clock { font-size: 2rem; }
 }
 </style>
 </head>
 <body>
 
-<div id="musicOverlay">
-    <button class="start-btn" onclick="start()">ENTER PORTFOLIO</button>
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+
+<div id="preloader" class="hover-target">
+    <div class="boot-sequence">D G B</div>
+    <button class="start-btn" onclick="initExperience()">INITIALIZE</button>
 </div>
 
+<canvas id="webgl-canvas"></canvas>
 <video id="bgVideo" autoplay loop playsinline muted>
     <source src="./snaptik.vn_cwAXi.mp4" type="video/mp4">
 </video>
 
-<div class="navbar">
-    <a onclick="showPage(1)">Overview</a>
-    <a onclick="showPage(2)">Examination</a>
-    <a onclick="showPage(3)">Career Path</a>
-</div>
-
-<div id="page1" class="page active">
-    <div class="box">
-        <div class="header-box">
-            <h1>Giới Thiệu Bản Thân</h1>
-        </div>
-
-        <div class="layout-grid">
-            <div class="profile-img-wrap">
-                <img src="./retouch_2026020222520653.jpg" alt="Gia Bảo">
-            </div>
-
-            <div class="info-section">
-                <h2>Cá Nhân.</h2>
-                <div class="detail-item"><b>Họ và tên</b> <span>Điểu Gia Bảo</span></div>
-                <div class="detail-item"><b>Lớp hiện tại</b> <span>12XH1A</span></div>
-                <div class="detail-item"><b>Tổ chức</b> <span>Việt Hoa Quang Chánh</span></div>
-
-                <div class="social-links">
-                    <a href="https://www.facebook.com/share/14aBRYBcUNa/" target="_blank" class="social-circle">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="FB">
-                    </a>
-                    <a href="https://tiktok.com/@giabaoo1605" target="_blank" class="social-circle">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TT">
-                    </a>
-                </div>
-
-                <div class="school-desc">
-                    Trường THCS & THPT Việt Hoa Quang Chánh là môi trường giáo dục khai phóng, tập trung vào việc kiến tạo nền tảng đạo đức và ngoại ngữ (Tiếng Trung) vượt trội cho học sinh.
-                    <p style="margin-top: 10px; color: white;">📍 Long Khánh, Đồng Nai.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="countdown-box">
-            <div style="font-size: 10px; letter-spacing: 5px; margin-bottom: 15px; opacity: 0.6;">TIME REMAINING UNTIL FINALS</div>
-            <div id="countdown">00 : 00 : 00 : 00</div>
-        </div>
-
-        <div class="footer-mail">CONNECT VIA EMAIL: DGBAOO2K8@GMAIL.COM</div>
+<nav class="nav-bar">
+    <div class="brand">GIA BAO</div>
+    <div class="nav-links">
+        <a onclick="transitionTo(1)" id="nav1" class="active hover-target">Identity</a>
+        <a onclick="transitionTo(2)" id="nav2" class="hover-target">Milestone</a>
+        <a onclick="transitionTo(3)" id="nav3" class="hover-target">Vision</a>
     </div>
-</div>
+</nav>
 
-<div id="page2" class="page">
-    <div class="box">
-        <h1 style="font-size: 3rem; margin-bottom: 30px;">Kỳ Thi Tốt Nghiệp 2026.</h1>
-        <img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="sub-img">
-        <div style="max-width: 800px; color: var(--text-dim); font-size: 1.1rem;">
-            <p style="color: white; margin-bottom: 20px;">Thời gian: 11-12/06/2026</p>
-            <p>Dự kiến kỳ thi năm 2026 sẽ tiếp tục duy trì sự ổn định về cấu trúc đề thi, đồng thời tăng cường yếu tố ứng dụng số hóa trong công tác quản lý thí sinh. Điểm mới quan trọng nằm ở việc tối ưu hóa quy trình hành chính và rút ngắn thời gian công bố kết quả phúc khảo.</p>
-            <a href="https://xaydungchinhsach.chinhphu.vn/thoi-gian-to-chuc-thi-tot-nghiep-thpt-nam-2026-cac-dieu-chinh-co-anh-huong-den-thi-sinh-khi-nao-thi-tot-nghiep-thpt-tren-may-tinh-11925092708572251.htm" target="_blank" style="display: inline-block; margin-top: 30px; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent);">Tìm hiểu văn bản gốc →</a>
+<section id="page1" class="page active">
+    <div class="container">
+        <div class="content-col">
+            <div class="typing-wrap">
+                <h1 class="main-title typing-text">Giới Thiệu Bản Thân.</h1>
+            </div>
+            
+            <div class="data-grid">
+                <div class="data-row"><span class="data-label">Name</span><span class="data-val">Điểu Gia Bảo</span></div>
+                <div class="data-row"><span class="data-label">Division</span><span class="data-val">12XH1A</span></div>
+                <div class="data-row"><span class="data-label">Base</span><span class="data-val">Việt Hoa Quang Chánh</span></div>
+                <div class="data-row"><span class="data-label">Location</span><span class="data-val">Long Khánh, Đồng Nai</span></div>
+            </div>
+
+            <div class="social-dock">
+                <a href="https://www.facebook.com/share/14aBRYBcUNa/" target="_blank" class="s-link hover-target"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg"></a>
+                <a href="https://tiktok.com/@giabaoo1605" target="_blank" class="s-link hover-target"><img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg"></a>
+            </div>
+        </div>
+        <div class="image-col hover-target">
+            <img src="./retouch_2026020222520653.jpg" class="hero-img" alt="Portrait">
         </div>
     </div>
-</div>
+</section>
 
-<div id="page3" class="page">
-    <div class="box">
-        <h1 style="font-size: 3rem; margin-bottom: 30px;">Định Hướng Tương Lai.</h1>
-        <img src="./NGHE-CONG-TAC-XA-HOI.png" class="sub-img">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
-            <div>
-                <h3 style="margin-bottom: 15px;">Ngành Công Tác Xã Hội</h3>
-                <p style="color: var(--text-dim);">Một sứ mệnh nhân văn nhằm hỗ trợ những mảnh đời khó khăn và thúc đẩy sự công bằng xã hội. Đây là con đường tôi lựa chọn để đóng góp giá trị thực cho cộng đồng.</p>
-            </div>
-            <div>
-                <h3 style="margin-bottom: 15px;">Cam Kết Cá Nhân</h3>
-                <ul style="list-style: none; color: var(--text-dim);">
-                    <li style="margin-bottom: 10px;">• Hoàn thành xuất sắc kỳ thi THPT</li>
-                    <li style="margin-bottom: 10px;">• Nâng cao trình độ Hán ngữ</li>
-                    <li style="margin-bottom: 10px;">• Trau dồi tư duy phản biện</li>
-                </ul>
-            </div>
+<section id="page2" class="page">
+    <div class="container">
+        <div class="image-col">
+            <img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="hero-img" alt="Exam">
+        </div>
+        <div class="content-col">
+            <h1 class="main-title">Kỳ Thi Quốc Gia<br>2026.</h1>
+            <p class="desc-text">Giai đoạn bước ngoặt đánh dấu sự chuyển mình của hệ thống đánh giá năng lực, tập trung vào số hóa và tối ưu lộ trình tuyển sinh.</p>
+            <div style="font-size: 8px; letter-spacing: 4px; color: #555; margin-top: 30px;">T-MINUS TO COMMENCEMENT</div>
+            <div id="master-clock">00:00:00:00</div>
+            <a href="https://xaydungchinhsach.chinhphu.vn/thoi-gian-to-chuc-thi-tot-nghiep-thpt-nam-2026-cac-dieu-chinh-co-anh-huong-den-thi-sinh-khi-nao-thi-tot-nghiep-thpt-tren-may-tinh-11925092708572251.htm" target="_blank" class="start-btn hover-target" style="margin-top: auto; align-self: flex-start;">READ DOCUMENT</a>
         </div>
     </div>
-</div>
+</section>
+
+<section id="page3" class="page">
+    <div class="container">
+        <div class="content-col">
+            <h1 class="main-title">Công Tác<br>Xã Hội.</h1>
+            <p class="desc-text">Sứ mệnh tạo ra giá trị bền vững không nằm ở những điều lớn lao, mà ở sự kiên định mang lại thay đổi tích cực cho cộng đồng. Hành trình rèn luyện để trở thành một nhân tố cống hiến thực sự.</p>
+            
+            <div class="data-grid" style="margin-top: 30px;">
+                <div class="data-row"><span class="data-label">Language</span><span class="data-val highlight">HSK Proficiency Objective</span></div>
+                <div class="data-row"><span class="data-label">Academic</span><span class="data-val">Excellence Completion</span></div>
+                <div class="data-row"><span class="data-label">Core Value</span><span class="data-val">Social Dedication</span></div>
+            </div>
+        </div>
+        <div class="image-col">
+            <img src="./NGHE-CONG-TAC-XA-HOI.png" class="hero-img" alt="Social Work">
+        </div>
+    </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <script>
-function start() {
-    const video = document.getElementById("bgVideo");
-    const overlay = document.getElementById("musicOverlay");
-    video.muted = false;
-    video.volume = 0.5;
-    video.play();
-    overlay.style.opacity = "0";
-    setTimeout(() => overlay.style.display = "none", 1000);
+/* --- 1. CUSTOM CURSOR DYNAMICS --- */
+const cursorDot = document.querySelector('.cursor-dot');
+const cursorOutline = document.querySelector('.cursor-outline');
+let mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
+
+window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`;
+});
+
+// Inertia loop cho outline
+function animateCursor() {
+    let distX = mouseX - outlineX; let distY = mouseY - outlineY;
+    outlineX += distX * 0.15; outlineY += distY * 0.15;
+    cursorOutline.style.left = `${outlineX}px`; cursorOutline.style.top = `${outlineY}px`;
+    requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// Hiệu ứng hover
+document.querySelectorAll('a, button, .hover-target').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px';
+        cursorOutline.style.background = 'rgba(0, 242, 255, 0.1)';
+    });
+    el.addEventListener('mouseleave', () => {
+        cursorOutline.style.width = '30px'; cursorOutline.style.height = '30px';
+        cursorOutline.style.background = 'transparent';
+    });
+});
+
+/* --- 2. THE THREE.JS AMBIENCE --- */
+let scene, camera, renderer, particles;
+function initWebGL() {
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 1000);
+    camera.position.z = 400;
+
+    renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('webgl-canvas'), alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    const geo = new THREE.BufferGeometry();
+    const pos = [];
+    for(let i=0; i<3000; i++) {
+        pos.push((Math.random() - 0.5) * 2000, (Math.random() - 0.5) * 2000, (Math.random() - 0.5) * 2000);
+    }
+    geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    
+    const mat = new THREE.PointsMaterial({ color: 0xffffff, size: 1.5, transparent: true, opacity: 0.15 });
+    particles = new THREE.Points(geo, mat);
+    scene.add(particles);
+}
+function animateWebGL() {
+    requestAnimationFrame(animateWebGL);
+    particles.rotation.y += 0.0003;
+    particles.rotation.x += 0.0001;
+    renderer.render(scene, camera);
+}
+initWebGL(); animateWebGL();
+
+/* --- 3. PAGE TRANSITIONS (GSAP CLIP-PATH) --- */
+function initExperience() {
+    const v = document.getElementById("bgVideo");
+    v.muted = false; v.volume = 0.3; v.play();
+    
+    gsap.to("#preloader", {
+        clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
+        duration: 1.2, ease: "power4.inOut",
+        onComplete: () => document.getElementById("preloader").style.display = "none"
+    });
+    
+    // Animate page 1 in
+    gsap.to("#page1", { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", duration: 1.2, ease: "power4.inOut", delay: 0.2 });
 }
 
-function showPage(p){
-    document.querySelectorAll(".page").forEach(e => e.classList.remove("active"));
-    document.getElementById("page" + p).classList.add("active");
-    window.scrollTo({top:0, behavior:'smooth'});
+function transitionTo(targetId) {
+    const current = document.querySelector(".page.active");
+    const next = document.getElementById("page" + targetId);
+    if(current === next) return;
+
+    document.querySelectorAll(".nav-links a").forEach(a => a.classList.remove("active"));
+    document.getElementById("nav" + targetId).classList.add("active");
+
+    // Đóng trang hiện tại
+    gsap.to(current, {
+        clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
+        duration: 0.8, ease: "power3.inOut",
+        onComplete: () => {
+            current.classList.remove("active");
+            next.classList.add("active");
+            // Mở trang mới
+            gsap.fromTo(next, 
+                { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" },
+                { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", duration: 1, ease: "power4.inOut" }
+            );
+        }
+    });
 }
 
-function countdown(){
-    let target = new Date("June 11, 2026 07:00:00").getTime();
-    let now = new Date().getTime();
-    let diff = target - now;
-    if(diff < 0) { document.getElementById("countdown").innerHTML = "START"; return; }
+/* --- 4. PRECISION COUNTDOWN --- */
+function runClock() {
+    const target = new Date("June 11, 2026 07:00:00").getTime();
+    const now = new Date().getTime();
+    const diff = target - now;
+    if(diff < 0) { document.getElementById("master-clock").innerHTML = "00:00:00:00"; return; }
     
-    let d = Math.floor(diff/(1000*60*60*24));
-    let h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-    let m = Math.floor((diff%(1000*60*60))/(1000*60));
-    let s = Math.floor((diff%(1000*60))/1000);
+    const d = Math.floor(diff/(1000*60*60*24));
+    const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    const m = Math.floor((diff%(1000*60*60))/(1000*60));
+    const s = Math.floor((diff%(1000*60))/1000);
     
-    document.getElementById("countdown").innerHTML = 
-        `${d}D : ${h}H : ${m}M : ${s}S`;
+    document.getElementById("master-clock").innerHTML = 
+        `${String(d).padStart(2,'0')}:${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 }
-setInterval(countdown, 1000);
-countdown();
+setInterval(runClock, 1000); runClock();
+
+// Resize handler
+window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+});
 </script>
 
 </body>
-</html>
+    </html>
+    
