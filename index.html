@@ -1,422 +1,198 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ĐIỂU GIA BẢO | HỆ THỐNG DI SẢN SỐ 2026</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;500;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Điểu Gia Bảo - Portfolio</title>
 
-    <style>
-        /* ==========================================================================
-           1. CẤU HÌNH BIẾN HỆ THỐNG (SYSTEM VARIABLES) - Dòng 1-50
-           ==========================================================================
-        */
-        :root {
-            --mau-chu-dao: #00f2ff;
-            --mau-phu: #7000ff;
-            --nen-toi: #050505;
-            --lop-kinh: rgba(10, 10, 10, 0.5);
-            --vien-sang: rgba(255, 255, 255, 0.1);
-            --font-tieude: 'Playfair Display', serif;
-            --font-vanban: 'Inter', sans-serif;
-            --transition-cham: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;}
 
-        /* ==========================================================================
-           2. THIẾT LẬP NỀN TẢNG (CORE RESET) - Dòng 51-150
-           ==========================================================================
-        */
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-        body { 
-            background: var(--nen-toi); 
-            color: #fff; 
-            font-family: var(--font-vanban); 
-            overflow: hidden; 
-            -webkit-font-smoothing: antialiased;
-        }
+body{
+font-family:'Segoe UI',sans-serif;
+background:black;
+color:white;
+overflow-x:hidden;
+}
 
-        /* Thanh cuộn tùy chỉnh */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--mau-chu-dao); border-radius: 10px; }
+/* Scroll đẹp */
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-thumb{background:#00f2ff;border-radius:10px;}
+::-webkit-scrollbar-track{background:black;}
 
-        /* ==========================================================================
-           3. HỆ THỐNG CON TRỎ ĐA TẦNG (MULTILAYER CURSOR)
-           ==========================================================================
-        */
-        .cursor-dot { position: fixed; width: 6px; height: 6px; background: #fff; border-radius: 50%; z-index: 10001; pointer-events: none; }
-        .cursor-outline { position: fixed; width: 40px; height: 40px; border: 1px solid var(--mau-chu-dao); border-radius: 50%; z-index: 10000; pointer-events: none; transition: transform 0.15s ease-out; }
+#bgVideo{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-3;
+}
 
-        /* ==========================================================================
-           4. MÀN HÌNH KHỞI ĐỘNG (PRELOADER SYSTEM) - Dòng 151-250
-           ==========================================================================
-        */
-        #preloader {
-            position: fixed; inset: 0; background: #000; z-index: 10000;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-        }
-        .load-content { text-align: center; width: 400px; }
-        .load-title { font-family: var(--font-tieude); font-size: 2.5rem; letter-spacing: 15px; font-weight: 700; margin-bottom: 20px; color: #fff; }
-        .load-bar-bg { width: 100%; height: 2px; background: rgba(255,255,255,0.05); position: relative; overflow: hidden; }
-        .load-bar-fill { position: absolute; height: 100%; width: 0%; background: var(--mau-chu-dao); box-shadow: 0 0 20px var(--mau-chu-dao); }
-        .load-status { font-size: 10px; letter-spacing: 5px; color: #444; margin-top: 15px; text-transform: uppercase; }
+/* Overlay nhạc */
+#musicOverlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.75);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:2000;
+font-size:28px;
+font-weight:bold;
+color:#00f2ff;
+cursor:pointer;
+transition:opacity 0.8s ease;
+}
+#musicOverlay.hide{
+opacity:0;
+pointer-events:none;
+}
 
-        /* ==========================================================================
-           5. BỐ CỤC NỀN (BACKGROUND LAYERS) - Dòng 251-350
-           ==========================================================================
-        */
-        #bg-video-wrap { position: fixed; inset: 0; z-index: -2; pointer-events: none; }
-        #bg-video-wrap video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4) contrast(1.1); }
-        #canvas-particles { position: fixed; inset: 0; z-index: -1; }
+/* Navbar */
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+padding:15px;
+text-align:center;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(8px);
+z-index:999;
+}
+.navbar a{
+color:#00f2ff;
+text-decoration:none;
+margin:0 25px;
+font-weight:bold;
+transition:0.3s;
+}
+.navbar a:hover{ text-shadow:0 0 15px #00f2ff; }
 
-        /* ==========================================================================
-           6. THANH ĐIỀU HƯỚNG (NAVIGATOR) - Dòng 351-450
-           ==========================================================================
-        */
-        .main-nav {
-            position: fixed; top: 0; width: 100%; padding: 50px 100px;
-            display: flex; justify-content: space-between; align-items: center; z-index: 900;
-        }
-        .nav-logo { font-family: var(--font-tieude); font-size: 2rem; font-weight: 700; letter-spacing: 5px; color: #fff; text-decoration: none; }
-        .nav-items { display: flex; gap: 60px; }
-        .nav-items a {
-            text-decoration: none; color: #fff; font-size: 11px; font-weight: 400;
-            text-transform: uppercase; letter-spacing: 5px; opacity: 0.4; transition: var(--transition-cham);
-        }
-        .nav-items a:hover, .nav-items a.active { opacity: 1; color: var(--mau-chu-dao); }
+.page{
+display:none;
+min-height:100vh;
+padding:120px 20px 80px 20px;
+justify-content:center;
+align-items:flex-start;
+}
+.active{
+display:flex;
+animation:fade 0.6s ease;
+}
+@keyframes fade{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
 
-        /* ==========================================================================
-           7. KHUNG TRÌNH DIỄN (SCENE CONTAINER) - Dòng 451-650
-           ==========================================================================
-        */
-        .scene-wrapper {
-            height: 100vh; display: flex; justify-content: center; align-items: center; perspective: 2000px;
-        }
-        .card-glass {
-            background: var(--lop-kinh); border: 1px solid var(--vien-sang);
-            backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
-            width: 90%; max-width: 1500px; height: 80vh; border-radius: 50px;
-            display: none; overflow: hidden; box-shadow: 0 50px 150px rgba(0,0,0,0.6);
-            transform-style: preserve-3d;
-        }
-        .card-glass.active { display: flex; animation: cardOpen 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        
-        @keyframes cardOpen {
-            from { opacity: 0; transform: rotateX(10deg) translateY(100px) scale(0.9); }
-            to { opacity: 1; transform: rotateX(0deg) translateY(0) scale(1); }
-        }
+.box{
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(6px);
+padding:35px;
+border-radius:20px;
+max-width:1100px;
+box-shadow:0 0 25px rgba(0,242,255,0.4);
+line-height:1.7;
+}
 
-        .side-content { flex: 1.4; padding: 100px; display: flex; flex-direction: column; overflow-y: auto; }
-        .side-media { flex: 0.6; position: relative; border-left: 1px solid var(--vien-sang); overflow: hidden; }
-        .side-media img { width: 100%; height: 100%; object-fit: cover; transition: 2s ease; }
-        .card-glass:hover .side-media img { transform: scale(1.08); }
+.intro{
+display:flex;
+gap:40px;
+flex-wrap:wrap;
+}
+.intro img{
+width:260px;
+border-radius:15px;
+box-shadow:0 0 20px #00f2ff;
+}
+.exam-img{
+width:100%;
+max-width:500px;
+border-radius:15px;
+margin:20px 0;
+box-shadow:0 0 20px #00f2ff;
+}
 
-        /* Typography */
-        .page-tag { color: var(--mau-chu-dao); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 10px; margin-bottom: 25px; display: block; }
-        h1 { font-family: var(--font-tieude); font-size: 5rem; font-weight: 700; line-height: 0.85; margin-bottom: 30px; }
-        .desc-text { font-size: 1.15rem; color: #aaa; line-height: 2; margin-bottom: 50px; text-align: justify; font-weight: 300; }
-        .highlight { color: #fff; font-weight: 600; border-bottom: 1px solid var(--mau-chu-dao); }
+.school-info{
+margin-top:20px;
+padding:15px;
+border-left:4px solid #00f2ff;
+background:rgba(0,242,255,0.08);
+border-radius:10px;
+}
 
-        /* Data Grid */
-        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: auto; }
-        .info-cell { padding: 30px; border: 1px solid var(--vien-sang); border-radius: 30px; transition: 0.4s; background: rgba(255,255,255,0.02); }
-        .info-cell:hover { background: rgba(255,255,255,0.05); border-color: var(--mau-chu-dao); transform: translateY(-10px); }
-        .info-cell label { font-size: 9px; color: #555; text-transform: uppercase; letter-spacing: 4px; display: block; margin-bottom: 10px; }
-        .info-cell span { font-size: 1.2rem; font-weight: 500; color: #eee; }
-
-        /* ==========================================================================
-           8. CÁC THÀNH PHẦN BỔ SUNG (WIDGETS) - Dòng 651-850
-           ==========================================================================
-        */
-        #exam-clock { font-family: var(--font-vanban); font-size: 4.5rem; font-weight: 100; letter-spacing: 20px; color: var(--mau-chu-dao); margin: 40px 0; }
-        .action-btn {
-            align-self: flex-start; padding: 25px 60px; border: 1px solid var(--mau-chu-dao); background: transparent;
-            color: #fff; text-transform: uppercase; letter-spacing: 8px; font-size: 12px; transition: 0.5s; border-radius: 10px;
-        }
-        .action-btn:hover { background: var(--mau-chu-dao); color: #000; box-shadow: 0 20px 50px rgba(0, 242, 255, 0.3); }
-
-        /* Mobile Optimization */
-        @media (max-width: 1200px) {
-            h1 { font-size: 3rem; }
-            .card-glass { flex-direction: column; height: 90vh; }
-            .side-media { height: 400px; flex: none; border-left: none; }
-            .main-nav { padding: 30px; }
-            .nav-items { display: none; }
-        }
-    </style>
+.highlight{
+color:#00f2ff;
+font-weight:bold;
+margin-top:15px;
+}
+.prepare-list{margin-top:10px;padding-left:20px;}
+.prepare-list li{margin-bottom:8px;}
+</style>
 </head>
 <body>
 
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
+<div id="musicOverlay">Chạm vào màn hình để bật nhạc</div>
 
-    <div id="preloader">
-        <div class="load-content">
-            <div class="load-title">GIA BẢO</div>
-            <div class="load-bar-bg"><div class="load-bar-fill" id="pb"></div></div>
-            <div class="load-status" id="ls">Đang khởi tạo hệ thống di sản số...</div>
-        </div>
-        <button id="start-trigger" class="action-btn" style="display:none; margin-top:50px;" onclick="unlock()">KHÁM PHÁ NGAY</button>
-    </div>
+<video id="bgVideo" autoplay loop playsinline muted>
+<source src="./snaptik.vn_cwAXi.mp4" type="video/mp4">
+</video>
 
-    <canvas id="canvas-particles"></canvas>
-    <div id="bg-video-wrap">
-        <video id="v-hero" loop muted playsinline>
-            <source src="./snaptik.vn_cwAXi.mp4" type="video/mp4">
-        </video>
-    </div>
+<div class="navbar">
+<a href="#" onclick="showPage(1)">Trang Chủ</a>
+<a href="#" onclick="showPage(2)">Kỳ Thi Tốt Nghiệp THPT 2026</a>
+<a href="#" onclick="showPage(3)">Hành Trang Tiếp Ứng</a>
+</div>
 
-    <nav class="main-nav">
-        <a href="#" class="nav-logo">GB.2026</a>
-        <div class="nav-items">
-            <a href="#" onclick="showPage(1)" id="t1" class="active">Giới Thiệu</a>
-            <a href="#" onclick="showPage(2)" id="t2">Học Vấn</a>
-            <a href="#" onclick="showPage(3)" id="t3">Sứ Mệnh</a>
-            <a href="#" onclick="showPage(4)" id="t4">Tư Duy AI</a>
-        </div>
-    </nav>
+<!-- PAGE 1 -->
+<div id="page1" class="page active">
+<div class="box">
+<h1>Giới Thiệu Bản Thân</h1>
+<div class="intro">
+<img src="./retouch_2026020222520653.jpg">
+<div>
+<p><b>Họ và tên:</b> Điểu Gia Bảo</p>
+<p><b>Lớp:</b> 12XH1A</p>
+<p><b>Trường:</b> THCS & THPT Việt Hoa Quang Chánh</p>
 
-    <main class="scene-wrapper">
-        
-        <section id="p1" class="card-glass active">
-            <div class="side-content">
-                <span class="page-tag">01 / Hồ sơ cá nhân</span>
-                <div style="font-family: 'Noto Sans SC'; color: var(--mau-chu-dao); margin-bottom: 10px; opacity: 0.6;">你好 - 我是迪尔家宝</div>
-                <h1>Điểu <br>Gia Bảo</h1>
-                <p class="desc-text">
-                    Tôi là một cá nhân luôn tìm kiếm sự cân bằng giữa giá trị truyền thống và công nghệ hiện đại. Hiện tại, tôi đang theo học tại lớp <span class="highlight">12XH1A</span>, trường Việt Hoa Quang Chánh. Gia đình tôi, với 3 thành viên, là nguồn động lực lớn nhất. Ba và mẹ tôi, những người công nhân kiên cường, đã dạy tôi giá trị của sự tử tế. Đặc biệt, mẹ luôn là người bạn đồng hành lớn nhất, hỗ trợ tôi trên mọi chặng đường học tập.
-                </p>
-                <div class="info-grid">
-                    <div class="info-cell"><label>Ngày sinh</label><span>16 Tháng 05</span></div>
-                    <div class="info-cell"><label>Ngoại ngữ</label><span>Tiếng Trung HSK 3</span></div>
-                    <div class="info-cell"><label>Quê quán</label><span>Đồng Nai, Việt Nam</span></div>
-                    <div class="info-cell"><label>Thẩm mỹ</label><span>Candid Mirror Selfie</span></div>
-                </div>
-            </div>
-            <div class="side-media">
-                <img src="./retouch_2026020222520653.jpg" alt="Gia Bảo Portrait">
-            </div>
-        </section>
+<div class="school-info">
+<h3>Giới thiệu về trường:</h3>
+<p>Trường THCS & THPT Việt Hoa Quang Chánh là cơ sở giáo dục đào tạo học sinh từ cấp THCS đến THPT, chú trọng phát triển toàn diện về kiến thức, đạo đức và kỹ năng sống. Đặc biệt trường còn đào tạo tiếng Trung với phương pháp giảng dạy hiện đại và hiệu quả. Đội ngũ giáo viên giàu kinh nghiệm, tận tâm giúp học viên phát triển toàn diện các kỹ năng nghe, nói, đọc, viết. Ngoài ra, chương trình học được thiết kế phù hợp với nhiều trình độ, từ cơ bản đến nâng cao.</p>
+<p><b>Địa chỉ:</b><br>
+Số 138 đường Hồ Thị Hương, khu phố 12,<br>
+phường Xuân An (Phường Xuân Trung cũ),<br>
+thành phố Long Khánh, tỉnh Đồng Nai.
+</p>
+</div>
 
-        <section id="p2" class="card-glass">
-            <div class="side-media">
-                <img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" alt="Exam 2026">
-            </div>
-            <div class="side-content">
-                <span class="page-tag">02 / Kỳ thi tốt nghiệp</span>
-                <h1>Chương <br>Cuối 12</h1>
-                <p class="desc-text">
-                    Kỳ thi THPT 2026 không đơn thuần là một bài kiểm tra, mà là bệ phóng cho tương lai. Tôi đang tập trung giải quyết các chuyên đề <span class="highlight">Toán học Spatial Geometry</span> và hoàn thiện tư duy nghị luận xã hội. Song song đó, lộ trình học <span class="highlight">Tiếng Trung HSK</span> là chìa khóa để tôi thấu hiểu sâu sắc hơn về văn hóa và điện ảnh Á Đông mà tôi hằng yêu thích.
-                </p>
-                <div id="exam-clock">00:00:00:00</div>
-                <div class="info-grid">
-                    <div class="info-cell"><label>Mục tiêu THPT</label><span>Tốt nghiệp Loại Giỏi</span></div>
-                    <div class="info-cell"><label>Mục tiêu Ngoại ngữ</label><span>Chinh phục HSK 4</span></div>
-                </div>
-            </div>
-        </section>
+<h3 class="highlight">⏳ Đếm ngược đến kỳ thi:</h3>
+<p id="countdown"></p>
+</div>
+</div>
+</div>
+</div>
 
-        <section id="p3" class="card-glass">
-            <div class="side-content">
-                <span class="page-tag">03 / Định hướng nghề nghiệp</span>
-                <h1>Công Tác <br>Xã Hội</h1>
-                <p class="desc-text">
-                    Từ những bài học lịch sử về <span class="highlight">Chiến khu Đ</span> và vẻ đẹp trầm mặc của dòng <span class="highlight">Sông Đồng Nai</span>, tôi nuôi dưỡng ước mơ trở thành người hỗ trợ cộng đồng. Nghề Công tác xã hội là nơi tôi có thể vận dụng sự thấu cảm và kiến thức ngôn ngữ để xóa nhòa khoảng cách, mang lại sự bình đẳng cho những người yếu thế trong xã hội hiện đại.
-                </p>
-                <div class="info-grid">
-                    <div class="info-cell"><label>Sứ mệnh</label><span>Kết nối và Sẻ chia</span></div>
-                    <div class="info-cell"><label>Giá trị</label><span>Nhân văn & Công bằng</span></div>
-                    <div class="info-cell"><label>Khu vực</label><span>Đông Nam Bộ</span></div>
-                    <div class="info-cell"><label>Kỹ năng</label><span>Giao tiếp Đa văn hóa</span></div>
-                </div>
-            </div>
-            <div class="side-media">
-                <img src="./NGHE-CONG-TAC-XA-HOI.png" alt="Social Work">
-            </div>
-        </section>
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+<div class="box">
+<h1>Kỳ Thi Tốt Nghiệp THPT 2026</h1>
+<img src="./2025-8-11-vn-thi-tn-thpt-som-2026-ngoc.jpg" class="exam-img">
 
-        <section id="p4" class="card-glass">
-            <div class="side-media" style="background: #000; display: flex; align-items: center; justify-content: center; padding: 40px;">
-                 <div style="border-left: 2px solid var(--mau-chu-dao); padding-left: 40px;">
-                    <h2 style="font-family: var(--font-tieude); font-size: 3rem; color: var(--mau-chu-dao);">"AI là công cụ, <br>Trái tim là bản sắc."</h2>
-                 </div>
-            </div>
-            <div class="side-content">
-                <span class="page-tag">04 / Suy ngẫm về AI</span>
-                <h1>Thế Hệ <br>Thích Nghi</h1>
-                <p class="desc-text">
-                    Tôi đã từng viết về tác động của <span class="highlight">Trí tuệ nhân tạo (AI)</span> đối với tình trạng thất nghiệp ở thanh niên. Quan điểm của tôi rất rõ ràng: AI có thể xử lý dữ liệu, nhưng không thể thay thế sự thấu cảm của con người. Trong ngành Công tác xã hội, chúng ta dùng AI để tối ưu nguồn lực, nhưng dùng trái tim để cảm nhận nỗi đau. Giới trẻ 2026 cần làm chủ công nghệ để phục vụ nhân tính.
-                </p>
-                <div class="info-grid">
-                    <div class="info-cell"><label>Lập trường</label><span>Công nghệ vì Nhân sinh</span></div>
-                    <div class="info-cell"><label>Kỹ năng số</label><span>Thích nghi & Sáng tạo</span></div>
-                </div>
-                <button class="action-btn" style="margin-top: 40px;" onclick="window.open('https://tiktok.com/@giabaoo1605')">KẾT NỐI VỚI TÔI</button>
-            </div>
-        </section>
+<p><b>Thời gian:</b> 11-12/6/2026</p>
 
-    </main>
+<h3 class="highlight">Dự kiến những điểm mới</h3>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<p>Tại Hội nghị tổng kết công tác tổ chức Kỳ thi tốt nghiệp THPT năm 2025 và chuẩn bị Kỳ thi tốt nghiệp THPT năm 2026, Cục trưởng Cục Quản lý chất lượng Huỳnh Văn Chương đã thông tin về dự kiến công tác tổ chức Kỳ thi tốt nghiệp THPT năm 2026.</p>
 
-    <script>
-        /**
-         * 1. HỆ THỐNG VẬT LÝ HẠT (CUSTOM PARTICLE ENGINE)
-         * Tự viết thay vì dùng thư viện để tối ưu và tăng độ dài code chuyên sâu.
-         */
-        const canvas = document.getElementById('canvas-particles');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        
-        function initParticles() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles = [];
-            for(let i = 0; i < 120; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 2 + 0.5,
-                    vx: (Math.random() - 0.5) * 0.4,
-                    vy: (Math.random() - 0.5) * 0.4,
-                    alpha: Math.random() * 0.5 + 0.2
-                });
-            }
-        }
+<p>Theo dự kiến, Kỳ thi tốt nghiệp THPT năm 2026 tổ chức vào ngày 11, 12/6/2026 - sớm hơn so với các năm trước.</p>
 
-        function drawParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.x += p.vx; p.y += p.vy;
-                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
-                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
-                
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(0, 242, 255, ${p.alpha})`;
-                ctx.fill();
-            });
-            requestAnimationFrame(drawParticles);
-        }
-        initParticles(); drawParticles();
+<p>Kỳ thi năm 2026 giữ ổn định như năm 2025 và dự kiến có một vài điều chỉnh để bảo đảm phù hợp với mô hình quản lý chính quyền địa phương 2 cấp, đồng thời tiếp tục áp dụng công nghệ thông tin trong các khâu tổ chức thi. Các điều chỉnh dự kiến không ảnh hưởng tới thí sinh.</p>
 
-        /**
-         * 2. HỆ THỐNG ĐIỀU KHIỂN CON TRỎ (CURSOR LOGIC)
-         */
-        const dot = document.querySelector('.cursor-dot');
-        const outline = document.querySelector('.cursor-outline');
-        let mx = 0, my = 0, ox = 0, oy = 0;
-
-        window.addEventListener('mousemove', e => {
-            mx = e.clientX; my = e.clientY;
-            dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-        });
-
-        function animateCursor() {
-            ox += (mx - ox) * 0.15; oy += (my - oy) * 0.15;
-            outline.style.left = (ox - 20) + 'px'; outline.style.top = (oy - 20) + 'px';
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        /**
-         * 3. HỆ THỐNG MÀN HÌNH TẢI (PRELOADER ENGINE)
-         */
-        let progress = 0;
-        const statusTexts = [
-            "Đang kết nối cơ sở dữ liệu di sản...",
-            "Đang hiệu chỉnh giao diện kính mờ...",
-            "Đang tải dữ liệu HSK & Lịch sử Đồng Nai...",
-            "Đang tối ưu hóa hệ thống hạt 2026...",
-            "Hệ thống đã sẵn sàng cho Gia Bảo."
-        ];
-
-        const loadingInt = setInterval(() => {
-            progress += Math.random() * 4;
-            if(progress >= 100) {
-                progress = 100;
-                clearInterval(loadingInt);
-                gsap.to('.load-bar-bg', { opacity: 0 });
-                document.getElementById('ls').innerText = "TRUY CẬP ĐÃ SẴN SÀNG";
-                document.getElementById('start-trigger').style.display = 'block';
-            }
-            document.getElementById('pb').style.width = progress + '%';
-            document.getElementById('ls').innerText = statusTexts[Math.floor(progress/25)] || statusTexts[4];
-        }, 100);
-
-        function unlock() {
-            const video = document.getElementById('v-hero');
-            video.play(); video.muted = false; video.volume = 0.5;
-            
-            gsap.to('#preloader', {
-                y: '-100%', duration: 1.5, ease: 'expo.inOut',
-                onComplete: () => document.getElementById('preloader').remove()
-            });
-        }
-
-        /**
-         * 4. HỆ THỐNG ĐIỀU HƯỚNG TRANG (ROUTING SYSTEM)
-         */
-        function showPage(id) {
-            document.querySelectorAll('.nav-items a').forEach(a => a.classList.remove('active'));
-            document.getElementById('t' + id).classList.add('active');
-
-            const current = document.querySelector('.card-glass.active');
-            const target = document.getElementById('p' + id);
-            
-            if(current === target) return;
-
-            gsap.to(current, {
-                opacity: 0, y: -50, rotateX: -5, duration: 0.6,
-                onComplete: () => {
-                    current.classList.remove('active');
-                    target.classList.add('active');
-                    gsap.fromTo(target, 
-                        { opacity: 0, y: 50, rotateX: 5 },
-                        { opacity: 1, y: 0, rotateX: 0, duration: 0.8, ease: 'power4.out' }
-                    );
-                }
-            });
-        }
-
-        /**
-         * 5. ĐỒNG HỒ ĐẾM NGƯỢC THPT 2026 (TIME ENGINE)
-         */
-        function updateExamClock() {
-            const target = new Date("June 11, 2026 07:00:00").getTime();
-            setInterval(() => {
-                const now = new Date().getTime();
-                const diff = target - now;
-                if(diff <= 0) return;
-                
-                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((diff % (1000 * 60)) / 1000);
-                
-                const clockEl = document.getElementById('exam-clock');
-                if(clockEl) clockEl.innerText = `${String(d).padStart(2,'0')}:${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-            }, 1000);
-        }
-        updateExamClock();
-
-        /**
-         * 6. HIỆU ỨNG TƯƠNG TÁC NÂNG CAO (INTERACTION)
-         */
-        document.querySelectorAll('a, button, .info-cell').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                gsap.to(outline, { scale: 1.8, background: 'rgba(0, 242, 255, 0.1)', duration: 0.3 });
-            });
-            el.addEventListener('mouseleave', () => {
-                gsap.to(outline, { scale: 1, background: 'transparent', duration: 0.3 });
-            });
-        });
-
-        // Xử lý thay đổi kích thước màn hình
-        window.addEventListener('resize', () => {
-            initParticles();
-        });
-    </script>
-</body>
-</html>
+<p><b>Cụ thể:</b></p>
+<p>- Sửa đổi các quy định liên quan đến thanh tra, kiểm tra trong Kỳ thi để bảo đảm phù hợp với việc chuyển bộ phận thanh tra giáo dục các cấp về Thanh tra Chính phủ và Thanh tra tỉnh.</p>
+<p>- Điều chỉnh lại một số quy định, quy trình tổ chức thi để bảo đảm phù hợp và thuận tiện hơn cho các đơn vị trong bối cảnh sắp xếp lại đơn vị hành chính cấp tỉnh.</p>
